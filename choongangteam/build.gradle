@@ -23,12 +23,6 @@ repositories {
 	mavenCentral()
 }
 
-repositories {
-   mavenCentral()
-   maven { url 'https://jitpack.io' }
-   
-}
-
 dependencies {
 	// jsp
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'	
