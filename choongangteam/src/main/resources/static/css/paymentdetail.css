@@ -1,0 +1,178 @@
+body {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px;
+  gap: 20px;
+}
+
+.left-section {
+  flex: 2;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.right-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.details h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price-info {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.price-info .price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #9832a8;
+}
+
+.price-info .total {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.summary-info {
+  display: flex;
+  flex-direction: column; /* 항목들이 세로로 정렬되도록 설정 */
+  gap: 10px; /* 항목들 간의 간격 설정 */
+}
+
+.summary-item {
+  display: flex; /* flex로 설정하여 이미지와 텍스트가 가로로 정렬됨 */
+  align-items: center; /* 이미지와 텍스트 세로 중앙 정렬 */
+  margin-bottom: 3px; /* 항목들 간 간격을 설정 */
+  position: relative; /* 구분선이 항목 안에 표시되도록 하기 위해 position 설정 */
+  padding-bottom: 10px; /* 구분선과 텍스트 사이에 여백 추가 */
+}
+
+.summary-item p {
+  margin: 0; /* p 태그 기본 마진을 없앰 */
+  white-space: normal; /* 줄바꿈과 공백을 정상 처리 */
+}
+
+.summary-item img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+/* 모집 인원 항목 위에 구분선 */
+.summary-item:first-child::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+/* 원데이 시간 항목 아래에 구분선 */
+.summary-item:last-child::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+.class-info {
+  margin-bottom: 20px;
+}
+
+.radio-group label {
+  margin-right: 15px;
+}
+
+.date-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pay-button {
+  flex-grow: 1; /* 버튼이 남은 공간을 채우도록 설정 */
+  padding: 12px 20px;
+  background-color: #9832a8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 10px; /* 아이콘과 버튼 사이에 간격을 추가 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.pay-button:hover {
+  background-color: #c6b7ca;
+}
+
+/* 결제하기 버튼 옆에 아이콘 배치 */
+.icon-container {
+  display: flex; /* 가로로 정렬 */
+  justify-content: space-between; /* 공간을 균등하게 나누기 */
+  gap: 20px;
+  align-items: center; /* 수직 정렬 */
+  margin-top: 20px;
+}
+
+.icon-container .icon {
+  width: 28px; /* 아이콘 크기 */
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-container .icon:hover {
+  opacity: 0.7; /* 호버 시 투명도 변경 */
+}
+
+/* 협의 가능 섹션 스타일 */
+.agreement-section {
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #ccc; /* 기본 테두리 */
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+/* 섹션 색상 변경 (협의 가능 클릭 시) */
+.agreement-active {
+  background-color: #f1e0ff; /* 클릭 시 배경색 변경 */
+  border-radius: 10px;
+}
