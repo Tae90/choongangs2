@@ -11,6 +11,8 @@
      <p>This is the initial page for the application.</p>    
     
        <a href="room_enter">비디오룸 입장</a>
+
+       나의 페이지
     
 </body>
 </html>
