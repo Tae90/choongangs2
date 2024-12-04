@@ -6,10 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>방송 상세 페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
 <style>
 /* 페이지 전체 스타일 */
 body {
-	font-family: Arial, sans-serif;
+	font-family: 'Pretendard', sans-serif;
+	font-size: .875rem;
+	font-weight: 500;
 	background-color: #ffffff;
 	color: #333333;
 	margin: 0;
@@ -101,16 +104,43 @@ body {
 	margin: 0;
 }
 
-.follow-buttons {
+.recoding-buttons {
 	display: flex;
 	gap: 10px;
 	align-items: center;
 	flex-shrink: 0;
 }
 
-.follow-buttons button {
+.recoding-buttons button {
 	padding: 10px;
 	min-width: 100px;
+	background-color: #4b0082;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+.recoding-buttons button:hover {
+	background-color: #6a0dad;
+	transform: scale(1.05);
+}
+
+/* 채팅창 접기 버튼 스타일 */
+.collapse-button {
+	padding: 10px;
+	background-color: #4b0082;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+.collapse-button:hover {
+	background-color: #6a0dad;
+	transform: scale(1.05);
 }
 
 /* 채팅창 연습 스타일 */
@@ -169,29 +199,17 @@ body {
 .chat-input button {
 	padding: 10px;
 	min-width: 100px;
+	background-color: #4b0082;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
 }
 
 .chat-input button:hover {
-	background-color: #2e004b;
-}
-
-/* 오른쪽으로 접기 버튼 스타일 */
-.collapse-button {
-	position: fixed;
-	top: 20px;
-	right: 20px;
-	width: 30px;
-	height: 30px;
-	background-color: #4b0082;
-	border: none;
-	color: #ffffff;
-	cursor: pointer;
-	border-radius: 5px;
-	transition: transform 0.3s;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 1000;
+	background-color: #6a0dad;
+	transform: scale(1.05);
 }
 
 /* 채팅창 접히지 않은 상타 스타일 */
@@ -212,11 +230,11 @@ body {
 		if (chatSection.classList.contains('collapsed')) {
 			chatSection.classList.remove('collapsed');
 			broadcastDetail.style.flex = '3 1 60%';
-			document.querySelector('.collapse-button').innerHTML = '▶';
+			document.querySelector('.collapse-button').innerHTML = '접기◀';
 		} else {
 			chatSection.classList.add('collapsed');
 			broadcastDetail.style.flex = '3 1 80%';
-			document.querySelector('.collapse-button').innerHTML = '◀';
+			document.querySelector('.collapse-button').innerHTML = '▶펼치기';
 		}
 	}
 </script>
@@ -252,16 +270,15 @@ body {
 				</div>
 			</div>
 
-			<!-- 팔로우 및 구독 버튼 -->
-			<div class="follow-buttons">
-				<button>팔로우</button>
-				<button>구독</button>
+			<!-- 녹화 및 화면공유 -->
+			<div class="recoding-buttons">
+				<button>녹화</button>
+				<button>화면공유</button>
+				<!-- 채팅창 접기 버튼 -->
+				<button class="collapse-button" onclick="toggleChat()">접기◀</button>
 			</div>
 		</div>
 	</div>
-
-	<!-- 채팅창 접기 버튼 -->
-	<button class="collapse-button" onclick="toggleChat()">▶</button>
 
 	<!-- 채팅창 연습 -->
 	<div class="chat-section">

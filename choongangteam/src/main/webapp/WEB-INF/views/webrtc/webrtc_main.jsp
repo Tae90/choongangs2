@@ -1,16 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>방송 리스트 페이지</title>
+
+<!-- 기존 페이지 -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 기존 페이지 부트스트랩 끝 -->
+
+<!-- webrtc 추가 -->
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.4.0/adapter.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+  
+  <script type="text/javascript" src="../js/webrtc/janus.js"></script>
+  <script type="text/javascript" src="../js/webrtc/webrtc_main.js?ver=12"></script>
+<!-- webrtc 추가 끝 -->
+
+
 <style>
 /* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
     background-color: #ffffff; /* 발람 배경색 */
     color: #333333; /* 어두운 글자 색 */
     margin: 0;
@@ -187,195 +213,210 @@ body {
 </style>
 
 <script>
-        function showTab(tabIndex) {
-            const containers = document.querySelectorAll('.container');
-            const tabs = document.querySelectorAll('.tab');
 
-            // 모든 탭과 콘텐츠어의 혼성 상태를 초기화
-            containers.forEach(container => container.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
+	function showTab(tabIndex) {
+		const containers = document.querySelectorAll('.container');
+		const tabs = document.querySelectorAll('.tab');
 
-            // 선택된 탭과 콘텐츠어 혼성화
-            containers[tabIndex].classList.add('active');
-            tabs[tabIndex].classList.add('active');
-        }
+		// 모든 탭과 콘텐츠어의 혼성 상태를 초기화
+		containers.forEach(container => container.classList.remove('active'));
+		tabs.forEach(tab => tab.classList.remove('active'));
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 첫 번째 탭을 기본적으로 표시
-            showTab(0);
+		// 선택된 탭과 콘텐츠어 혼성화
+		containers[tabIndex].classList.add('active');
+			tabs[tabIndex].classList.add('active');
+	}
 
-            // 방송 카드를 클릭하면 webrtc_detail 페이지로 이동
-            const broadcastCards = document.querySelectorAll('.broadcast-card');
-            broadcastCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    location.href = '/user/webrtc_detail';
-                });
-            });
-        });
-    </script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// 첫 번째 탭을 기본적으로 표시
+		showTab(0);
+
+		// 방송 카드를 클릭하면 webrtc_detail 페이지로 이동
+		const broadcastCards = document.querySelectorAll('.broadcast-card');
+		broadcastCards.forEach(card => {
+			card.addEventListener('click', () => {
+				location.href = '/user/webrtc_detail';
+			});
+		});
+	});
+</script>
 </head>
+
 <body>
-   <!-- 레프트 사이드바 -->
-    <div class="left-sidebar" style="width: 20%; float: left; padding: 20px; box-sizing: border-box; background-color: #f8f9fa; height: 100vh;">
-        <h4>추천 방송</h4>
-        <div class="channel-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="https://via.placeholder.com/50" alt="프로필 사진" style="border-radius: 50%; margin-right: 10px;">
-            <div>
-                <div style="font-weight: bold; color: #ffffff;">스피드소닉</div>
-                <div style="font-size: 0.9em; color: #b0b3b8;">바람의나라</div>
-                <div style="color: #ff5555; font-weight: bold;">• 326</div>
-            </div>
-        </div>
-        <div class="channel-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="https://via.placeholder.com/50" alt="프로필 사진" style="border-radius: 50%; margin-right: 10px;">
-            <div>
-                <div style="font-weight: bold; color: #ffffff;">유히히</div>
-                <div style="font-size: 0.9em; color: #b0b3b8;">메이플스토리</div>
-                <div style="color: #ff5555; font-weight: bold;">• 165</div>
-            </div>
-        </div>
-        <div class="channel-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="https://via.placeholder.com/50" alt="프로필 사진" style="border-radius: 50%; margin-right: 10px;">
-            <div>
-                <div style="font-weight: bold; color: #ffffff;">두기잉</div>
-                <div style="font-size: 0.9em; color: #b0b3b8;">마비노기</div>
-                <div style="color: #ff5555; font-weight: bold;">• 89</div>
-            </div>
-        </div>
-        <div class="channel-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="https://via.placeholder.com/50" alt="프로필 사진" style="border-radius: 50%; margin-right: 10px;">
-            <div>
-                <div style="font-weight: bold; color: #ffffff;">미시코</div>
-                <div style="font-size: 0.9em; color: #b0b3b8;">그림/아트</div>
-                <div style="color: #ff5555; font-weight: bold;">• 81</div>
-            </div>
-        </div>
-        <div class="channel-item" style="display: flex; align-items: center; margin-bottom: 15px;">
-            <img src="https://via.placeholder.com/50" alt="프로필 사진" style="border-radius: 50%; margin-right: 10px;">
-            <div>
-                <div style="font-weight: bold; color: #ffffff;">미호밍</div>
-                <div style="font-size: 0.9em; color: #b0b3b8;">로스트아크</div>
-                <div style="color: #ff5555; font-weight: bold;">• 74</div>
-            </div>
-        </div>
-        <button class="btn btn-secondary" style="width: 100%;">더보기 ▾</button>
-    </div>
-    <div class="main-content" style="width: 80%; float: left; padding: 20px; box-sizing: border-box;">
-
-
-    <!-- 방송 방 만들기 세션 -->
-    <div class="create-broadcast-section">
-        <div class="create-broadcast-title">새로운 방송을 만들어보세요!</div>
-        <div class="create-broadcast-description">시청자들과 소통하고 장소가수장사을 시작하세요. 다양한 콘텐츠로 나만의 방송을 만들 수 있습니다.</div>
-        <button class="create-broadcast-button" data-toggle="modal" data-target="#broadcastModal">방송 만들기</button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="broadcastModal" tabindex="-1" role="dialog" aria-labelledby="broadcastModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="broadcastModalLabel">방송 모드 선택</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="broadcastModeSelect">방송 모드를 선택해주세요</label>
-                <select class="form-control" id="broadcastModeSelect">
-                  <option>회의 모드</option>
-                  <option>개인방송 모드</option>
-                </select>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-            <button type="button" class="btn btn-primary" onclick="startBroadcast()">방송 시작</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-        function startBroadcast() {
-            const mode = document.getElementById('broadcastModeSelect').value;
-            alert(`${mode}로 방송을 시작합니다.`);
-            // 추가적인 로직을 여기에 작성 (예: 방송 생성 요청 보내기)
-            $('#broadcastModal').modal('hide');
-        }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- 전체방송 타이틀 추가 -->
-	<div class="page-title">전체 방송 리스트</div>
-	<!-- 구분선 추가 -->
-	<div class="divider"></div>
-
-	<!-- 탭 영역 -->
-	<div class="tabs">
-		<div class="tab" onclick="showTab(0)">인기</div>
-		<div class="tab" onclick="showTab(1)">최신</div>
-		<div class="tab" onclick="showTab(2)">추천</div>
-	</div>
-
-	<!-- 방송 카드 콘텐츠어들 -->
-	<div class="container">
-	<div class="broadcast-card">
-			<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
-			<div class="broadcast-info">
-				<h3>방송 제목 1</h3>
-				<p>방송 설명 및 키워드</p>
+	<!-- 레프트 사이드바 -->
+	<div class="left-sidebar"
+		style="width: 15%; float: left; padding: 20px; box-sizing: border-box; background-color: #f8f9fa; height: 100vh;">
+		<h4>방송 현황</h4>
+		<div class="channel-item"
+			style="display: flex; align-items: center; margin-bottom: 15px;">
+			<img src="https://via.placeholder.com/50" alt="프로필 사진"
+				style="border-radius: 50%; margin-right: 10px;">
+			<div>
+				<div style="font-weight: bold; color: #ffffff;">스피드소닉</div>
+				<div style="font-size: 0.9em; color: #b0b3b8;">바람의나라</div>
+				<div style="color: #ff5555; font-weight: bold;">• 326</div>
 			</div>
-			<div class="streamer-profile">
-				<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
-				<div class="streamer-info">
-					<div class="nickname">스트리머 닉네임</div>
-					<div class="keywords">전략적 팀 전투, 아케인의 세계로</div>
+		</div>
+		<div class="channel-item"
+			style="display: flex; align-items: center; margin-bottom: 15px;">
+			<img src="https://via.placeholder.com/50" alt="프로필 사진"
+				style="border-radius: 50%; margin-right: 10px;">
+			<div>
+				<div style="font-weight: bold; color: #ffffff;">유히히</div>
+				<div style="font-size: 0.9em; color: #b0b3b8;">메이플스토리</div>
+				<div style="color: #ff5555; font-weight: bold;">• 165</div>
+			</div>
+		</div>
+		<div class="channel-item"
+			style="display: flex; align-items: center; margin-bottom: 15px;">
+			<img src="https://via.placeholder.com/50" alt="프로필 사진"
+				style="border-radius: 50%; margin-right: 10px;">
+			<div>
+				<div style="font-weight: bold; color: #ffffff;">두기잉</div>
+				<div style="font-size: 0.9em; color: #b0b3b8;">마비노기</div>
+				<div style="color: #ff5555; font-weight: bold;">• 89</div>
+			</div>
+		</div>
+		<div class="channel-item"
+			style="display: flex; align-items: center; margin-bottom: 15px;">
+			<img src="https://via.placeholder.com/50" alt="프로필 사진"
+				style="border-radius: 50%; margin-right: 10px;">
+			<div>
+				<div style="font-weight: bold; color: #ffffff;">미시코</div>
+				<div style="font-size: 0.9em; color: #b0b3b8;">그림/아트</div>
+				<div style="color: #ff5555; font-weight: bold;">• 81</div>
+			</div>
+		</div>
+		<div class="channel-item"
+			style="display: flex; align-items: center; margin-bottom: 15px;">
+			<img src="https://via.placeholder.com/50" alt="프로필 사진"
+				style="border-radius: 50%; margin-right: 10px;">
+			<div>
+				<div style="font-weight: bold; color: #ffffff;">미호밍</div>
+				<div style="font-size: 0.9em; color: #b0b3b8;">로스트아크</div>
+				<div style="color: #ff5555; font-weight: bold;">• 74</div>
+			</div>
+		</div>
+		<button class="btn btn-secondary" style="width: 100%;">더보기 ▾</button>
+	</div>
+	<div class="main-content"
+		style="width: 80%; float: left; padding: 20px; box-sizing: border-box;">
+
+
+		<!-- 방송 방 만들기 세션 -->
+		<div class="create-broadcast-section">
+			<div class="create-broadcast-title">새로운 방송을 만들어보세요!</div>
+			<div class="create-broadcast-description">시청자들과 소통하고 정보를 공유해보세요. 다양한 콘텐츠로 나만의 방송을 만들 수 있습니다.</div>
+			<button class="create-broadcast-button" data-toggle="modal"
+				data-target="#broadcastModal">방송 만들기</button>
+		</div>
+
+		<!-- Modal 수정 -->
+		<div class="modal fade" id="broadcastModal" tabindex="-1"
+			role="dialog" aria-labelledby="broadcastModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="broadcastModalLabel">방송 모드 선택</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<!-- 방송 모드 선택 -->
+							<div class="form-group">
+								<label for="broadcastModeSelect">방송 모드를 선택해주세요</label> <select
+									class="form-control" id="broadcastModeSelect">
+									<option value="0">회의 모드</option>
+									<option value="1">개인방송 모드</option>
+								</select>
+							</div>
+							<!-- 방 제목 입력 필드 추가 -->
+							<div class="form-group">
+								<label for="broadcastTitleInput">방 번호를 입력해주세요</label> <input
+									type="text" class="form-control" id="room"
+									placeholder="숫자만 가능합니다.">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary"
+							onclick="registerUsername()">방송 시작</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container">
-		<div class="broadcast-card">
-			<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
-			<div class="broadcast-info">
-				<h3>방송 제목 2</h3>
-				<p>방송 설명 및 키워드</p>
-			</div>
-			<div class="streamer-profile">
-				<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
-				<div class="streamer-info">
-					<div class="nickname">스트리머 닉네임</div>
-					<div class="keywords">종합 게임, 예능</div>
+		<!-- 전체방송 타이틀 추가 -->
+		<div class="page-title">전체 방송 리스트</div>
+		<!-- 구분선 추가 -->
+		<div class="divider"></div>
+
+		<!-- 탭 영역 -->
+		<div class="tabs">
+			<div class="tab" onclick="showTab(0)">인기</div>
+			<div class="tab" onclick="showTab(1)">최신</div>
+			<div class="tab" onclick="showTab(2)">추천</div>
+		</div>
+
+		<!-- 방송 카드 콘텐츠어들 -->
+		<div class="container">
+			<div class="broadcast-card">
+				<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
+				<div class="broadcast-info">
+					<h3>방송 제목 1</h3>
+					<p>방송 설명 및 키워드</p>
+				</div>
+				<div class="streamer-profile">
+					<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
+					<div class="streamer-info">
+						<div class="nickname">스트리머 닉네임</div>
+						<div class="keywords">전략적 팀 전투, 아케인의 세계로</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container">
-		<div class="broadcast-card">
-
-			<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
-			<div class="broadcast-info">
-				<h3>방송 제목 3</h3>
-				<p>방송 설명 및 키워드</p>
-			</div>
-			<div class="streamer-profile">
-				<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
-				<div class="streamer-info">
-					<div class="nickname">스트리머 닉네임</div>
-					<div class="keywords">모험 게임, 해적 이야기</div>
+		<div class="container">
+			<div class="broadcast-card">
+				<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
+				<div class="broadcast-info">
+					<h3>방송 제목 2</h3>
+					<p>방송 설명 및 키워드</p>
+				</div>
+				<div class="streamer-profile">
+					<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
+					<div class="streamer-info">
+						<div class="nickname">스트리머 닉네임</div>
+						<div class="keywords">종합 게임, 예능</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-    </div>
+		<div class="container">
+			<div class="broadcast-card">
+
+				<img src="/static/images/seoul_banner.jpg" alt="방송 이미지">
+				<div class="broadcast-info">
+					<h3>방송 제목 3</h3>
+					<p>방송 설명 및 키워드</p>
+				</div>
+				<div class="streamer-profile">
+					<img src="https://via.placeholder.com/40" alt="스트리머 프로필">
+					<div class="streamer-info">
+						<div class="nickname">스트리머 닉네임</div>
+						<div class="keywords">모험 게임, 해적 이야기</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>

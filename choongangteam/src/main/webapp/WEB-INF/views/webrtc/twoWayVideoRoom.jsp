@@ -17,8 +17,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
-  <script type="text/javascript" src="/js/webrtc/janus.js"></script>
-  <script type="text/javascript" src="/js/webrtc/makeVideoRoom.js?ver=12"></script>
+  <script type="text/javascript" src="../js/webrtc/janus.js"></script>
+  <script type="text/javascript" src="../js/webrtc/twoWayVideoRoom.js?ver=12"></script>
   
   <script>
     $(function () {

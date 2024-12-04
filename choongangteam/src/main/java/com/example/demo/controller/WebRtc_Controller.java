@@ -14,26 +14,28 @@ public class WebRtc_Controller {
    public String webrtc_main(){
       System.out.println("webrtc main");
 
-      return "/webrtc/makeVideoRoom";
+      //return "/webrtc/makeVideoRoom";
+      return "/webrtc/webrtc_main";
    }
 
-   @GetMapping("/myVideoRoom")
+   @GetMapping("/myVideoRoom") //1:다 개인방송
    public String myVideoRoom(@RequestParam String username, @RequestParam String room, RedirectAttributes rttr) {
       System.out.println("username:"+username+" ,room:"+room);
 
-      if(room == "null" || room.equals("undefined"))
-      {
-         rttr.addFlashAttribute("msg", "undefined");
-
-         return "redirect:/";
-      }
       return "/webrtc/myVideoRoom";
    }
    
-   @GetMapping("/subscribeVideoRoom")
+   @GetMapping("/webrtc_detailMeeting") //다:다 회의
+   public String webrtc_detailMeeting(@RequestParam String username, @RequestParam String room, RedirectAttributes rttr) {
+      System.out.println("username:"+username+" ,room:"+room);
+
+      return "/webrtc/webrtc_detailMeeting";
+   }
+
+   @GetMapping("/subscribeVideoRoom") //구독자가 바로 접근
    public String subscribeVideoRoom(@RequestParam String room){
       System.out.println("subscribeVideoRoom");
-      return "subscribeVideoRoom";
+      return "/webrtc/subscribeVideoRoom";
    }
 
 }
