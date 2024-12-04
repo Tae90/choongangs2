@@ -3,6 +3,29 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.dao.PaymentDAO">
-
+	
+	<!-- 결제 정보 저장 -->
+	<insert id="savePayment" parameterType="Payment">
+		insert into payment (
+		payment_number, payment_title, payment_price, payment_method, payment_agency, member_email, payment_date, payment_state)
+    	values
+    	(#{payment_number}, #{payment_title}, #{payment_price}, #{payment_method}, #{payment_agency}, #{member_email},
+    	#{payment_date}, #{payment_state})
+	</insert>
+	
+	<!-- 레슨 정보 조회 -->
+    <select id="getLessonNumber" parameterType="int" resultType="Lesson">
+        select * from lesson where lesson_number = #{lesson_number}
+    </select>
+    
+    <!-- 회원 정보 조회 -->
+    <select id="getMember" parameterType="string" resultType="Member">
+        select * from member where member_email = #{member_email}
+    </select>
+	
+	<!-- 결제 취소 업데이트 -->
+	<update id="updatePaymentState" parameterType="int">
+		update payment set payment_state = #{state} where payment_number = ${paymentNumber}
+	</update>
 
 </mapper>
