@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MainpageDAO">
+
+	<select id="bestclass" resultType="lesson">
+
+		SELECT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number = r.lesson_number
+		GROUP BY
+		l.lesson_number
+		ORDER BY
+		l.favorite_count DESC;
+
+	</select>
+	
+	<select id="subcatelist" resultType="subcategory">
+		
+		SELECT * FROM choongang.subcategory where maincategory_number = #{maincategory_number};
+		
+	</select>
+
+</mapper>
+
+
+
+
