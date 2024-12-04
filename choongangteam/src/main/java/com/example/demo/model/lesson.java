@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.apache.ibatis.type.Alias;
 
@@ -8,12 +8,12 @@ import lombok.Data;
 
 @Data
 @Alias("lesson")
-public class lesson {
+public class Lesson {
 	
 	private int lesson_number;
 	private String lesson_title;
 	private String lesson_content;
-	private Date write_date;
+	private Date wirte_date;
 	private String start_time;
 	private String end_time;
 	private String lesson_keyword;
@@ -24,9 +24,9 @@ public class lesson {
 	private String content_image;
 	private int member_count;
 	private String member_email;
-	
 	private int subcategory_number;
 	private int maincategory_number;
+	
 	
 	
 }
