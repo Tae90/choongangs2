@@ -1,4 +1,4 @@
-package com.example.demo.controller.mainpage;
+package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +13,8 @@ public class MainpageController {
 	
 	@RequestMapping("mainpage")
 	public String mainpage() {
+		
+		
 		
 		return "mainpage/mainpage";
 	}
