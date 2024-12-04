@@ -8,7 +8,8 @@ import lombok.Data;
 
 @Data
 @Alias("member")
-public class Member {
+public class member {
+
 	private String member_email;
 	private String member_nickname;
 	private String member_password;
