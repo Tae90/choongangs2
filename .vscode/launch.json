@@ -1,0 +1,14 @@
+{
+   "configurations": [
+      {
+         "type": "java",
+         "name": "Spring Boot-ChoongangteamApplication<choongangteam>",
+         "request": "launch",
+         "cwd": "${workspaceFolder}",
+         "mainClass": "com.example.demo.ChoongangteamApplication",
+         "projectName": "choongangteam",
+         "args": "",
+         "envFile": "${workspaceFolder}/.env"
+      }
+   ]
+}
