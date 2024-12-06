@@ -46,7 +46,7 @@
     
 <title>Insert title here</title>
 
-<script>
+<!-- <script>
 let page = 4;
 let loading = false;
 let hasMore = true;
@@ -139,7 +139,7 @@ $(window).scroll(function() {
     }, 100);
 });
 
-</script>
+</script> -->
 
 
 </head>
@@ -150,28 +150,24 @@ $(window).scroll(function() {
 	
 	 <div style="margin: auto; max-width: 1280px;">
 	 
-	 	 <div class="second_cate" >
+	 <c:if test="${not empty searchclass}">
+	 <div class="second_cate" >
 	 	 
-	 	 <c:forEach var="subcategory" items="${subcate}">
-        <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}"
-           class="${subcategory.subcategory_number == selectedSubcategory ? 'selected' : ''}">
-            <span>${subcategory.subcategory_name}</span>
-        </a>
-    </c:forEach>
+	 	<h3><span style="color: black; font-weight: 600;">${lesson_keyword }</span>에 대한 검색 결과</h3>
             
-        </div>
+        </div> 
 
 
         <div class="review">
-            <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=favorite">추천순</a>&nbsp; 
-           <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=review">리뷰순</a>&nbsp; 
-         <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}">최신순</a> 
-        </div><br>
-        
+            <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=favorite" class="${param.order == 'favorite' ? 'active' : ''}">추천순</a>&nbsp; 
+           <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=review" class="${param.order == 'review' ? 'active' : ''}">리뷰순</a>&nbsp; 
+         <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }"  class="${empty param.order ? 'active' : ''}">최신순</a> 
+        </div><br> 
+        	</c:if>
         
          <div class="flex-container"  id="lessonContainer" style="margin-top: 100px;">
 			 
-			 <c:forEach var="lesson" items="${cateclass }" begin="0" end="11">
+			 <c:forEach var="lesson" items="${searchclass }" begin="0" end="11">
             <div class="flex-item" data-lesson-id="${lesson.lesson_number}">
                 <a href="asd" class="class_link">
                     <div class="image-container">
@@ -192,10 +188,12 @@ $(window).scroll(function() {
 			 
         </div>
         
+		     <c:if test="${empty searchclass}">
+           			 <p align="center" style="font-size: 28px; margin-top:100px;"><span style="font-weight:600;">${lesson_keyword }</span>에 대한 검색 결과가 없습니다.</p>
+       		 </c:if>
 
 
-
-     <div id="loading" class="loading-spinner" style="display: none;"></div>
+<!--      <div id="loading" class="loading-spinner" style="display: none;"></div> -->
 	 	
 	 </div>
 	 

@@ -32,7 +32,62 @@
 	</select>
 
 
-	<select id="cateclass" parameterType="HashMap"  resultType="lesson">
+	<select id="cateclass" parameterType="HashMap"
+		resultType="lesson">
+
+		SELECT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number =
+		r.lesson_number
+		WHERE
+		l.subcategory_number = #{subcategory_number}
+		GROUP
+		BY
+		l.lesson_number
+		ORDER BY
+		<choose>
+			<when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+			<when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+			<otherwise>l.lesson_number DESC</otherwise>
+		</choose>
+	</select>
+
+
+	<select id="getLessons" parameterType="HashMap"
+		resultType="lesson">
+		SELECT DISTINCT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number = r.lesson_number
+		WHERE
+		l.subcategory_number = #{subcategory_number}
+		AND l.lesson_number NOT IN
+		<foreach item="id" collection="loadedLessonIds" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
+		GROUP BY
+		l.lesson_number
+		ORDER BY
+		<choose>
+			<when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+			<when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+			<otherwise>l.lesson_number DESC</otherwise>
+		</choose>
+		LIMIT #{limit}
+	</select>
+
+
+
+	<select id="searchclass" parameterType="HashMap"
+		resultType="lesson">
 
 		SELECT
 		l.*,
@@ -42,42 +97,17 @@
 		LEFT JOIN
 		choongang.reply r ON l.lesson_number = r.lesson_number
 		WHERE
-		l.subcategory_number = #{subcategory_number}
+		 l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
 		GROUP BY
 		l.lesson_number
 		ORDER BY
 		<choose>
-    <when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
-    <when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
-    <otherwise>l.lesson_number DESC</otherwise>
-</choose>
-	</select>
+			<when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+			<when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+			<otherwise>l.lesson_number DESC</otherwise>
+		</choose>
 
-	
-	 <select id="getLessons"  parameterType="HashMap" resultType="lesson">
-      	  SELECT DISTINCT
-    l.*,
-    ROUND(AVG(r.reply_score), 1) AS avg_reply_score
-    FROM
-    choongang.lesson l
-    LEFT JOIN
-    choongang.reply r ON l.lesson_number = r.lesson_number
-    WHERE
-    l.subcategory_number = #{subcategory_number}
-    AND l.lesson_number NOT IN
-    <foreach item="id" collection="loadedLessonIds" open="(" separator="," close=")">
-        #{id}
-    </foreach>
-    GROUP BY
-    l.lesson_number
-    ORDER BY
-    <choose>
-        <when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
-        <when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
-        <otherwise>l.lesson_number DESC</otherwise>
-    </choose>
-    LIMIT #{limit}
-    </select>
+	</select>
 
 
 
