@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MainpageDAO">
+
+	<!-- 찜이 가장 많은 클래스를 불러온다. -->
+	<select id="bestclass" resultType="lesson">
+
+		SELECT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number = r.lesson_number
+		GROUP
+		BY
+		l.lesson_number
+		ORDER BY
+		l.favorite_count DESC;
+
+	</select>
+
+	<!-- 메인카테고리가 같은 서브카테고리를 불러온다. -->
+	<select id="subcatelist" resultType="subcategory">
+
+		SELECT * FROM
+		choongang.subcategory where maincategory_number =
+		#{maincategory_number};
+
+	</select>
+
+
+	<select id="cateclass" parameterType="HashMap"  resultType="lesson">
+
+		SELECT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number = r.lesson_number
+		WHERE
+		l.subcategory_number = #{subcategory_number}
+		GROUP BY
+		l.lesson_number
+		ORDER BY
+		<choose>
+    <when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+    <when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+    <otherwise>l.lesson_number DESC</otherwise>
+</choose>
+	</select>
+
+	
+	 <select id="getLessons"  parameterType="HashMap" resultType="lesson">
+      	  SELECT DISTINCT
+    l.*,
+    ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+    FROM
+    choongang.lesson l
+    LEFT JOIN
+    choongang.reply r ON l.lesson_number = r.lesson_number
+    WHERE
+    l.subcategory_number = #{subcategory_number}
+    AND l.lesson_number NOT IN
+    <foreach item="id" collection="loadedLessonIds" open="(" separator="," close=")">
+        #{id}
+    </foreach>
+    GROUP BY
+    l.lesson_number
+    ORDER BY
+    <choose>
+        <when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+        <when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+        <otherwise>l.lesson_number DESC</otherwise>
+    </choose>
+    LIMIT #{limit}
+    </select>
+
+
+
+</mapper>
+
+
+
+

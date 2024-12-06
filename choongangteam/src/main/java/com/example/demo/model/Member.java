@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.sql.Date;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
