@@ -7,8 +7,9 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MainpageDAO;
-import com.example.demo.model.lesson;
-import com.example.demo.model.subcategory;
+import com.example.demo.model.Lesson;
+import com.example.demo.model.Subcategory;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,27 +19,34 @@ public class MainpageService {
 	
 	private final  MainpageDAO dao;
 
-	public List<lesson> bestclass(lesson lesson) {
+	public List<Lesson> bestclass(Lesson lesson) {
 		
 		return dao.bestclass(lesson);
 	}
 
-	public List<subcategory> subcatelist(int maincate_num) {
+	public List<Subcategory> subcatelist(int maincate_num) {
 		
 		return dao.subcatelist(maincate_num);
 	}
 
 	
 
-	public List<lesson> cateclass(Map<String, Object> params) {
+	public List<Lesson> cateclass(Map<String, Object> params) {
 		
 		return dao.cateclass(params);
 	}
 
 	
-	 public List<lesson> getLessons(HashMap map) {
+	 public List<Lesson> getLessons(HashMap map) {
 	        return dao.getLessons( map);
 	    }
+	 
+	 
+
+	public List<Lesson> searchclass(Map<String, Object> params) {
+		
+		return dao.searchclass(params);
+	}
 
 
 

@@ -5,23 +5,24 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.model.lesson;
-import com.example.demo.model.subcategory;
+import com.example.demo.model.Lesson;
+import com.example.demo.model.Subcategory;
 
 @Mapper
 public interface MainpageDAO {
 
-	List<lesson> bestclass(lesson lesson);
+	List<Lesson> bestclass(Lesson lesson);
 
-	List<subcategory> subcatelist(int maincate_num);
-
-
-	List<lesson> cateclass(Map<String, Object> params);
+	List<Subcategory> subcatelist(int maincate_num);
 
 
-	  List<lesson> getLessons(HashMap map);
+	List<Lesson> cateclass(Map<String, Object> params);
+
+
+	  List<Lesson> getLessons(HashMap map);
+
+	List<Lesson> searchclass(Map<String, Object> params);
 			  
 
 

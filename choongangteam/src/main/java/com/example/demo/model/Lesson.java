@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Alias("lesson")
-public class lesson {
+public class Lesson {
 	
 	private int lesson_number;
 	private String lesson_title;

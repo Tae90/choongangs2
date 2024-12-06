@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.model.lesson;
-import com.example.demo.model.maincategory;
-import com.example.demo.model.subcategory;
+import com.example.demo.model.Lesson;
+import com.example.demo.model.Maincategory;
+import com.example.demo.model.Subcategory;
 import com.example.demo.service.MainpageService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,10 +24,10 @@ public class MainpageController {
 	private final MainpageService service;
 	
 	@RequestMapping("mainpage")
-	public String mainpage(lesson lesson, Model model ) {
+	public String mainpage(Lesson lesson, Model model ) {
 		
 		// 메인페이지에 나오는 best 20 클래스중 8개만 보여줌
-		List<lesson> bestclass = service.bestclass(lesson); 
+		List<Lesson> bestclass = service.bestclass(lesson); 
 		
 		System.out.println(bestclass);
 		
@@ -37,9 +37,9 @@ public class MainpageController {
 	}
 	
 	@RequestMapping("bestclass")
-	public String bestclass(lesson lesson, Model model) {
+	public String bestclass(Lesson lesson, Model model) {
 		
-		List<lesson> bestclass = service.bestclass(lesson); 
+		List<Lesson> bestclass = service.bestclass(lesson); 
 		
 
 		
@@ -51,7 +51,7 @@ public class MainpageController {
 	
 	@RequestMapping("category_page")
 	public String category_page(  @RequestParam(name = "page", defaultValue = "0") int page,
-		    @RequestParam(name = "size", defaultValue = "8") int size, @RequestParam(name = "order", defaultValue = "latest") String order, lesson lesson, Model model, maincategory maincategory, subcategory subcategory ) {
+		    @RequestParam(name = "size", defaultValue = "8") int size, @RequestParam(name = "order", defaultValue = "latest") String order, Lesson lesson, Model model, Maincategory maincategory, Subcategory subcategory ) {
 		
 		int maincate_num = maincategory.getMaincategory_number();
 		int subcate_num = subcategory.getSubcategory_number();
@@ -59,7 +59,7 @@ public class MainpageController {
 		System.out.println(maincate_num);
 		System.out.println(subcate_num);
 		
-		List<subcategory> subcate = service.subcatelist(maincate_num);
+		List<Subcategory> subcate = service.subcatelist(maincate_num);
 		
 		System.out.println(subcate);
 		
@@ -72,7 +72,7 @@ public class MainpageController {
 	    params.put("order", order); // order 파라미터 추가
 	    
 	    // Service 호출
-	    List<lesson> cateclass = service.cateclass(params);
+	    List<Lesson> cateclass = service.cateclass(params);
 		
 	    
 	    System.out.println("Loaded lessons: " + cateclass);
@@ -93,7 +93,7 @@ public class MainpageController {
 	
 	@GetMapping("/loadMoreLessons")
     @ResponseBody
-    public List<lesson> loadMoreLessons(
+    public List<Lesson> loadMoreLessons(
             @RequestParam ("page")    int page,
             @RequestParam ("subcategory_number")    int subcategory_number,
             @RequestParam(name = "order", defaultValue = "latest") String order,
@@ -113,10 +113,32 @@ public class MainpageController {
         map.put("loadedLessonIds", loadedLessonIds);
         
         
-        List<lesson> list =  service.getLessons(map);
+        List<Lesson> list =  service.getLessons(map);
         System.out.println("list:"+ list);
         
         return  list;
+    }
+    
+    
+    @RequestMapping("keyword_search")
+    public String keyword_search(@RequestParam(name ="lesson_keyword") String lesson_keyword, Lesson lesson, Model model,
+    		@RequestParam(name = "order", defaultValue = "latest") String order) {
+    	
+    	Map<String, Object> params = new HashMap<>();
+    	params.put("lesson_keyword", lesson_keyword);
+    	params.put("lesson", lesson);
+    	 params.put("order", order); // order 파라미터 추가
+    	
+    	 List<Lesson> searchclass = service.searchclass(params);
+    	
+    	System.out.println("searchlist"+searchclass);
+    	
+    	
+    	 model.addAttribute("searchclass", searchclass);
+    	 model.addAttribute("lesson_keyword", lesson_keyword);
+    	 model.addAttribute("order", order); // 뷰에서 사용할 수 있도록 order 추가
+    	 
+    	return "mainpage/keyword_resultpage";
     }
 	
 }
