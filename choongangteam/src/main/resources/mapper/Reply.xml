@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ReplyDAO">
+	
+	<resultMap id="reply"          type="reply">
+		<result property="reply_number"	      column="reply_number" />
+		<result property="reply_content"      column="reply_content" />
+		<result property="write_date"  		  column="write_date" />
+		<result property="reply_score"        column="reply_score" />
+		<result property="member_email"       column="member_email" />
+		<result property="lesson_number"  	  column="lesson_number" />
+		<result property="member_nickname" 	  column="member_nickname" />
+		<result property="member_photo" 	  column="member_photo" />			
+	</resultMap>
+	
+	<insert id="insert" parameterType="reply">
+		insert into reply values(
+			reply_number,
+			#{reply_content},
+			now(),
+			#{reply_score},
+			#{member_email},
+			123
+		)
+	</insert>
+	
+	<select id="commentList" parameterType="int" resultType="reply">
+		select 
+				s1.*,
+				at1.member_nickname as member_nickname,
+				at1.member_photo as member_photo
+		 	from (
+		 		select r.*,
+		 			row_number() over (order by r.write_date)
+		 		from reply r	 
+		 	) s1
+		 		left join member at1 on s1.member_email = at1.member_email 
+		
+		where lesson_number = #{i}	
+	</select>
+	
+	<select id="replycheck">	
+		select count(*) from reply where lesson_number = 123 and member_email = #{member_email};		
+	</select>
+	
+	
+</mapper>
