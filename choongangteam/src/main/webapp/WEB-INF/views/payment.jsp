@@ -34,7 +34,7 @@
         <h2>결제 수단</h2>
         <label><input type="radio" name="agency" value="html5_inicis" checked> 카드/간편결제</label>
         <label><input type="radio" name="agency" value="kakaopay"> 카카오페이
-        <img src="<%= request.getContextPath() %>/uimg/kakaopay_logo.png" class="payment-logo"></label>
+        <img src="<%= request.getContextPath()%>/uimg/kakaopay_logo.png" class="payment-logo"></label>
        </div>
     </div>
 
@@ -64,12 +64,12 @@
         <button type="button" class="pay-button" id="paybutton">결제하기</button>
     </div>
 </div>
-	<input type="hidden" id="payment_number" value="">
-	<input type="hidden" id="lesson_number" value="${lesson.lesson_number}">
-	<input type="hidden" id="payment_title" value="${lesson.lesson_title}">
+	
+	<input type="hidden" id="payment_number" value="${lesson.lesson_number}">
 	<input type="hidden" id="payment_price" value="${lesson.lesson_price}">
-	<input type="hidden" id="payment_nickname" value="${member.member_nickname}">
+	<input type="hidden" id="payment_title" value="${lesson.lesson_title}">
 	<input type="hidden" id="member_email" value="${member.member_email}">
+	<input type="hidden" id="member_nickname" value="${member.member_nickname}">
 
 <script>
     $(document).ready(function() {
@@ -85,15 +85,18 @@
 			
             // 결제 요청
             IMP.request_pay({
-                pg: payment_agency,           		// 등록된 pg사: kg이니시스(html5_inicis), 카카오페이(kakaopay)
-                pay_method: "card",         		// 결제방식: card(신용카드)
-                merchant_uid: payment_number, 		// 주문번호
-                name: payment_title,           		// 상품명
-                amount: payment_price,           	// 금액
-                buyer_email: member_email			// 주문자 이메일
+                pg: payment_agency,           				// 등록된 pg사: kg이니시스(html5_inicis), 카카오페이(kakaopay)
+                pay_method: "card",         				// 결제방식: card(신용카드)
+                merchant_uid: payment_number, 				// 주문번호
+                name: payment_title,           				// 상품명
+                amount: payment_price,           			// 금액
+                buyer_name: $("#member_nickname").val(),	// 이름
+                buyer_email: $("#member_email").val()		// 이메일
                 
             }, function (rsp) {
             	console.log("결제 응답 객체:", rsp);
+            	console.log("lesson_number:", $("#payment_number").val());
+            	console.log("member_email:", $("#member_email").val());
             	
                 if (rsp.success) {         	
                 	
@@ -113,15 +116,17 @@
                         url: "/save_payment", // 서버의 처리 URL
                         contentType: "application/json",
                         data: JSON.stringify({
-                           "payment_number": rsp.merchant_uid,		// 주문번호
-                           "payment_title": payment_title,			// 상품명
-                           "payment_price": rsp.paid_amount,		// 결제금액
-                           "payment_method": rsp.pay_method,		// 결제방식
-                           "payment_agency": rsp.pg_provider,		// 결제대행사
-                           "member_email": rsp.buyer_email,			// 구매자 이메일
+                           "payment_number": rsp.merchant_uid,				// 주문번호
+                           "payment_title": payment_title,					// 상품명
+                           "payment_price": rsp.paid_amount,				// 결제금액
+                           "payment_method": rsp.pay_method,				// 결제방식
+                           "payment_agency": rsp.pg_provider,				// 결제대행사
+                           "lesson_number": $("#payment_number").val(), 	// 레슨넘버
+                           "member_email": $("#member_email").val(),		// 이메일
+                           "payment_nickname": $("#member_nickname").val(),	// 닉네임
                            "payment_date": new Date(rsp.paid_at * 1000).toISOString(), // 결제날짜
                            "payment_state": rsp.status === "paid" ? 1 : 0	// 결제상태 (1: 성공, 0: 실패)
-                           
+
                         }),                       
                         success: function() {
                             console.log("결제 정보 저장 성공");

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Alias("favorite")
-public class favorite {
+public class Favorite {
 	
 	private int favorite_number;
 	private String favorite_title;

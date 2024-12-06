@@ -18,19 +18,17 @@ public class PaymentService {
 	public void savePayment(Payment payment) {
 		dao.savePayment(payment);
 	}
-
+	
 	public Lesson getLessonNumber(int lesson_number) {
 		return dao.getLessonNumber(lesson_number);
 	}
 
-	public Member getMember(String member_email) {
-		return dao.getMember(member_email);
+	public Member getMemberEmail(String member_email) {
+		return dao.getMemberEmail(member_email);
 	}
-
+	
 	public void updatePaymentState(int payment_number, int state) {
 		dao.updatePaymentState(payment_number, state);
 	}
 
-
-	 
 }

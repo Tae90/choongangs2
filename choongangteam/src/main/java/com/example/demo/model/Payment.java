@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Alias("payment")
-public class payment {
+public class Payment {
 
 	private int payment_number; 
 	private Date  payment_date; 
