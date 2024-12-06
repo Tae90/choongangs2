@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Alias("reply")
-public class reply {
+public class Reply {
 	private int reply_number;
 	private String reply_content;
 	private Date write_date;
