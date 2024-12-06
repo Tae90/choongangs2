@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,21 @@ public class MainpageService {
 		
 		return dao.subcatelist(maincate_num);
 	}
+
+	
+
+	public List<lesson> cateclass(Map<String, Object> params) {
+		
+		return dao.cateclass(params);
+	}
+
+	
+	 public List<lesson> getLessons(HashMap map) {
+	        return dao.getLessons( map);
+	    }
+
+
+
 
 	
 	

@@ -32,4 +32,6 @@ public class lesson {
 	private String avg_reply_score;
 	
 	
+	
+	
 }

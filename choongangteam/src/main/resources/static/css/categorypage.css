@@ -38,6 +38,11 @@
 	color: #5D5D5D;
 }
 
+.review a.active {
+  color: #9832a8;
+  font-weight: bold;
+}
+
 /* 클래스 글들이 들어간다. */
 /* 베스트 클래스를 보여주는 flex 컨테이너 */
 .flex-container {

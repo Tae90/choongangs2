@@ -47,7 +47,6 @@
 <title>Insert title here</title>
 
 <script>
-/* 무한 스크롤 스크립트 */
 let page = 4;
 let loading = false;
 let hasMore = true;
@@ -140,20 +139,6 @@ $(window).scroll(function() {
     }, 100);
 });
 
-
-/* 추천순, 리뷰순, 최신순을 누를때 그 페이지로 갔음을 알려주는 함수 */
- 
- document.addEventListener('DOMContentLoaded', function() {
-  const currentURL = window.location.href;
-  const links = document.querySelectorAll('.review a');
-
-  links.forEach(link => {
-    if (link.href === currentURL) {
-      link.classList.add('active');
-    }
-  });
-});
-
 </script>
 
 
@@ -178,13 +163,10 @@ $(window).scroll(function() {
 
 
         <div class="review">
-  <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=favorite"
-     class="${param.order == 'favorite' ? 'active' : ''}">추천순</a>&nbsp; 
-  <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=review"
-     class="${param.order == 'review' ? 'active' : ''}">리뷰순</a>&nbsp; 
-  <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}"
-     class="${empty param.order ? 'active' : ''}">최신순</a> 
-</div><br>
+            <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=favorite">추천순</a>&nbsp; 
+           <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}&order=review">리뷰순</a>&nbsp; 
+         <a href="category_page?Maincategory_number=${subcategory.maincategory_number}&Subcategory_number=${subcategory.subcategory_number}">최신순</a> 
+        </div><br>
         
         
          <div class="flex-container"  id="lessonContainer" style="margin-top: 100px;">
