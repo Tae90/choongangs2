@@ -28,5 +28,10 @@ public class lesson {
 	private int subcategory_number;
 	private int maincategory_number;
 	
+	// 댓글 별점 평균
+	private String avg_reply_score;
+	
+	
+	
 	
 }
