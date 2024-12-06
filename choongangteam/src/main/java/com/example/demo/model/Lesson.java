@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Alias("lesson")
 public class Lesson {
-	
+	 
 	private int lesson_number;
 	private String lesson_title;
 	private String lesson_content;

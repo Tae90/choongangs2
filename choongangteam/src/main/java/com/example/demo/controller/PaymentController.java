@@ -33,7 +33,7 @@ public class PaymentController {
 	public String paymentform(@RequestParam(value="lesson_number", required=false) int lesson_number,
 	        				  @RequestParam(value="member_email", required=false) String member_email,
 	        				  HttpSession session, Model model) {
-		
+		  
 		Member member = (Member) session.getAttribute("member"); // 세션에서 회원 정보 가져오기
 	    Lesson lesson = (Lesson) session.getAttribute("lesson"); // 세션에서 레슨 정보 가져오기
 
