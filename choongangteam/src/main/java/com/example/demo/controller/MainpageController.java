@@ -139,6 +139,7 @@ public class MainpageController {
     	 model.addAttribute("order", order); // 뷰에서 사용할 수 있도록 order 추가
     	 
     	return "mainpage/keyword_resultpage";
+    	 
     }
 	
 }
