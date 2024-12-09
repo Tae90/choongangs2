@@ -46,8 +46,10 @@
 	animation: spin 1s ease-in-out infinite;
 }
 
-@keyframes spin {
-    to { transform: translateX(-50%) rotate(360deg); }
+@
+keyframes spin {to { transform:translateX(-50%)rotate(360deg);
+	
+}
 }
 </style>
 
@@ -152,9 +154,20 @@ $(window).scroll(function() {
 <body>
 
 	<!-- 헤더 부분 -->
-	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+	<!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
+	<c:choose>
+		<c:when test="${not empty sessionScope.userSession}">
+			<jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
+	
+	
 
-	<div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+	<div
+		style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
 
 		<c:if test="${not empty searchclass}">
 			<div class="second_cate">
@@ -211,10 +224,11 @@ $(window).scroll(function() {
 			</p>
 
 
-			<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 100px;">
-            	<h2>유저들이 많이 찾는 클래스</h2>
-            	<a href="bestclass" class="seeall">모두보기</a>
-        	</div>	
+			<div
+				style="display: flex; align-items: center; justify-content: space-between; margin-top: 100px;">
+				<h2>유저들이 많이 찾는 클래스</h2>
+				<a href="bestclass" class="seeall">모두보기</a>
+			</div>
 
 
 			<div class="flex-container" style="margin-bottom: 200px;">
@@ -253,8 +267,8 @@ $(window).scroll(function() {
 	</div>
 
 
-		         <!-- 이용약관 footer -->
-    <jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
+	<!-- 이용약관 footer -->
+	<jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
 
 
 </body>
