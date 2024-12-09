@@ -82,6 +82,7 @@ public class ReplyController {
 		int pageSize = 4;
 		int offset = (page - 1) * pageSize;
 		
+		
 		HashMap map = new HashMap();
 		map.put("lesson_number", lesson_number);
 		map.put("limit", 5);
