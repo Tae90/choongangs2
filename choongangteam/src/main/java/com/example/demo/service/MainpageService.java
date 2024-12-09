@@ -37,7 +37,7 @@ public class MainpageService {
 	}
 
 	
-	 public List<Lesson> getLessons(HashMap map) {
+	 public List<Lesson> getLessons(HashMap<String, Object> map) {
 	        return dao.getLessons( map);
 	    }
 	 
@@ -46,6 +46,11 @@ public class MainpageService {
 	public List<Lesson> searchclass(Map<String, Object> params) {
 		
 		return dao.searchclass(params);
+	}
+
+	public List<Lesson> getSearchLessons(HashMap<String, Object> map) {
+		
+		return dao.getSearchLessons(map);
 	}
 
 

@@ -20,6 +20,7 @@
     <link href="/css/icons.css" rel="stylesheet">
     <link href="/css/font.css" rel="stylesheet">
     <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/categorypage.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -27,7 +28,7 @@
     <style>
     	.loading-spinner {
     position: fixed;
-    bottom: 20px;
+    bottom: 200px;
     left: 50%;
     transform: translateX(-50%);
     display: none;
@@ -195,7 +196,7 @@ $(window).scroll(function() {
             <div class="flex-item" data-lesson-id="${lesson.lesson_number}">
                 <a href="asd" class="class_link">
                     <div class="image-container">
-                        <img src="art.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                        <img src="'${lesson.lesson_thumbnail }'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                     </div>
                     <div class="text-container" style="font-size: 14px;">
                         ${lesson.lesson_title }
@@ -220,7 +221,8 @@ $(window).scroll(function() {
 	 </div>
 	 
 	
-    
+             <!-- 이용약관 footer -->
+    <jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
    
 
 </body>

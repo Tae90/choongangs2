@@ -108,6 +108,34 @@
 		</choose>
 
 	</select>
+	
+	
+		<select id="getSearchLessons" parameterType="HashMap"
+		resultType="lesson">
+		SELECT DISTINCT
+		l.*,
+		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		FROM
+		choongang.lesson l
+		LEFT JOIN
+		choongang.reply r ON l.lesson_number = r.lesson_number
+		WHERE
+		l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
+		AND l.lesson_number NOT IN
+		<foreach item="id" collection="loadedLessonIds" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
+		GROUP BY
+		l.lesson_number
+		ORDER BY
+		<choose>
+			<when test="order == 'favorite'">l.favorite_count DESC, l.lesson_number DESC</when>
+			<when test="order == 'review'">l.reply_count DESC, l.lesson_number DESC</when>
+			<otherwise>l.lesson_number DESC</otherwise>
+		</choose>
+		LIMIT #{limit}
+	</select>
 
 
 
