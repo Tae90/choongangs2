@@ -79,10 +79,10 @@
 
             <div class="side_menu">
                 <div class="myimg_name">
-                    <img src="${path}/img/profile/${user.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
+                    <img src="${path}/img/profile/${userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
                     <div class="nick_email">
-                        <span>${user.nickname }</span>
-                        <span style="font-size: 14px; color: #8c8c8c;">${user.email }</span>
+                        <span>${userSession.nickname }</span>
+                        <span style="font-size: 14px; color: #8c8c8c;">${userSession.email }</span>
 
                     </div>
                 </div>
@@ -120,9 +120,9 @@
                 <div class="my_profile">
                     <span>닉네임(별명)</span>
                     <span id="nickname">
-                        <span id="current-nickname">${user.nickname }</span>
-                        <form id="edit-nickname-form" style="display: none;">
-                            <input type="text" class="new-nickname" id="new-nickname" maxlength="12" value="${user.nickname }"><br><br>
+                        <span id="current-nickname">${userSession.nickname }</span>
+                        <form id="edit-nickname-form"  action="nickname_update"  method="post"  style="display: none;">
+                            <input type="text" class="new-nickname" id="member-nickname" name="member_nickname" maxlength="12" value="${userSession.nickname }"><br><br>
                             <button type="submit">저장</button>
                             <button type="button" id="cancel-edit">취소</button>
                         </form>
@@ -137,35 +137,32 @@
 
                 <script>
 
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const editBtn = document.getElementById('edit-nickname-btn');
-                        const nicknameSpan = document.getElementById('current-nickname');
-                        const editForm = document.getElementById('edit-nickname-form');
-                        const newNicknameInput = document.getElementById('new-nickname');
-                        const cancelBtn = document.getElementById('cancel-edit');
+                document.addEventListener('DOMContentLoaded', function () {
+                    const editBtn = document.getElementById('edit-nickname-btn');
+                    const nicknameSpan = document.getElementById('current-nickname');
+                    const editForm = document.getElementById('edit-nickname-form');
+                    const newNicknameInput = document.getElementById('member-nickname');
+                    const cancelBtn = document.getElementById('cancel-edit');
 
-                        editBtn.addEventListener('click', function () {
-                            nicknameSpan.style.display = 'none';
-                            editBtn.style.display = 'none';
-                            editForm.style.display = 'inline';
-                            newNicknameInput.focus();
-                        });
-
-                        cancelBtn.addEventListener('click', function () {
-                            nicknameSpan.style.display = 'inline';
-                            editBtn.style.display = 'inline';
-                            editForm.style.display = 'none';
-                            newNicknameInput.value = nicknameSpan.textContent;
-                        });
-
-                        editForm.addEventListener('submit', function (e) {
-                            e.preventDefault();
-                            nicknameSpan.textContent = newNicknameInput.value;
-                            nicknameSpan.style.display = 'inline';
-                            editBtn.style.display = 'inline';
-                            editForm.style.display = 'none';
-                        });
+                    editBtn.addEventListener('click', function () {
+                        nicknameSpan.style.display = 'none';
+                        editBtn.style.display = 'none';
+                        editForm.style.display = 'inline';
+                        newNicknameInput.focus();
                     });
+
+                    cancelBtn.addEventListener('click', function () {
+                        nicknameSpan.style.display = 'inline';
+                        editBtn.style.display = 'inline';
+                        editForm.style.display = 'none';
+                        newNicknameInput.value = nicknameSpan.textContent;
+                    });
+
+                    editForm.addEventListener('submit', function (e) {
+                        // 폼 제출은 그대로 진행되도록 e.preventDefault()를 제거했습니다.
+                        // 백엔드에서 처리 후 페이지가 새로고침되거나 리다이렉트될 것입니다.
+                    });
+                });
 
                 </script>
 
@@ -173,7 +170,7 @@
                     <span>프로필 이미지</span>
                     <span style="position: relative;">
                         <div class="profile_img">
-                            <img id="currentProfileImg" src="${path}/img/profile/${user.user_photo}"
+                            <img id="currentProfileImg" src="${path}/img/profile/${userSession.user_photo}"
                                 style="border-radius: 50%; width: 56px; height: 56px;">
                         </div>
                         <input type="file" id="imageUpload" accept="image/*" style="display: none;"
@@ -226,7 +223,7 @@
 
                 <div class="my_profile">
                     <span>이메일(로그인 ID)</span>
-                    <span>${user.email }</span>
+                    <span>${userSession.email }</span>
                     <span></span>
                 </div>
 
