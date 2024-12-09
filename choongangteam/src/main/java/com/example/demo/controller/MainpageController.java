@@ -133,12 +133,47 @@ public class MainpageController {
     	
     	System.out.println("searchlist"+searchclass);
     	
+    	List<Lesson> bestclass = service.bestclass(lesson); 
     	
+    	
+    	model.addAttribute("bestclass", bestclass);
     	 model.addAttribute("searchclass", searchclass);
     	 model.addAttribute("lesson_keyword", lesson_keyword);
     	 model.addAttribute("order", order); // 뷰에서 사용할 수 있도록 order 추가
     	 
     	return "mainpage/keyword_resultpage";
+    	 
+    }
+    
+    
+    
+    @GetMapping("/loadMoreSearchLessons")
+    @ResponseBody
+    public List<Lesson> loadMoreSearchLessons(
+            @RequestParam ("page")    int page,
+            @RequestParam(name = "order", defaultValue = "latest") String order, @RequestParam(name ="lesson_keyword") String lesson_keyword,
+            @RequestParam("loadedLessonIds") List<Integer> loadedLessonIds)	{
+
+    	System.out.println("page:"+ page);
+    	System.out.println("lesson_keyword:"+ lesson_keyword);
+    	
+        int pageSize = 4; // 한 번에 불러올 강의 수
+        int offset = (page - 1) * pageSize;
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("limit", 4);
+        map.put("offset", offset);
+        map.put("order", order); // order 파라미터 추가
+        map.put("loadedLessonIds", loadedLessonIds);
+        map.put("lesson_keyword", lesson_keyword);
+        
+        
+        List<Lesson> list =  service.getSearchLessons(map);
+        System.out.println("list:"+ list);
+        
+        
+        
+        return  list;
     }
 	
 }

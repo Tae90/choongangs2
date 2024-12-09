@@ -23,7 +23,7 @@
 
 
         <div class="top_right_menu">
-            <a href="asd" class="login">로그인</a>
+            <a href="loginpage" class="login">로그인</a>
         </div>
 
         <hr style="border-style: ridge; border-width: 1px; width: 100%; position: absolute; bottom: 0;">

@@ -20,9 +20,11 @@ public interface MainpageDAO {
 	List<Lesson> cateclass(Map<String, Object> params);
 
 
-	  List<Lesson> getLessons(HashMap map);
+	  List<Lesson> getLessons(HashMap<String, Object> map);
 
 	List<Lesson> searchclass(Map<String, Object> params);
+
+	List<Lesson> getSearchLessons(HashMap<String, Object> map);
 			  
 
 
