@@ -6,21 +6,21 @@ function emailchk(event) {
 
 	var member_email = $("#member_email").val();
 //	var form = $("#form")[0];
-	alert("member_email : " + member_email);
+//	alert("member_email : " + member_email);
 	
 	$.ajax({
 		type: "POST",
 		url: "member_emailcheck",
 		data: {"member_email": member_email},
 		success: function(data){
-			alert("data:"+ data);
+//			alert("data:"+ data);
 			if (data == 0) {
 				var msg = '<font color="red">입력하신 계정을 찾을 수 없습니다.</font>';		
-				alert(msg);		
+//				alert(msg);		
 				$("#msg").html(msg).show();
 				return false;
 			}else if (data == 1){
-				alert("이메일전송");
+//				alert("이메일전송");
 				
 				location.href="find_pass_ok?member_email="+member_email;
 				

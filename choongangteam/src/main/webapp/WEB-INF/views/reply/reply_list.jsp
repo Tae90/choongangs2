@@ -48,7 +48,11 @@
 	#form input[type=radio]:checked ~ label{
     	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	}
+
+
 	
+	
+	/* 별 on off */
 	.star_off {
 		font-size: 1.5em; 
     	color: transparent;
@@ -60,6 +64,24 @@
 		text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	}
 	
+	/* 	로딩표시 */
+	.loading-spinner {
+    	position: fixed;
+    	bottom: 20px;
+    	left: 50%;
+    	transform: translateX(-50%);
+    	display: none;
+	    border: 4px solid rgba(0, 0, 0, 0.1);
+    	border-radius: 50%;
+    	border-top-color: #9832a8;
+    	width: 40px;
+    	height: 40px;
+    	animation: spin 1s ease-in-out infinite;
+	}
+
+	@keyframes spin {
+    	to { transform: translateX(-50%) rotate(360deg); }
+	}
 	
 </style>
 
@@ -77,8 +99,8 @@
 	</div>
 	
 	<!-- 댓글 -->
-	<c:forEach var="cl" items="${clist }">
-	<div class="flex flex-col gap-4 text-sm ">
+	<c:forEach var="cl" items="${clist }" begin="0" end="4">
+	<div id=${cl.reply_number } class="flex flex-col gap-4 text-sm ">
 		<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
 		
 			<div class="flex gap-3">

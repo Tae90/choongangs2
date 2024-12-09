@@ -103,13 +103,15 @@ public class LoginController {
 		userSession.setEmail(dbmember.getMember_email());
 		userSession.setNickname(dbmember.getMember_nickname());
 		userSession.setUser_photo(dbmember.getMember_photo());
+		userSession.setMember_number(dbmember.getMember_number());
+
 		session.setAttribute("userSession", userSession);
 		
 		System.out.println("로그인 세션값 : " + userSession);
 		
 		
 		
-		return "";		
+		return "redirect:/mainpage";		
 	}
 	
 	
@@ -162,12 +164,13 @@ public class LoginController {
 		userSession.setEmail(member.getMember_email());
 		userSession.setNickname(member.getMember_nickname());
 		userSession.setUser_photo(member.getMember_photo());
+		userSession.setMember_number(member.getMember_number());
 		session.setAttribute("userSession", userSession);
 		
 		System.out.println("로그인 세션값 : " + userSession);
 		
 		
-		return "";
+		return "redirect:/mainpage";		
 	}
 	
 	@RequestMapping("/naverlogin")
@@ -206,11 +209,12 @@ public class LoginController {
 		userSession.setEmail(member.getMember_email());
 		userSession.setNickname(member.getMember_nickname());
 		userSession.setUser_photo(member.getMember_photo());
+		userSession.setMember_number(member.getMember_number());
 		session.setAttribute("userSession", userSession);
 		
 		System.out.println("로그인 세션값 : " + userSession);
     
-	return "";
+	return "{ \"status\": \"success\", \"redirectUrl\": \"/mainpage\"}";
 	}	
 	
 	
