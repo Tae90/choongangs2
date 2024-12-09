@@ -15,8 +15,8 @@ public class PaymentService {
 	
 	 private final PaymentDAO dao;
 
-	public void savePayment(Payment payment) {
-		dao.savePayment(payment);
+	public int savePayment(Payment payment) {
+		return dao.savePayment(payment);
 	}
 	
 	public Lesson getLessonNumber(int lesson_number) {
