@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Alias("subcategory")
-public class subcategory {
+public class Subcategory {
 	
 	private int subcategory_number;
 	private String subcategory_name;
