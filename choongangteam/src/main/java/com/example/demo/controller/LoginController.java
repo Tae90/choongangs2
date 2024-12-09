@@ -274,7 +274,27 @@ public class LoginController {
 	}
 	
 	
-	
+		// 비밀번호 찾기로 이동
+		@RequestMapping("/switchMode")
+		public String switchMode(HttpSession session) {
+			System.out.println("switchMode in");		
+			
+		    UserSession userSession = (UserSession) session.getAttribute("userSession");
+		    
+		    if (userSession.getMember_number() == 0) {
+		        userSession.setMember_number(1);
+		        session.setAttribute("userSession", userSession); // 변경된 값 저장
+		        System.out.println("member_number : " + userSession.getMember_number());
+		    } else if (userSession.getMember_number() == 1) {
+		        userSession.setMember_number(0);
+		        session.setAttribute("userSession", userSession); // 변경된 값 저장
+		        System.out.println("member_number : " + userSession.getMember_number());
+		    }
+			
+			
+			
+			return "redirect:/mainpage";
+		}
 	
 	
 	
