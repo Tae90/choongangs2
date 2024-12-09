@@ -43,6 +43,7 @@ $(window).scroll(function() {
 
 // 무한스크롤 함수(댓글을 더 불러오는 함수)
 function loadMoreReply(){
+	console.log("loadMoreReply in");
 	// 더 불러올 댓글이 없거나 로딩중이 아니라면(???)
 	// 하면 함수 취소
 	if (loading || !hasMore) return;
@@ -65,7 +66,10 @@ function loadMoreReply(){
 			"loadedReplyNum": loadedReplyNum			
 		},
 		success: function(response){
-			if (response && response.lengt > 0){
+			console.log("loaded success");
+			console.log("response : "+response);
+			if (response && response.length > 0){
+				console.log("댓글 불러왓을 때 if문 실행됨");
 				setTimeout(function(){
 					response.forEach(function(reply){
 						let replyHtml =
@@ -123,6 +127,7 @@ function loadMoreReply(){
 					$('.loading-spinner').hide();
 				}, Math.random() * 1000 + 1000);
 			}else{
+				console.log("else문 실행됨");
 				// 데이터가 없으면 바로 처리
 				hasMore = false;
 				loading = false;
