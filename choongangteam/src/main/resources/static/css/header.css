@@ -349,22 +349,7 @@
         }
 
 
-        /* 푸터 */
-        footer {
-            background-color: #9832a8;
-            height: 72px;
-            opacity: 40%;
-            margin-top: 60px;
-            text-align: center;
-            padding: 14px;
-        }
-
-        footer a:link {
-            margin: auto;
-            color: black;
-            text-decoration: none;
-            font-size: 13px;
-        }
+      
 
 
         @media(max-width : 768px) {

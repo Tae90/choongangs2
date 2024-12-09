@@ -20,6 +20,8 @@
     <link href="/css/icons.css" rel="stylesheet">
     <link href="/css/font.css" rel="stylesheet">
     <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/header_login.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/slidshow.css" rel="stylesheet">
     <link href="/css/mainpage.css" rel="stylesheet">
     <link href="/css/mainpage_slideshow.css" rel="stylesheet">
@@ -29,7 +31,10 @@
 <body>
 
 	<!-- 헤더 부분 -->
-	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include> 
+	
+	
+<%-- 	<jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include> --%>
 	
 	
 	 <!-- 여기에 내용넣기 -->
@@ -85,7 +90,7 @@
             <div class="flex-item">
                 <a href="asd" class="class_link">
                     <div class="image-container">
-                        <img src="art.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                        <img src="'${lesson.lesson_thumbnail }'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                     </div>
                     <div class="text-container" style="font-size: 14px;">
                         ${lesson.lesson_title }
@@ -108,12 +113,7 @@
     </div>
     
        <!-- 이용약관 footer -->
-    <footer>
-        <a href="asd">이용약관</a><br>
-        <a href="asd">개인정보 처리방침</a><br>
-        <a href="asd">환불규정</a>
-
-    </footer>
+    <jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
 	
 </body>
 </html>

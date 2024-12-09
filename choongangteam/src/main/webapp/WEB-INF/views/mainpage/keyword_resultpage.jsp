@@ -1,74 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap"
+	rel="stylesheet">
 
-    <link href="/css/icons.css" rel="stylesheet">
-    <link href="/css/font.css" rel="stylesheet">
-    <link href="/css/header.css" rel="stylesheet">
-    <link href="/css/categorypage.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    
-    <style>
-    	.loading-spinner {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #9832a8;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s ease-in-out infinite;
+<link href="/css/icons.css" rel="stylesheet">
+<link href="/css/font.css" rel="stylesheet">
+<link href="/css/header.css" rel="stylesheet">
+<link href="/css/footer.css" rel="stylesheet">
+<link href="/css/categorypage.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+.loading-spinner {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
+	border: 4px solid rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	border-top-color: #9832a8;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
     to { transform: translateX(-50%) rotate(360deg); }
 }
-    </style>
-    
+</style>
+
 <title>Insert title here</title>
 
-<!-- <script>
+<script>
 let page = 4;
 let loading = false;
 let hasMore = true;
 let loadedLessonIds = [];
 
-function loadMoreLessons() {
+function loadMoreSearchLessons() {
     if (loading || !hasMore) return;
     loading = true;
     
     $('.loading-spinner').show();
     
-    console.log("loadMoreLessons method in");
+    console.log("loadMoreSearchLessons method in");
     console.log("page", page);
     console.log("subcate_num:", ${subcate_num});
     
     $.ajax({
-        url: 'loadMoreLessons',
+        url: 'loadMoreSearchLessons',
         method: 'GET',
         data: {
            "page": page,
-           "subcategory_number": ${subcate_num},
            "order": "${order}",
+           "lesson_keyword":"${lesson_keyword}",
            "loadedLessonIds": loadedLessonIds
         },
         success: function(response) {
@@ -80,7 +87,7 @@ function loadMoreLessons() {
                             '<div class="flex-item">' +
                                 '<a href="asd" class="class_link">' +
                                     '<div class="image-container">' +
-                                        '<img src="art.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">' +
+                                        '<img src="' + lesson.lesson_thumbnail + '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">' +
                                     '</div>' +
                                     '<div class="text-container" style="font-size: 14px;">' +
                                         lesson.lesson_title +
@@ -133,13 +140,12 @@ $(window).scroll(function() {
     scrollTimeout = setTimeout(function() {
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
             if (!loading && hasMore) {
-                loadMoreLessons();
+                loadMoreSearchLessons();
             }
         }
     }, 100);
 });
-
-</script> -->
+</script>
 
 
 </head>
@@ -147,59 +153,109 @@ $(window).scroll(function() {
 
 	<!-- 헤더 부분 -->
 	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
-	
-	 <div style="margin: auto; max-width: 1280px;">
-	 
-	 <c:if test="${not empty searchclass}">
-	 <div class="second_cate" >
-	 	 
-	 	<h3><span style="color: black; font-weight: 600;">${lesson_keyword }</span>에 대한 검색 결과</h3>
-            
-        </div> 
+
+	<div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+
+		<c:if test="${not empty searchclass}">
+			<div class="second_cate">
+
+				<h3>
+					<span style="color: black; font-weight: 600;">${lesson_keyword }</span>에
+					대한 검색 결과
+				</h3>
+
+			</div>
 
 
-        <div class="review">
-            <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=favorite" class="${param.order == 'favorite' ? 'active' : ''}">추천순</a>&nbsp; 
-           <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=review" class="${param.order == 'review' ? 'active' : ''}">리뷰순</a>&nbsp; 
-         <a href="keyword_search?lesson_keyword=${lesson.lesson_keyword }"  class="${empty param.order ? 'active' : ''}">최신순</a> 
-        </div><br> 
-        	</c:if>
-        
-         <div class="flex-container"  id="lessonContainer" style="margin-top: 100px;">
-			 
-			 <c:forEach var="lesson" items="${searchclass }" begin="0" end="11">
-            <div class="flex-item" data-lesson-id="${lesson.lesson_number}">
-                <a href="asd" class="class_link">
-                    <div class="image-container">
-                        <img src="art.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-                    </div>
-                    <div class="text-container" style="font-size: 14px;">
-                        ${lesson.lesson_title }
-                    </div>
-                    <div class="text-container" style="font-size: 14px; font-weight: 600;">
-                        ${lesson.lesson_price }원
-                    </div>
-                    <div class="text-container" style="font-size: 12px;">
-                        <span style="color: gold; font-size: 16px; text-align: center;">★</span>&nbsp;${lesson.avg_reply_score }&nbsp;(${lesson.reply_count })
-                    </div>
-                </a>
-            </div>
-     </c:forEach>
-			 
-        </div>
-        
-		     <c:if test="${empty searchclass}">
-           			 <p align="center" style="font-size: 28px; margin-top:100px;"><span style="font-weight:600;">${lesson_keyword }</span>에 대한 검색 결과가 없습니다.</p>
-       		 </c:if>
+			<div class="review">
+				<a
+					href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=favorite"
+					class="${param.order == 'favorite' ? 'active' : ''}">추천순</a>&nbsp;
+				<a
+					href="keyword_search?lesson_keyword=${lesson.lesson_keyword }&order=review"
+					class="${param.order == 'review' ? 'active' : ''}">리뷰순</a>&nbsp; <a
+					href="keyword_search?lesson_keyword=${lesson.lesson_keyword }"
+					class="${empty param.order ? 'active' : ''}">최신순</a>
+			</div>
+			<br>
+		</c:if>
+
+		<div class="flex-container" id="lessonContainer"
+			style="margin-top: 100px;">
+
+			<c:forEach var="lesson" items="${searchclass }" begin="0" end="11">
+				<div class="flex-item" data-lesson-id="${lesson.lesson_number}">
+					<a href="asd" class="class_link">
+						<div class="image-container">
+							<img src="'${lesson.lesson_thumbnail }'"
+								style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+						</div>
+						<div class="text-container" style="font-size: 14px;">
+							${lesson.lesson_title }</div>
+						<div class="text-container"
+							style="font-size: 14px; font-weight: 600;">
+							${lesson.lesson_price }원</div>
+						<div class="text-container" style="font-size: 12px;">
+							<span style="color: gold; font-size: 16px; text-align: center;">★</span>&nbsp;${lesson.avg_reply_score }&nbsp;(${lesson.reply_count })
+						</div>
+					</a>
+				</div>
+			</c:forEach>
+
+		</div>
+
+		<c:if test="${empty searchclass}">
+			<p align="center" style="font-size: 20px; margin-top: 100px;">
+				<span style="font-weight: 600;">${lesson_keyword }</span>에 대한 검색 결과가
+				없습니다.
+			</p>
 
 
-<!--      <div id="loading" class="loading-spinner" style="display: none;"></div> -->
-	 	
-	 </div>
-	 
-	
-    
-   
+			<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 100px;">
+            	<h2>유저들이 많이 찾는 클래스</h2>
+            	<a href="bestclass" class="seeall">모두보기</a>
+        	</div>	
+
+
+			<div class="flex-container" style="margin-bottom: 200px;">
+
+				<c:forEach var="recommend" items="${bestclass }" begin="0" end="3">
+					<div class="flex-item">
+						<a href="asd" class="class_link">
+							<div class="image-container">
+								<img src="art.jpg"
+									style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+							</div>
+							<div class="text-container" style="font-size: 14px;">
+								${recommend.lesson_title }</div>
+							<div class="text-container"
+								style="font-size: 14px; font-weight: 600;">
+								${recommend.lesson_price }원</div>
+							<div class="text-container" style="font-size: 12px;">
+								<span style="color: gold; font-size: 16px; text-align: center;">★</span>&nbsp;${recommend.avg_reply_score }&nbsp;(${recommend.reply_count })
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+
+
+
+
+			</div>
+
+
+
+		</c:if>
+
+
+		<div id="loading" class="loading-spinner" style="display: none;"></div>
+
+	</div>
+
+
+		         <!-- 이용약관 footer -->
+    <jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
+
 
 </body>
 </html>
