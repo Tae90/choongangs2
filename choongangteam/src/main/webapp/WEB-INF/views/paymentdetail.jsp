@@ -9,6 +9,7 @@
 <link href="/css/header.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/paymentdetail.css" rel="stylesheet">
+
 <title>상세 페이지</title>
 <script>
   $(document).ready(function() {
@@ -23,6 +24,10 @@
     });
 
   });
+  
+  $(function() {
+		$('.review-section').load('/reply_list?lesson_number=${lesson_number}');
+	});
 </script>
 
 </head>
@@ -81,16 +86,11 @@
                    
       </div>
     </div>
+    
   
-  		<div class="review-section">
-    		<h2>베스트 리뷰</h2>
-    		<div class="review">
-        <img src="<%= request.getContextPath()%>/uimg/flower.jpeg">
-        <div class="review-name">파크종찬</div>
-        <div class="star-score">★★★★★</div>
-        <div class="review-text">모두가 너무 좋아하는 체험이었습니다. <br>다음에 또 가고 싶습니다.</div>
-    </div>
-</div>
+  	<div class="review-section"></div>
+		
+		
  </div>
 </body>
 </html>

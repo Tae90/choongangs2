@@ -57,14 +57,18 @@ public class ReplyController {
 	@RequestMapping("/reply_list")
 	public String comment_list(@RequestParam(name ="page", defaultValue = "0") int page,
 							   @RequestParam(name = "size", defaultValue = "5") int size,
+							   @RequestParam("lesson_number") int lesson_number,
 							   Model model) {
 		System.out.println("comment_list in");
 		
+		System.out.println("lesson_number : "+lesson_number);
+		
 		// 글넘버에 댓글들 불러오기
-		List<Reply> clist = service.commentList(123);
+		List<Reply> clist = service.commentList(lesson_number);
 		System.out.println(clist);
 		
 		model.addAttribute("clist", clist);
+		model.addAttribute("lesson_number", lesson_number);
 				
 		return "/reply/reply_list";
 	}

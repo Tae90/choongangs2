@@ -54,15 +54,17 @@ function loadMoreReply(){
 	// 로딩중 아이콘 출력
 	$('.loading-spinner').show();
 	console.log("loading start");
-	// 글번호값 가져와야함
-	console.log("board num : " );
+	
+	// 글번호값 가져와야함	
+	var lesson_number = document.getElementsByName('lesson_number')[0].value;
+	console.log("lesson num : " + lesson_number);
 	
 	$.ajax({
 		url: 'loadMoreReply',
 		method: 'GET',
 		data: {
 			"page": page,
-			"lesson_number": 123,
+			"lesson_number": lesson_number,
 			"loadedReplyNum": loadedReplyNum			
 		},
 		success: function(response){

@@ -38,7 +38,7 @@
 		 	) s1
 		 		left join member at1 on s1.member_email = at1.member_email 
 		
-		where lesson_number = #{i}	
+		where lesson_number = #{lesson_number}	
 	</select>
 	
 	<select id="getReply" parameterType="HashMap" resultType="reply">
