@@ -38,7 +38,7 @@
 		 	) s1
 		 		left join member at1 on s1.member_email = at1.member_email 
 		
-		where lesson_number = #{i}	
+		where lesson_number = #{lesson_number}	
 	</select>
 	
 	<select id="getReply" parameterType="HashMap" resultType="reply">
@@ -52,11 +52,11 @@
 		 		from reply r	 
 		 	) s1
 		 		left join member at1 on s1.member_email = at1.member_email 
-			where lesson_number = #{i} and reply_number not in 
+			where lesson_number = #{lesson_number} and reply_number not in 
 				<foreach item="id" collection="loadedReplyNum" open="(" separator="," close=")">
 					#{id}
 				</foreach>
-			limit #{limit}
+			LIMIT #{limit}
 			
 	</select>
 	

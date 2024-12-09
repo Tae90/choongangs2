@@ -94,6 +94,7 @@
 
 <!-- 댓글 전체 컨테이너 -->
 <div id="reply_listSection" class="flex flex-col gap-4">
+	<input type="hidden" name="lesson_number" value="${lesson_number }">
 	<div>
 		<h2 class="text-lg font-semibold">수강생 리뷰</h2>
 	</div>

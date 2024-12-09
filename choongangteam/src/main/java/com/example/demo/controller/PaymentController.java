@@ -31,6 +31,9 @@ public class PaymentController {
       	   
 	    String member_email = (String)session.getAttribute("email");
        
+
+//      model.addAttribute("lesson_number", lesson_number);
+//      model.addAttribute("member_email", member_email);
 	    // 125는 임의의 값
         model.addAttribute("lesson_number", 125);
       
