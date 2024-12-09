@@ -10,7 +10,7 @@ import com.example.demo.model.Payment;
 @Mapper
 public interface PaymentDAO {
 
-	void savePayment(Payment payment);
+	int savePayment(Payment payment);
 		    
 	void updatePaymentState(@Param("payment_number")int payment_number, @Param("state")int state);
 

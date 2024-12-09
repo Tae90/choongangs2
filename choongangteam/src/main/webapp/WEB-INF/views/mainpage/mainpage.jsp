@@ -31,14 +31,20 @@
 <body>
 
 	<!-- 헤더 부분 -->
-	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include> 
-	
-	
-<%-- 	<jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include> --%>
+	<!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
+	<c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
+    </c:when>
+    <c:otherwise>
+        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+    </c:otherwise>
+</c:choose>
 	
 	
 	 <!-- 여기에 내용넣기 -->
     <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+    	
 
         <!-- Slideshow container -->
         <div class="slideshow-container">

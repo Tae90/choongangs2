@@ -34,16 +34,16 @@
             </button> -->
 
             <div class="dropdown_mypage">
-                <button onclick="myFunction()" class="dropbtn">nie <span
+                <button onclick="myFunction()" class="dropbtn">${user.nickname } <span
                         class="material-symbols-outlined small-icon">keyboard_arrow_down</span></button>
                 <div id="myDropdown" class="dropdown-content-mypage">
                     <a href="#home"> <span
                             class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스</a>
                     <hr style="margin: 0; color: #ddd;">
-                    <a href="#about"><span
+                    <a href="mypage"><span
                             class="material-symbols-outlined bottom-icon">account_circle</span>&nbsp;&nbsp;내 정보</a>
                     <hr style="margin: 0; color: #ddd;">
-                    <a href="#contact"><span
+                    <a href="logout1"><span
                             class="material-symbols-outlined bottom-icon">logout</span>&nbsp;&nbsp;로그아웃</a>
                 </div>
             </div>
@@ -82,19 +82,32 @@
                 <span class="material-symbols-outlined" style="color: black;">reorder</span><span
                     style="margin-left: 5px; margin-bottom: 4px;">카테고리</span>
             </div>
-            <div class="dropdown-content">
+             <div class="dropdown-content">
                 <div class="dropright">
                     <a style="display: flex; align-items: center;">공예<span class="material-symbols-outlined"
                             style="position: absolute; right: 0px;">chevron_right</span></a>
 
                     <div class="dropright-content">
-                        <a href="asd">비즈 공예</a>
-                        <a href="asd">뜨개질</a>
-                        <a href="asd">레진아트</a>
-                        <a href="asd">스탬프</a>
-                        <a href="asd">한지 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=101">뜨개질</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=102">레진아트</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=103">비즈 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=104">스탬프</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=105">한지 공예</a>
                     </div>
 
+                </div>
+                
+                
+                <div class="dropright">
+                    <a style="display: flex; align-items: center;">라이프 스타일<span class="material-symbols-outlined"
+                            style="position: absolute; right: 0px;">chevron_right</span></a>
+
+                    <div class="dropright-content">
+                        <a href="category_page?Maincategory_number=2&Subcategory_number=201">디퓨저</a>
+                        <a href="category_page?Maincategory_number=2&Subcategory_number=202">아로마 테라피</a>
+                        <a href="category_page?Maincategory_number=2&Subcategory_number=203">입욕제/비누</a>
+                        <a href="category_page?Maincategory_number=2&Subcategory_number=204">캔들</a>
+                    </div>
                 </div>
 
 
@@ -103,11 +116,11 @@
                             style="position: absolute; right: 0px;">chevron_right</span></a>
 
                     <div class="dropright-content">
-                        <a href="asd">판화</a>
-                        <a href="asd">캘리그라피</a>
-                        <a href="asd">수채화</a>
-                        <a href="asd">디지털 아트</a>
-                        <a href="asd">만다라 아트</a>
+                        <a href="category_page?Maincategory_number=3&Subcategory_number=301">디지털 아트</a>
+                        <a href="category_page?Maincategory_number=3&Subcategory_number=302">만다라 아트</a>
+                        <a href="category_page?Maincategory_number=3&Subcategory_number=303">수채화</a>
+                        <a href="category_page?Maincategory_number=3&Subcategory_number=304">캘리그라피</a>
+                        <a href="category_page?Maincategory_number=3&Subcategory_number=305">판화</a>
                     </div>
                 </div>
 
@@ -117,24 +130,14 @@
                             style="position: absolute; right: 0px;">chevron_right</span></a>
 
                     <div class="dropright-content">
-                        <a href="asd">DIY 가구</a>
-                        <a href="asd">업사이클링</a>
-                        <a href="asd">DIY 홈데코</a>
+                        <a href="category_page?Maincategory_number=4&Subcategory_number=401">업사이클링</a>
+                        <a href="category_page?Maincategory_number=4&Subcategory_number=402">DIY 가구</a>
+                        <a href="category_page?Maincategory_number=4&Subcategory_number=403">DIY 홈데코</a>
                     </div>
                 </div>
 
 
-                <div class="dropright">
-                    <a style="display: flex; align-items: center;">라이프 스타일<span class="material-symbols-outlined"
-                            style="position: absolute; right: 0px;">chevron_right</span></a>
-
-                    <div class="dropright-content">
-                        <a href="asd">캔들</a>
-                        <a href="asd">입욕제/비누</a>
-                        <a href="asd">아로마 테라피</a>
-                        <a href="asd">디퓨저</a>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
