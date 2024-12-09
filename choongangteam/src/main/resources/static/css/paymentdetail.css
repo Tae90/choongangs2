@@ -1,228 +1,223 @@
 body {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
+	font-family: 'Pretendard', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 500;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
 }
 
 .payment-container {
-  position: relative;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  gap: 20px;
-  padding: 0 10px;
-  margin-top: 160px;
-  display: flex;
-  align-items: stretch;
+	max-width: 1280px;
+	width: 100%;
+	height: auto;
+	margin: 10px 10px;
+	gap: 10px;
+	padding: 10px 10px;
+	display: flex;
+	border: 1px solid black;
 }
 
-
 .payment-left-section {
-  position: relative;
-  bottom: 40px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  flex: 1;
-  margin-right: 20px;
+	float: left; 
+	bottom : 40px;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	flex: 1;
+	margin-right: 20px;
+	bottom: 40px;
 }
 
 .payment-right-section {
-  position: relative;
-  background-color: #fff;
-  padding: 20px;
-  bottom: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	float: right;
+	background-color: #fff;
+	padding: 20px;
+	bottom: 40px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .review-section {
-  position: absolute; /* 상대 위치로 변경 */
-  bottom: -230px;
-  width: 60%;
-  background-color: #fff;
-  left : 0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 20px; /* 추가적인 여백 */
+	position: absolute; /* 상대 위치로 변경 */
+	bottom: -230px;
+	width: 60%;
+	background-color: #fff;
+	left: 0;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	margin-top: 20px; /* 추가적인 여백 */
 }
 
 .review-section .review {
-  display: flex; /* 플렉스박스 레이아웃 */
-  flex-direction: column; /* 세로 방향으로 배치 */
-  align-items: flex-start; /* 왼쪽 정렬 */
-  gap: 5px; /* 각 항목 간의 간격 */
+	display: flex; /* 플렉스박스 레이아웃 */
+	flex-direction: column; /* 세로 방향으로 배치 */
+	align-items: flex-start; /* 왼쪽 정렬 */
+	gap: 5px; /* 각 항목 간의 간격 */
 }
 
 .review-section .review img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; /* 사진을 원형으로 만들기 */
+	width: 50px;
+	height: 50px;
+	border-radius: 50%; /* 사진을 원형으로 만들기 */
 }
 
 .review-section .review .review-name {
-  font-size: 0.875rem;
-  font-weight: bold;
-  margin-bottom: 5px; /* 이름 아래에 간격 */
+	font-size: 0.875rem;
+	font-weight: bold;
+	margin-bottom: 5px; /* 이름 아래에 간격 */
 }
 
 .review-section .review .star-score {
-  font-size: 1rem;
-  color: gold; /* 별점 색상 */
+	font-size: 1rem;
+	color: gold; /* 별점 색상 */
 }
 
 .review-section .review .review-text {
-  font-size: 0.875rem;
-  white-space: normal;
-  margin-top: 5px;
+	font-size: 0.875rem;
+	white-space: normal;
+	margin-top: 5px;
 }
 
 .details h1 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+	font-size: 1.25rem;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .price-info {
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+	background-color: #f9f9f9;
+	padding: 10px;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+	margin-bottom: 20px;
 }
 
 .price-info .price {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #9832a8;
+	font-size: 1rem;
+	font-weight: bold;
+	color: #9832a8;
 }
 
 .price-info .total {
-  font-size: 0.875rem;
-  color: #666;
+	font-size: 0.875rem;
+	color: #666;
 }
 
 .summary-info {
-  display: flex;
-  flex-direction: column; /* 항목들이 세로로 정렬되도록 설정 */
-  gap: 10px; /* 항목들 간의 간격 설정 */
+	display: flex;
+	flex-direction: column; /* 항목들이 세로로 정렬되도록 설정 */
+	gap: 10px; /* 항목들 간의 간격 설정 */
 }
 
 .summary-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 3px;
-  position: relative;
-  padding-bottom: 10px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 3px;
+	position: relative;
+	padding-bottom: 10px;
 }
 
 .summary-item p {
-  margin: 0;
-  white-space: normal;
+	margin: 0;
+	white-space: normal;
 }
 
 .summary-item img {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
 }
 
 /* 모집 인원 항목 위에 구분선 */
 .summary-item:first-child::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 0;
-  width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  opacity: 1;
+	content: "";
+	position: absolute;
+	top: -10px;
+	left: 0;
+	width: 100%;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	opacity: 1;
 }
 
 /* 원데이 시간 항목 아래에 구분선 */
 .summary-item:last-child::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  opacity: 1;
+	content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	opacity: 1;
 }
 
 .class-info {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .radio-group label {
-  margin-right: 15px;
+	margin-right: 15px;
 }
 
 .date-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 0.875rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	font-size: 0.875rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 .pay-button {
-  flex-grow: 1; /* 버튼이 남은 공간을 채우도록 설정 */
-  padding: 12px 20px;
-  background-color: #9832a8;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
-  margin-left: 10px; /* 아이콘과 버튼 사이에 간격을 추가 */
-  text-align: center; /* 텍스트 중앙 정렬 */
-  text-decoration: none; /* 밑줄 제거 */
+	flex-grow: 1; /* 버튼이 남은 공간을 채우도록 설정 */
+	padding: 12px 20px;
+	background-color: #9832a8;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 1em;
+	cursor: pointer;
+	margin-left: 10px; /* 아이콘과 버튼 사이에 간격을 추가 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	text-decoration: none; /* 밑줄 제거 */
 }
 
 .pay-button:hover {
-  background-color: #c6b7ca;
+	background-color: #c6b7ca;
 }
 
 /* 결제하기 버튼 옆에 아이콘 배치 */
 .icon-container {
-  display: flex; /* 가로로 정렬 */
-  justify-content: space-between; /* 공간을 균등하게 나누기 */
-  gap: 20px;
-  align-items: center; /* 수직 정렬 */
-  margin-top: 20px;
+	display: flex; /* 가로로 정렬 */
+	justify-content: space-between; /* 공간을 균등하게 나누기 */
+	gap: 20px;
+	align-items: center; /* 수직 정렬 */
+	margin-top: 20px;
 }
 
 .icon-container .icon {
-  width: 28px; /* 아이콘 크기 */
-  height: 28px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+	width: 28px; /* 아이콘 크기 */
+	height: 28px;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
 .icon-container .icon:hover {
-  opacity: 0.7; /* 호버 시 투명도 변경 */
+	opacity: 0.7; /* 호버 시 투명도 변경 */
 }
 
 /* 일정 섹션 스타일 */
 .agreement-section {
-  padding: 10px;
-  margin-top: 20px;
-  border: 1px solid #ccc; /* 기본 테두리 */
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  transition: border 0.3s ease;
+	padding: 10px;
+	margin-top: 20px;
+	border: 1px solid #ccc; /* 기본 테두리 */
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	transition: border 0.3s ease;
 }
-
