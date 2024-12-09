@@ -41,7 +41,8 @@ public class ClassRegisterController {
 	}
 	
 	@RequestMapping("writing")
-	public String writing(@ModelAttribute Lesson lesson, 
+	public String writing(@ModelAttribute Lesson lesson,
+			@RequestParam("lesson_keyword_insert") String keyword,
 			@RequestParam("thumnail") MultipartFile tfile,
 			@RequestParam("classImg") MultipartFile[] files,
 			@RequestParam("lesson_content") String content,
@@ -75,8 +76,8 @@ public class ClassRegisterController {
 		tfile.transferTo(new File(imagePath + tnewFileName)); // 파일 저장
 		lesson.setLesson_thumbnail(tnewFileName);
 		
-		
-		String[] key = lesson.getLesson_keyword().split(",");
+		//키워드 처리코드
+		String[] key = keyword.split(",");
 		String sumOfKeyword = new String();
 		for(int i=0;i<key.length;i++) {
 			key[i]=key[i].trim();
@@ -85,6 +86,7 @@ public class ClassRegisterController {
 			else sumOfKeyword+=(","+key[i]);
 		}
 		
+		lesson.setLesson_keyword(sumOfKeyword);
 		
 		//content처리 코드
 		for (MultipartFile file : filesToUpload) {

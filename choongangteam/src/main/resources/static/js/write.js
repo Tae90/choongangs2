@@ -102,7 +102,7 @@ $(document).ready(function() {
 	});
 
 	//실시간으로 키워드값 체크하는 함수
-	$('#lesson_keyword').on('input', function() {
+	$('#lesson_keyword_insert').on('input', function() {
 		let tempt = $.trim($(this).val());
 		if (!(tempt == "")) {
 			let cwa = tempt.split(",");
@@ -273,19 +273,19 @@ function check() {
 		return false;
 	}
 
-	if ($.trim($("#lesson_keyword").val()) == "") {
+	if ($.trim($("#lesson_keyword_insert").val()) == "") {
 		alert("키워드를 입력해 주세요!");
-		$("#lesson_keyword").val("").focus();
+		$("#lesson_keyword_insert").val("").focus();
 		return false;
 	}
 
 	/*키워드 입력값 유효성 검사*/
-	let tempt = $.trim($('#lesson_keyword').val());
+	let tempt = $.trim($('#lesson_keyword_insert').val());
 
 	let RealCK = tempt.split(",");
 	if (RealCK.length > 5) {
 		alert("키워드가 5개 초과입니다!");
-		$("#lesson_keyword").focus();
+		$("#lesson_keyword_insert").focus();
 		return false;
 	} else {
 		for (let i = 0; i < RealCK.length; i++) {
@@ -293,12 +293,12 @@ function check() {
 			RealCK[i] = RealCK[i].replace(" ", "_");
 			if (RealCK[i] == "") {
 				alert("비여있는 키워드가 있습니다!");
-				$("#lesson_keyword").focus();
+				$("#lesson_keyword_insert").focus();
 				return false;
 			}
 		}
 
-		$("#lesson_keyword").val(RealCK);
+		$("#lesson_keyword_insert").val(RealCK);
 	}
 
 	if ($.trim($("#subject").val()) == "") {
