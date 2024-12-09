@@ -31,15 +31,36 @@
 				s1.*,
 				at1.member_nickname as member_nickname,
 				at1.member_photo as member_photo
-		 	from (
+		from (
 		 		select r.*,
-		 			row_number() over (order by r.write_date)
+		 			row_number() over (order by r.reply_number)
 		 		from reply r	 
 		 	) s1
 		 		left join member at1 on s1.member_email = at1.member_email 
 		
 		where lesson_number = #{i}	
 	</select>
+	
+	<select id="getReply" parameterType="HashMap" resultType="reply">
+			select distinct
+				s1.*,
+				at1.member_nickname as member_nickname,
+				at1.member_photo as member_photo
+		 	from (
+		 		select r.*,
+		 			row_number() over (order by r.reply_number)
+		 		from reply r	 
+		 	) s1
+		 		left join member at1 on s1.member_email = at1.member_email 
+			where lesson_number = #{i} and reply_number not in 
+				<foreach item="id" collection="loadedReplyNum" open="(" separator="," close=")">
+					#{id}
+				</foreach>
+			limit #{limit}
+			
+	</select>
+	
+	
 	
 	<select id="replycheck">	
 		select count(*) from reply where lesson_number = 123 and member_email = #{member_email};		

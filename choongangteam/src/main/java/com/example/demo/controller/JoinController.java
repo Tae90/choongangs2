@@ -84,7 +84,7 @@ public class JoinController {
 		session.setAttribute("userSession", userSession);
 			
 		
-		return "";
+		return "redirect:/mainpage";
 	}
 	
 	

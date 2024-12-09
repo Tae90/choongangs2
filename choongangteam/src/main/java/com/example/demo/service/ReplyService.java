@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import java.awt.print.Pageable;
-
-
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.tree.RowMapper;
@@ -32,8 +31,11 @@ public class ReplyService {
 	}
 
 	public int replycheck(String member_email) {
-		// TODO Auto-generated method stub
 		return dao.replycheck(member_email);
+	}
+
+	public List<Reply> getReply(HashMap map) {
+		return dao.getReply(map);
 	}
 
 	

@@ -55,10 +55,12 @@ public class ReplyController {
 	
 	// 리뷰 리스트 출력
 	@RequestMapping("/reply_list")
-	public String comment_list(
+	public String comment_list(@RequestParam(name ="page", defaultValue = "0") int page,
+							   @RequestParam(name = "size", defaultValue = "5") int size,
 							   Model model) {
 		System.out.println("comment_list in");
 		
+		// 글넘버에 댓글들 불러오기
 		List<Reply> clist = service.commentList(123);
 		System.out.println(clist);
 		
@@ -66,6 +68,34 @@ public class ReplyController {
 				
 		return "/reply/reply_list";
 	}
+	
+	@GetMapping("/loadMoreReply")
+	@ResponseBody
+	public List<Reply> loadMoreReply(@RequestParam ("page") int page,
+									 @RequestParam("lesson_number") int lesson_number,
+									 @RequestParam("loadedReplyNum") List<Integer> loadedReplyNum){
+		
+		System.out.println("loadedReply in");
+		System.out.println("page : "+ page);
+		System.out.println("lesson_number : " + lesson_number);
+		
+		int pageSize = 4;
+		int offset = (page - 1) * pageSize;
+		
+		HashMap map = new HashMap();
+		map.put("lesson_number", lesson_number);
+		map.put("limit", 5);
+		map.put("offset", offset);
+		map.put("loadedReplyNum", loadedReplyNum);
+		
+		System.out.println("map : " + map);
+		
+		List<Reply> reply = service.getReply(map);
+		System.out.println("reply : "+ reply);
+		
+		return reply;
+	}
+	
 	
 	
 	// 리뷰 등록

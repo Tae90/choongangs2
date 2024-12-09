@@ -48,11 +48,13 @@
 				</div>
 			
 				<div class="m-16 sm:mx-auto sm:w-full sm:max-w-sm">
+					<a href="mainpage">
 						<button type="submit" class="relative w-full">
 							<div class=" text-white text-center px-2 py-1.5 rounded-md drop-shadow-sm cursor-pointer purple px-4 py-2 h-10">
 								확인
 							</div>
 						</button>
+					</a>
 				</div>
 			</div>
 			

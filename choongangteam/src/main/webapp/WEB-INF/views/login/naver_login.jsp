@@ -29,8 +29,12 @@ function naverSignInCallback() {
        data : {'member_email': id, 'member_nickname': nickname},
        success: function(result){
            console.log("네이버 로그인 성공");
-           // 연동기록 없는 네이버 로그인 경우
            
+           var response = JSON.parse(result);
+           
+           if (response.status === "success" && response.redirectUrl) {
+        	   window.location.href = response.redirectUrl;
+           }           
        },
         error: function(result){
            alert("네이버 로그인이 실패하였습니다.");                
