@@ -56,7 +56,7 @@
 				<foreach item="id" collection="loadedReplyNum" open="(" separator="," close=")">
 					#{id}
 				</foreach>
-			limit #{limit}
+			LIMIT #{limit}
 			
 	</select>
 	
