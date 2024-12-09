@@ -172,6 +172,7 @@ public class MainpageController {
         System.out.println("list:"+ list);
         
         
+        
         return  list;
     }
 	
