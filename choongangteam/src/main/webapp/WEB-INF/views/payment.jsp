@@ -43,7 +43,7 @@
     <h2>결제 정보</h2>
     <div class="summary-row">
         <p>레슨 금액</p>
-        <span>10,000원</span>
+        <span>${lesson.lesson_price}</span>
     </div>
     <div class="summary-row">
         <p>강의 일정</p>
@@ -55,7 +55,7 @@
     </div>
     <div class="total-row">
         <p>최종 결제금액</p>
-        <span>10,000원</span>
+        <span>${lesson.lesson_price}</span>
     </div>
 </div>
     
@@ -95,26 +95,17 @@
                 
             }, function (rsp) {
             	console.log("결제 응답 객체:", rsp);
-            	console.log("lesson_number:", $("#payment_number").val());
-            	console.log("member_email:", $("#member_email").val());
+            	console.log("lesson_number:", '${lesson.lesson_number}');
+            	console.log("member_email:", '${member.member_email}');
+            	console.log("payment_nickname:", '${member.member_nickname}');
             	
                 if (rsp.success) {         	
                 	console.log("rsp.success:"+ rsp.success);
-                	
-                	 // 결제 완료 메시지 표시
-//            			Swal.fire({
-//                          text: "결제가 완료되었습니다.",
-//                          icon: 'success',                // 아이콘 (성공)
-//                          confirmButtonText: '확인',
-//                          confirmButtonColor: '#9832a8',  // 버튼 색상  
-//            			}).then(() => {
-//            			    window.location.href = "paymentdetail"  // "orderdone?merchant_uid=" + rsp.merchant_uid;
-//            			});
                 	 
                 	 // 결제 정보 저장
                    	$.ajax({
                         type: "POST",
-                        url: "save_payment", // 서버의 처리 URL
+                        url: "/save_payment", // 서버의 처리 URL
                         contentType: "application/json",
                         data: JSON.stringify({
                            "payment_number": rsp.merchant_uid,				// 주문번호
@@ -122,7 +113,7 @@
                            "payment_price": rsp.paid_amount,				// 결제금액
                            "payment_method": rsp.pay_method,				// 결제방식
                            "payment_agency": rsp.pg_provider,				// 결제대행사
-                           "lesson_number": $("#payment_number").val(), 	// 레슨넘버
+                           "lesson_number": '${lesson.lesson_number}', 		// 레슨넘버
                            "member_email": '${member.member_email}',		// 이메일
                            "payment_nickname": '${member.member_nickname}',	// 닉네임
                            "payment_date": new Date(rsp.paid_at * 1000).toISOString(), // 결제날짜
@@ -132,21 +123,25 @@
                         success: function(result) {
                         	console.log("결제 정보 저장 성공");
 							if(result == 1){
-								alert("결재성공");
+								// 결제 완료 메시지 표시
+		            			Swal.fire({
+		                          text: "결제가 완료되었습니다.",
+		                          icon: 'success',                // 아이콘 (성공)
+		                          confirmButtonText: '확인',
+		                          confirmButtonColor: '#9832a8',  // 버튼 색상  
+		            			}).then(() => {
+		            			    window.location.href = "mainpage"	// 추후 마이페이지 or 마이페이지 결제내역으로 변경 예정
+		            			});
 							}
-                        	
-                        	
-                         	// 버튼 상태 변경
-                            $("#paybutton")
-                                .text("결제 취소") 				// 버튼 텍스트 변경
-                                .attr("id", "cancelbutton") 	// ID 변경
-                                .off("click") 					// 기존 클릭 이벤트 제거
-                                .on("click", function () {
-                                    cancelPayment(rsp.merchant_uid); // 결제 취소 이벤트 등록
-                                });
-                        },
+						},
                         error: function() {
                        	 	console.log("결제 정보 저장 실패");
+                       	 	Swal.fire({
+                             text: "결제 정보 저장 중 오류가 발생했습니다.",
+                             icon: 'error',
+                             confirmButtonText: '확인',
+                             confirmButtonColor: '#9832a8'
+                         	});
                     	}
                     });
                    	
@@ -158,49 +153,10 @@
                         confirmButtonColor: '#9832a8'
                     });
                 }
-            }
-        );
-    });
- 
- 	// 결제 취소 
-    function cancelPayment(payment_number) {
-
-        // 결제 취소 요청
-        $.ajax({
-            type: "POST",
-            url: "/save_payment/cancel",
-            contentType: "application/json",
-            data: JSON.stringify({
-                "payment_number": payment_number // 취소할 결제 번호
-            }),
-            success: function () {
-                Swal.fire({
-                    text: "결제가 취소되었습니다.",
-                    icon: "success",
-                    confirmButtonText: "확인",
-                    confirmButtonColor: "#9832a8"
-                }).then(() => {
-                    // 버튼 상태 다시 "결제하기"로 변경
-                    $("#cancelbutton")
-                        .text("결제하기")
-                        .attr("id", "paybutton")
-                        .off("click")
-                        .on("click", function () {
-                            location.reload();
-                        });
-                });
-            },
-            error: function () {
-                Swal.fire({
-                    text: "결제 취소 처리에 실패했습니다.",
-                    icon: "error",
-                    confirmButtonText: "확인",
-                    confirmButtonColor: "#9832a8",
-                });
-            }
+            });
         });
-    }
-});
+    });
+
 </script>
 
 </body>
