@@ -10,8 +10,17 @@
 <title>클래스 등록</title>
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
 <link href="/css/write.css" rel="stylesheet">
+<link href="/css/header.css" rel="stylesheet">
+<link href="/css/font.css" rel="stylesheet">
+<link href="/css/icons.css" rel="stylesheet">
 <script src="/js/write.js"></script>
 <body>
 	<div class="container">
@@ -59,7 +68,7 @@
 					<!-- input div -->
 					<div class="writeSection">
 						<!-- 클래스 사이에 ,표를 넣어서 구분할 수 있도록 구현 -->
-						<input type="text" id="lesson_keyword" name="lesson_keyword" placeholder="클래스 키워드를 입력하세요">
+						<input type="text" id="lesson_keyword_insert" name="lesson_keyword_insert" placeholder="클래스 키워드를 입력하세요">
 						<br>
 						<p class="alertP">키워드를 추가할 시에 ','를 넣어서 구분해 주세요.최대 5개 입력 가능합니다.</p>
 						<div id="classKeywordError" class="classKeywordError"><br></div>
