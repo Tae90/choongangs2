@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+
 import java.sql.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -22,6 +23,7 @@ public class Lesson {
 	private String lesson_keyword;
 	private int lesson_price;
 	private int lesson_apply;
+
 	private int reply_count;
 	private int favorite_count;
 	private String lesson_thumbnail;
@@ -30,6 +32,8 @@ public class Lesson {
 	private String member_email;
 	private int subcategory_number;
 	private int maincategory_number;
+	// 댓글 별점 평균
+	private String avg_reply_score;
 	
-	
+		
 }
