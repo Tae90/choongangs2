@@ -83,7 +83,7 @@
 
 	<c:forEach var="lesson" items="${bestclass }" begin="0" end="7">
             <div class="flex-item">
-                <a href="asd" class="class_link">
+                <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link">
                     <div class="image-container">
                         <img src="art.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                     </div>

@@ -53,9 +53,9 @@
     <!-- 오른쪽 섹션 -->
     <div class="payment-right-section">
       <div class="details">
-        <h1>나만의 향수 MAKE IT!</h1>
+        <h1>${lesson.lesson_title}</h1>
         <div class="price-info">
-        <p class="price">40,000원</p>
+        <p class="price">${lesson.lesson_price}원</p>
         </div>
         
         <div class="summary-info">
@@ -78,19 +78,20 @@
       <div class="agreement-section" id="agreementSection">
           <input type="radio" value="agree"> 2024-12-06 16:00~18:00</div>
         
-        <!-- 아이콘 섹션 -->
       <div class="icon-container">
       
         <img src="<%= request.getContextPath()%>/uimg/heart.png" class="icon" id="heartIcon">
         
         <a href="asd"><img src="<%= request.getContextPath()%>/uimg/contact.png" class="icon" id="messageIcon"></a>
         <!-- 결제하기 버튼 -->
-          <a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson_number}" class="pay-button">결제하기</a>
+          <a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
       </div>
                    
       </div>
     </div>
-  
+ </div>
+ 
+ <!-- 리뷰 섹션 -->
   		<div class="review-section">
     		<h2>베스트 리뷰</h2>
     		<div class="review">
@@ -99,7 +100,7 @@
         <div class="star-score">★★★★★</div>
         <div class="review-text">모두가 너무 좋아하는 체험이었습니다. <br>다음에 또 가고 싶습니다.</div>
     </div>
+    
 </div>
- </div>
 </body>
 </html>
