@@ -9,7 +9,7 @@
 <body>
     <c:if test="${result == 1}">
         <script>
-            alert("로그아웃 성공");
+           
             location.href="mainpage";
         </script>
     </c:if>

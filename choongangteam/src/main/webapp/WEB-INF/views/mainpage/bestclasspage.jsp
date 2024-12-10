@@ -27,6 +27,7 @@
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
 <link href="/css/header_login.css" rel="stylesheet">
+<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/mainpage.css" rel="stylesheet">
 

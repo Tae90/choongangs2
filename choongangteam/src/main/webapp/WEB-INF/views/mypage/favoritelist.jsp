@@ -79,7 +79,7 @@
 
             <div class="side_menu">
                 <div class="myimg_name">
-                    <img src="${path}/img/profile/${userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
+                    <img src="${path}/uimg/${userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
                     <div class="nick_email">
                         <span>${userSession.nickname }</span>
                         <span style="font-size: 14px; color: #8c8c8c;">${userSession.email }</span>
