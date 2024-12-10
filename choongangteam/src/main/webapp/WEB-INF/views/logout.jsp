@@ -10,7 +10,7 @@
     <c:if test="${result == 1}">
         <script>
             alert("로그아웃 성공");
-            history.go(-1); // 로그아웃 성공 시 로그인 페이지로 이동
+            location.href="mainpage";
         </script>
     </c:if>
     <c:if test="${result != 1}">

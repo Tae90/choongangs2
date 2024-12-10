@@ -13,4 +13,9 @@ public class Favorite {
 	private String member_email;
 	private int lesson_number;
 	
+	
+	private String lesson_thumbnail;
+    private int lesson_price;
+    
+    private int total;
 }

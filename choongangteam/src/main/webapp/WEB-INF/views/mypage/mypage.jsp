@@ -90,22 +90,22 @@
                 <!--  <button class="write_lesson" onclick="location.href='asd'">클래스 등록</button> -->
 
                 <div class="my_menu">
-                    <a href="asd" class="side_link">
+                    <a href="mypage" class="side_link">
                         <span>프로필</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="asd" class="side_link">
+                    <a href="payment" class="side_link"  >
                         <span>결제 내역</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="asd" class="side_link">
+                    <a href="favoritelist" class="side_link"  >
                         <span>찜</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="asd" class="side_link">
+                    <a href="reviews" class="side_link" >
                         <span>리뷰</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
@@ -114,7 +114,7 @@
             </div>
 
             <!-- 사이드 버튼 누르면 나오는 메뉴 이거는 나중에 따로 파일 만들어서 불러와야 할듯 -->
-            <div class="mypage_content">
+            <div class="mypage_content"   id="mypage-content">
                 <h2>내 프로필</h2>
 
                 <div class="my_profile">
@@ -168,24 +168,28 @@
 
                <div class="my_profile">
                     <span>프로필 이미지</span>
+                     <form action="profileimg_update"  method="post">
                     <span style="position: relative;">
+                   
                         <div class="profile_img">
-                            <img id="currentProfileImg" src="${path}/img/profile/${userSession.user_photo}"
+                            <img id="currentProfileImg"  name="member_photo"  src="https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png"
                                 style="border-radius: 50%; width: 56px; height: 56px;">
                         </div>
                         <input type="file" id="imageUpload" accept="image/*" style="display: none;"
                             onchange="loadFile(this)">
-                        <button class="profileimg_edit" onclick="document.getElementById('imageUpload').click();">
+                        <button type="button" class="profileimg_edit" onclick="document.getElementById('imageUpload').click();">
                             <span class="material-symbols-outlined" style="font-size: 18px; color: white; display: flex;
             justify-content: center; align-items: center;">photo_camera</span>
                         </button>
                         
                     </span>
-                    <span>
+                    
                         <div id="imageActionButtons" style="display: none; margin-top: 10px;">
-                            <button onclick="saveImage()">저장</button>
+                            <button type="submit" onclick="saveImage()">저장</button>
                             <button onclick="cancelImage()">취소</button>
                         </div>
+                       </form>
+                       <span>
                     </span>
                 </div>
                 
@@ -209,8 +213,7 @@
                     }
 
                     function saveImage() {
-                        // 여기에 서버로 이미지를 저장하는 로직을 추가할 수 있습니다.
-                        alert('이미지가 저장되었습니다.');
+                   
                         document.getElementById('imageActionButtons').style.display = 'none';
                     }
 
@@ -239,6 +242,8 @@
 
         </div>
 	</div>
+	
+
 	
 	
 		 <!-- 이용약관 footer -->
