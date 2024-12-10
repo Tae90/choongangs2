@@ -26,6 +26,7 @@
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
+<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/categorypage.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

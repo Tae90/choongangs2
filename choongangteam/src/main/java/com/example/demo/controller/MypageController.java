@@ -1,20 +1,27 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Favorite;
 import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Reply;
 import com.example.demo.model.UserSession;
-import com.example.demo.service.LoginService;
 import com.example.demo.service.MypageService;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MypageController {
 	 private final MypageService service; 
-	 private final LoginService login_service;
+	 @Autowired
+	    private ServletContext servletContext;
 	
 	 // 회원정보 불러오기
 	@RequestMapping("mypage")
@@ -31,7 +39,7 @@ public class MypageController {
 			
 		UserSession user = (UserSession) session.getAttribute("userSession");
 		
-		
+		System.out.println("user:"+user);
 
 		model.addAttribute("user", user);	
 		
@@ -69,34 +77,64 @@ public class MypageController {
 	}
 	
 	// 프로필 사진변경
-	@RequestMapping("profileimg_update")
-		public String profileimg_update(@ModelAttribute Member member, HttpSession session , Model model) {
+	@RequestMapping(value = "profileimg_update", method = RequestMethod.POST)
+    public String profileimg_update(@RequestParam("imageFile") MultipartFile imageFile, HttpSession session) throws IOException {
 		
-		UserSession userSession1 = (UserSession) session.getAttribute("userSession");		
-		
-		Member member1 = new Member();
-		
-		member1.setMember_email(userSession1.getEmail());
-		member1.setMember_nickname(member.getMember_photo());	
-		
-		 service.updateprofileimg(member1); 
-		 
-		 
-		 session.removeAttribute("userSession");
-		  
-		 UserSession userSession = new UserSession();
-		 userSession.setEmail(userSession1.getEmail());
-		 userSession.setNickname(userSession1.getNickname());
-		 userSession.setUser_photo(member.getMember_photo());
-		 userSession.setMember_number(userSession1.getMember_number());
-		 
-		 session.setAttribute("userSession", userSession);
-		 
-		 System.out.println("변경 후 세션 : "+userSession);
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		
+		if (imageFile != null && !imageFile.isEmpty()) {
+			
+			// 이미지 저장 로직
+            String fileName = saveImage(imageFile);
+		
+            // 데이터베이스 업데이트
+            Member member = new Member();
+            member.setMember_email(userSession.getEmail());
+            member.setMember_photo(fileName);
+            
+            service.updateprofileimg(member);
+            
+            // 세션 업데이트
+            userSession.setUser_photo(fileName);
+            session.setAttribute("userSession", userSession);
+            
+            System.out.println("변경 후 세션 : " + userSession);
+		
+	}
 		return "redirect:/mypage";
 	}
+	
+	
+	
+	 private String saveImage(MultipartFile imageFile) throws IOException {
+	        // 웹 애플리케이션 루트 경로
+	        String webAppRoot = servletContext.getRealPath("/");
+
+	        // "uimg" 폴더 경로
+	        String imagePath = webAppRoot + "uimg/";
+
+	        // 파일명 생성
+	        String originalFilename = imageFile.getOriginalFilename();
+	        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+	        String fileName = UUID.randomUUID().toString() + fileExtension;
+
+	        // 디렉토리 생성
+	        File directory = new File(imagePath);
+	        if (!directory.exists()) {
+	            directory.mkdirs();
+	        }
+
+	        // 파일 저장
+	        File file = new File(imagePath + fileName);
+	        imageFile.transferTo(file);
+
+	        return fileName;
+	    }
+	
+	
+	
+	
 	
 	
 	@RequestMapping("favoritelist")
