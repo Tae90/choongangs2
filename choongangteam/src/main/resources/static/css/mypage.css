@@ -72,10 +72,6 @@
     color: black;
 }
 
-.side_link:visited{
-	color: black;
-}
-
 .mypage_content{
     display: flex;
     margin-top: 50px;

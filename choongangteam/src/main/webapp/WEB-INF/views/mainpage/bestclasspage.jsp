@@ -27,7 +27,6 @@
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
 <link href="/css/header_login.css" rel="stylesheet">
-<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/mainpage.css" rel="stylesheet">
 
@@ -63,7 +62,7 @@
 
 			<c:forEach var="lesson" items="${bestclass }" begin="0" end="19">
 				<div class="flex-item">
-					<a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link"  target="_blank">
+					<a href="asd" class="class_link">
 						<div class="image-container">
 							<img src="'${lesson.lesson_thumbnail }'"
 								style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">

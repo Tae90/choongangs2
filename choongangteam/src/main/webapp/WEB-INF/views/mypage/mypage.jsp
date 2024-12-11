@@ -79,7 +79,7 @@
 
             <div class="side_menu">
                 <div class="myimg_name">
-                    <img src="${path}/uimg/${empty userSession.user_photo ? '/img/profile/Default.png' : userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
+                    <img src="${path}/img/profile/${userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
                     <div class="nick_email">
                         <span>${userSession.nickname }</span>
                         <span style="font-size: 14px; color: #8c8c8c;">${userSession.email }</span>
@@ -87,27 +87,25 @@
                     </div>
                 </div>
 
-               <c:if test="${userSession.member_number == 1}">
-    					<button class="write_lesson" onclick="location.href='classRegister'">클래스 등록</button>
-			  </c:if>
+                <!--  <button class="write_lesson" onclick="location.href='asd'">클래스 등록</button> -->
 
                 <div class="my_menu">
-                    <a href="mypage" class="side_link">
+                    <a href="asd" class="side_link">
                         <span>프로필</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="payment" class="side_link"  >
+                    <a href="asd" class="side_link">
                         <span>결제 내역</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="favoritelist" class="side_link"  >
+                    <a href="asd" class="side_link">
                         <span>찜</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="reviews" class="side_link" >
+                    <a href="asd" class="side_link">
                         <span>리뷰</span>
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
@@ -116,7 +114,7 @@
             </div>
 
             <!-- 사이드 버튼 누르면 나오는 메뉴 이거는 나중에 따로 파일 만들어서 불러와야 할듯 -->
-            <div class="mypage_content"   id="mypage-content">
+            <div class="mypage_content">
                 <h2>내 프로필</h2>
 
                 <div class="my_profile">
@@ -125,12 +123,8 @@
                         <span id="current-nickname">${userSession.nickname }</span>
                         <form id="edit-nickname-form"  action="nickname_update"  method="post"  style="display: none;">
                             <input type="text" class="new-nickname" id="member-nickname" name="member_nickname" maxlength="12" value="${userSession.nickname }"><br><br>
-                            <button type="submit" style="background-color: rgba(0, 0, 0, 0); border: none; cursor: pointer; color: #8C8C8C;">
-                            		<span class="material-symbols-outlined small-icon">check_circle</span>
-                            </button>
-                            <button type="button" id="cancel-edit"  style="background-color: rgba(0, 0, 0, 0); border: none; cursor: pointer; color: #8C8C8C;">
-                            		 <span class="material-symbols-outlined small-icon">cancel</span>
-                            </button>
+                            <button type="submit">저장</button>
+                            <button type="button" id="cancel-edit">취소</button>
                         </form>
                         <button class="nickname_edit" id="edit-nickname-btn">
                             <span class="material-symbols-outlined"
@@ -174,60 +168,57 @@
 
                <div class="my_profile">
                     <span>프로필 이미지</span>
-                     <form action="profileimg_update"  method="post"  enctype="multipart/form-data">
                     <span style="position: relative;">
-                   
                         <div class="profile_img">
-                            <img id="currentProfileImg"  name="member_photo"  src="${path}/uimg/${userSession.user_photo}"
+                            <img id="currentProfileImg" src="${path}/img/profile/${userSession.user_photo}"
                                 style="border-radius: 50%; width: 56px; height: 56px;">
                         </div>
-                        <input type="file" id="imageUpload"  name="imageFile"  accept="image/*" style="display: none;"
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;"
                             onchange="loadFile(this)">
-                        <button type="button" class="profileimg_edit" onclick="document.getElementById('imageUpload').click();">
+                        <button class="profileimg_edit" onclick="document.getElementById('imageUpload').click();">
                             <span class="material-symbols-outlined" style="font-size: 18px; color: white; display: flex;
             justify-content: center; align-items: center;">photo_camera</span>
                         </button>
                         
                     </span>
-                    
+                    <span>
                         <div id="imageActionButtons" style="display: none; margin-top: 10px;">
-                            <button type="submit"   style="background-color: rgba(0, 0, 0, 0); border: none; cursor: pointer; color: #8C8C8C;">
-                            		<span class="material-symbols-outlined small-icon">check_circle</span>
-                            </button>
-                            <button onclick="cancelImage()"   style="background-color: rgba(0, 0, 0, 0); border: none; cursor: pointer; color: #8C8C8C;">
-                            		 <span class="material-symbols-outlined small-icon">cancel</span>
-                            </button>
+                            <button onclick="saveImage()">저장</button>
+                            <button onclick="cancelImage()">취소</button>
                         </div>
-                       </form>
-                       <span>
                     </span>
                 </div>
                 
                 
                 <script>
-                let originalImageSrc = '';
+                    let originalImageSrc = '';
 
-                function loadFile(input) {
-                    let file = input.files[0];
+                    function loadFile(input) {
+                        let file = input.files[0];
 
-                    if (file) {
-                        let reader = new FileReader();
-                        reader.onload = function (e) {
-                            let newImage = document.getElementById('currentProfileImg');
-                            originalImageSrc = newImage.src;  // 원래 이미지 저장
-                            newImage.src = e.target.result;
-                            document.getElementById('imageActionButtons').style.display = 'block';
+                        if (file) {
+                            let reader = new FileReader();
+                            reader.onload = function (e) {
+                                let newImage = document.getElementById('currentProfileImg');
+                                originalImageSrc = newImage.src;  // 원래 이미지 저장
+                                newImage.src = e.target.result;
+                                document.getElementById('imageActionButtons').style.display = 'block';
+                            }
+                            reader.readAsDataURL(file);
                         }
-                        reader.readAsDataURL(file);
                     }
-                }
 
-                function cancelImage() {
-                    let currentImage = document.getElementById('currentProfileImg');
-                    currentImage.src = originalImageSrc;  // 원래 이미지로 복원
-                    document.getElementById('imageActionButtons').style.display = 'none';
-                    document.getElementById('imageUpload').value = '';  // 파일 입력 초기화
-                }
+                    function saveImage() {
+                        // 여기에 서버로 이미지를 저장하는 로직을 추가할 수 있습니다.
+                        alert('이미지가 저장되었습니다.');
+                        document.getElementById('imageActionButtons').style.display = 'none';
+                    }
+
+                    function cancelImage() {
+                        let currentImage = document.getElementById('currentProfileImg');
+                        currentImage.src = originalImageSrc;  // 원래 이미지로 복원
+                        document.getElementById('imageActionButtons').style.display = 'none';
+                    }
                 </script>
 
                 <div class="my_profile">
@@ -248,8 +239,6 @@
 
         </div>
 	</div>
-	
-
 	
 	
 		 <!-- 이용약관 footer -->

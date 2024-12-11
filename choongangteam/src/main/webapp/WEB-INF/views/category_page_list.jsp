@@ -26,7 +26,6 @@
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
-<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/categorypage.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -34,26 +33,23 @@
 
 <style>
 .loading-spinner {
-    position: fixed;
-    bottom: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #9832a8;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
+	position: fixed;
+	bottom: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
+	border: 4px solid rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	border-top-color: #9832a8;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s ease-in-out infinite;
 }
 
-@keyframes spin {
-    from {
-        transform: translateX(-50%) rotate(0deg);
-    }
-    to {
-        transform: translateX(-50%) rotate(360deg);
-    }
+@
+keyframes spin {to { transform:translateX(-50%)rotate(360deg);
+	
+}
 }
 </style>
 
@@ -92,7 +88,7 @@ function loadMoreLessons() {
                     response.forEach(function(lesson) {
                         let lessonHtml = 
                             '<div class="flex-item">' +
-                                '<a href="paymentdetail?lesson_number=' + lesson.lesson_number + '" class="class_link"  target="_blank">' +
+                                '<a href="asd" class="class_link">' +
                                     '<div class="image-container">' +
                                         '<img src="' + lesson.lesson_thumbnail + '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">' +
                                     '</div>' +
@@ -220,7 +216,7 @@ $(window).scroll(function() {
 
 			<c:forEach var="lesson" items="${cateclass }" begin="0" end="11">
 				<div class="flex-item" data-lesson-id="${lesson.lesson_number}">
-					<a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link" target="_blank">
+					<a href="asd" class="class_link">
 						<div class="image-container">
 							<img src="'${lesson.lesson_thumbnail }'"
 								style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">

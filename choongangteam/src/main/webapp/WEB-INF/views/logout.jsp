@@ -9,8 +9,8 @@
 <body>
     <c:if test="${result == 1}">
         <script>
-           
-            location.href="mainpage";
+            alert("로그아웃 성공");
+            history.go(-1); // 로그아웃 성공 시 로그인 페이지로 이동
         </script>
     </c:if>
     <c:if test="${result != 1}">
