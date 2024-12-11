@@ -33,7 +33,6 @@ public class PaymentController {
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
 		   					   HttpSession session, Model model) {
       	   
-	    String member_email = (String)session.getAttribute("email");
 	    Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	    
         model.addAttribute("lesson", lesson);
@@ -99,10 +98,24 @@ public class PaymentController {
 	  String member_email = userSession.getEmail();
 	  
 	  Payment paymentInfo = paymentservice.getPaymentNumber(payment.getPayment_number());
-	        
+	  if (paymentInfo == null) {
+	        throw new IllegalArgumentException("결제 정보를 찾을 수 없습니다.");
+	    }
+	  
+	  // 아임포트 결제 취소 요청
+	  String imp_uid = paymentInfo.getPayment_imp_uid();
+	  String reason = "사용자 요청";
+	  int amount = paymentInfo.getPayment_price();
+	  
+	  boolean iamportCancel = iamportservice.cancelPayment(imp_uid, reason, amount);
+	  
+	  if (!iamportCancel) {
+	        throw new RuntimeException("아임포트 결제 취소가 실패했습니다.");
+	    }
+	  
       // 결제 취소 상태 설정
-	  payment.setPayment_state(0); // 0: 결제 취소
-	  int result = paymentservice.updatePayment(payment);
+	  paymentInfo.setPayment_state(0); // 0: 결제 취소
+	  int result = paymentservice.updatePayment(paymentInfo);
       
       return result;
    }

@@ -117,7 +117,8 @@
                            "member_email": '${member.member_email}',		// 이메일
                            "payment_nickname": '${member.member_nickname}',	// 닉네임
                            "payment_date": new Date(rsp.paid_at * 1000).toISOString(), // 결제날짜
-                           "payment_state": rsp.status === "paid" ? 1 : 0	// 결제상태 (1: 성공, 0: 실패)
+                           "payment_state": rsp.status === "paid" ? 1 : 0,	// 결제상태 (1: 성공, 0: 실패)
+                           "payment_imp_uid": rsp.imp_uid
 
                         }),                       
                         success: function(result) {

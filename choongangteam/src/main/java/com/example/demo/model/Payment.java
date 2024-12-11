@@ -19,6 +19,7 @@ public class Payment {
 	private int payment_state; 
 	private String payment_nickname;
 	private String member_email;
-	private int lesson_number; 
+	private int lesson_number;
+	private String payment_imp_uid;
 	
 }
