@@ -102,27 +102,24 @@ public class PaymentController {
 	  if (paymentInfo == null) {
 	        throw new IllegalArgumentException("결제 정보를 찾을 수 없습니다.");
 	    }
-	  
+  
 	  // 아임포트 결제 취소 요청
 	  String imp_uid = paymentInfo.getPayment_imp_uid();
 	  String reason = "사용자 요청";
-	  
 	  String token = iamportservice.getAccessToken();
-	  
-	  System.out.println("token : " + token);
 	  
 	  int amount = paymentInfo.getPayment_price();
 	  
-	  String result = iamportservice.cancelPayment(token, imp_uid, reason, amount);
-	  
-	  System.out.println("취소결과 : " + result);
-	  
-	  if (result.equals(200)) {
-	  // 결제 취소 상태 설정
-		  paymentInfo.setPayment_state(0); // 0: 결제 취소
-		  paymentservice.updatePayment(paymentInfo);      
-	  }
-      return 0;
+	  System.out.println("token : " + token);
+
+	  String iamportCancel = iamportservice.cancelPayment(token, imp_uid, reason, amount);
+	  	  
+      // 결제 취소 상태 설정
+	  paymentInfo.setPayment_state(0); // 0: 결제 취소
+	  int result = paymentservice.updatePayment(paymentInfo);
+	  	  
+      return result;
+
    }
    
 

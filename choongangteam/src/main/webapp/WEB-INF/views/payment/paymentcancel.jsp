@@ -64,7 +64,8 @@
                             </td>
                             <td>
                                 <c:if test="${payment.payment_state == 1}">
-                                    <button class="cancelbutton" data-payment="${payment.payment_number}">취소</button>
+                                    <button class="cancelbutton" data-payment="${payment.payment_number}"
+                                    data-imp_uid="${payment.payment_imp_uid}">취소</button>
                                 </c:if>
                             </td>
                         </tr>
@@ -78,7 +79,11 @@
         $(document).ready(function () {
             $(".cancelbutton").click(function () {
                 var payment_number = $(this).data("payment");
-
+                var payment_imp_uid = $(this).data("imp_uid");
+				
+                console.log("취소 요청 - payment_number:", payment_number);
+                console.log("취소 요청 - imp_uid:", payment_imp_uid);
+                
                 Swal.fire({
                     title: "결제를 취소하시겠습니까?",
                     icon: "warning",
@@ -94,7 +99,8 @@
                             url: "/save_payment/cancel",
                             contentType: "application/json",
                             data: JSON.stringify({
-                                payment_number: payment_number,
+                                "payment_number": payment_number,
+                                "payment_imp_uid": payment_imp_uid
                             }),
                             success: function () {
                                 Swal.fire("취소 완료", "결제가 취소되었습니다.", "success").then(() => {
