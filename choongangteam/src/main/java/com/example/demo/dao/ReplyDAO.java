@@ -19,6 +19,11 @@ public interface ReplyDAO {
 
 	List<Reply> getReply(HashMap map);
 
+	int replyDelete(int reply_number);
+
+	int pcheck(Reply reply);
+
+
 	
 	
 

@@ -38,6 +38,15 @@ public class ReplyService {
 		return dao.getReply(map);
 	}
 
+	public int replyDelete(int reply_number) {
+		return dao.replyDelete(reply_number);
+	}
+
+	public int pcheck(Reply reply) {
+		return dao.pcheck(reply);
+	}
+
+	
 	
 	
 	

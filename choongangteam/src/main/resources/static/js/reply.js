@@ -1,4 +1,5 @@
 
+//        4???
 let page = 4;
 let loading = false;
 let hasMore = true;
@@ -9,6 +10,7 @@ let scrollTimeout;
 $(document).ready(function() {
 	// 함수 실행되는지 확인
 	console.log("document ready");
+	
 	
 	// 클래스에 공백이 있으면 인식을 못하므로 여러개의 클래스값을 쓰려면 공백대신
 	// .을 삽입
@@ -146,38 +148,12 @@ function loadMoreReply(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 이미 리뷰를 작성했는지 판단하는 기능
 function replychk(event){
 	
 	alert("replchk in");
 	event.preventDefault();
-	
+		
 	var formData = $("form[name=form]").serialize();
 		
 	$.ajax({
@@ -185,18 +161,66 @@ function replychk(event){
 		url: "reply_check",
 		data: formData,
 		success: function(data){
-			if(data > 0){
-				
-				alert("한개의 리뷰만 작성할 수 있습니다.");				
-				
-				return false;	
+			if(data == 1){
+//				alert("한개의 리뷰만 작성할 수 있습니다.");
+				Swal.fire({
+					text: "한개의 리뷰만 작성할 수 있습니다.",
+					icon: "warning",
+					confirmButtonText: "확인",
+					confirmButtonColor: "#9832A8"					
+				});				
+//				return false;	
 			}else if (data == 0){
-				location.href="reply_insert?member_email="+member_email+"&reply_score="+reply_score+ "&reply_content="+reply_content;
+				var member_email = $("input[name='member_email']").val();
+				var reply_score = $("input[name='reply_score']").val(); 
+				var reply_content = $("textarea[name='reply_content']").val();
+				var lesson_number = $("input[name='lesson_number']").val();
 				
-			}			
+				location.href="reply_insert?member_email="+member_email+
+					"&reply_score="+reply_score+ 
+					"&reply_content="+reply_content+
+					"&lesson_number="+lesson_number;
+				
+			}else if (data == 2){
+//				alert("구매자만 리뷰를 달 수 있습니다.");
+				Swal.fire({
+					text: "구매자만 리뷰를 작성할 수 있습니다.",
+					icon: "error",
+					confirmButtonText: "확인",
+					confirmButtonColor: "#9832A8"
+				});
+			}
 		},
 		error: function(e){
 			alert("data error" +e);
 		}		
 	})	
 }
+
+
+// 댓글 삭제 확인 모달창
+function redelete(rnum,lnum){
+	alert("redelete in");
+	
+	alert("reply_number : " +rnum);
+	
+	Swal.fire({
+	      text: "정말로 삭제하시겠습니까?",
+	      icon: 'question',
+	      showCancelButton: true,
+	      confirmButtonText: '확인',
+	      cancelButtonText: '취소',
+	      confirmButtonColor: '#007bff',
+	      cancelButtonColor: '#d33'
+	    }).then((result) => {
+	      if (result.isConfirmed) {
+	        // replyNumber를 URL에 추가하여 삭제 요청을 보냅니다.
+	        window.location.href = "/reply_delete?reply_number=" + rnum+"&lesson_number="+lnum;
+	      } else if(result.isDismissed){
+	        console.log("취소되었습니다.");
+	      }
+	    });
+	
+}
+
+

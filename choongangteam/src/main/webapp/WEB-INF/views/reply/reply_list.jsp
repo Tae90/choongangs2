@@ -9,6 +9,8 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="./css/font.css"></script>
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- 	sweetalert 사용 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 	<script src="./js/reply.js"></script>
 	
 <style >
@@ -85,8 +87,6 @@
 	
 </style>
 
-
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -107,7 +107,7 @@
 			<div class="flex gap-3">
 				<div class="shrink-0">
 					<!-- 프사 넣을곳 -->
-					<img src="/static/img/profile/Default.png">
+						<img src="${path}/img/profile/${cl.member_photo}" style="width: 50px; height: 50px; border-radius: 50%">					
 				</div>
 				<div class="w-full">
 					<div>
@@ -139,8 +139,8 @@
 				<div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">${cl.reply_content }</div>			
 			</div>
 			<c:if test="${cl.member_email == userSession.email }">
-				<div class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
-					<button>삭제</button>
+				<div onclick="redelete(${cl.reply_number },${lesson_number })" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
+					<button >삭제</button>
 				</div>
 			</c:if>
 		</div>

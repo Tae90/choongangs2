@@ -79,7 +79,7 @@
 									<div class="text-sm"><a href="/find_pass" class="find_pass">비밀번호 찾기</a></div>
 								</div>
 								<div class="mt-2">
-									<input id="member_password" name="member_password" required="required" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-taling-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-taling-gray-800 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 focus:outline-none focus:ring-purple-500">
+									<input id="member_password" name="member_password" type="password" required="required" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-taling-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-taling-gray-800 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 focus:outline-none focus:ring-purple-500">
 								</div>
 								<div class="mt-2">
 									<label id="msg" class="text-sm font-medium""></label>					
