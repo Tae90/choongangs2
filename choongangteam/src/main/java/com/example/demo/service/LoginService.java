@@ -22,5 +22,8 @@ public class LoginService {
 		return dao.getMember(member);
 	}
 
+
+
+
 	
 }

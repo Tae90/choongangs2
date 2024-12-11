@@ -72,6 +72,10 @@
     color: black;
 }
 
+.side_link:visited{
+	color: black;
+}
+
 .mypage_content{
     display: flex;
     margin-top: 50px;
@@ -255,6 +259,90 @@
     width: 100%;
 }
 
+/* 회원 탈퇴 폼 */
+
+.warning {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(229, 231, 235);
+    min-height: 160px;
+    max-width: 782px;
+    gap: 4;
+}
+
+.delete_me {
+    display: flex;
+    flex-direction: column;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 48px;
+    gap: 80px;
+    min-height: 160px;
+    max-width: 782px;
+    width: 100%;
+}
+
+.delete_text {
+    display: grid;
+    grid-template-columns: 250px auto;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222222;
+    align-items: center;
+}
+
+.delete_passwd {
+    width: 100%;
+    max-width: 400px;
+    height: 32px;
+}
+
+.delete_passwd {
+    border-radius: 4px;
+    border: 1px solid rgb(229, 231, 235);
+}
+
+.delete_passwd:focus-within {
+    border-color: #9832a8;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.delete_passwd:focus {
+    outline: none;
+}
+
+input[type="checkbox"] {
+    accent-color: #9832a8;
+}
+
+.delete_ok {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px, 16px;
+    height: 48px;
+    background: #9832a8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    width: 350px;
+    transition: opacity 0.3s ease;
+}
+
+.delete_ok:disabled {
+    background-color: #cccccc;
+}
+
 @media screen and (max-width: 767px) {
 
     .mypage_container{
@@ -304,4 +392,25 @@
     .mypage_content{
         margin-left: auto;
     }
+    
+    .delete_text {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+    .delete_text span:nth-child(2) {
+        margin-top: 5px;
+    }
 }
+
+
+@media(max-width : 425px) {
+            
+    /*  form{
+         max-width: 240px;
+     } */
+ 
+     .delete_me {
+        padding-left: 0px;
+     }
+
+ }

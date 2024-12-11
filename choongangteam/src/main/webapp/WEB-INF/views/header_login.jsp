@@ -23,9 +23,11 @@
 
 
         <div class="top_right_menu">
-            <button class="messagebox" onclick="asd">
-                <span class="material-symbols-outlined small-icon"
-                    style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">switch_account</span>
+            <button class="messagebox">
+            	<a href="/switchMode" style="text-decoration: none;">
+                	<span class="material-symbols-outlined small-icon"
+                    	style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sync_alt</span>
+            	</a>
             </button>
 
     <!--         <button class="messagebox" onclick="location.href='asd'">
@@ -145,3 +147,33 @@
 
 
 </header>
+
+
+
+ <!-- 크기가 작아지면 하단에 생기는 메뉴 -->
+  <div class="bottom_menu">
+    <a href="mainpage" class="item">
+        <span class="material-symbols-outlined bottom-icon"> home</span>
+        <span style=" font-size: 14px;">홈</span>
+    </a>
+
+<!--     <a href="" class="item">
+        <span class="material-symbols-outlined bottom-icon">reorder</span>
+        <span style=" font-size: 14px;">카테고리</span>
+    </a> -->
+
+    <a href="favoritelist" class="item">
+        <span class="material-symbols-outlined bottom-icon">favorite</span>
+        <span style=" font-size: 14px;">찜</span>
+    </a>
+
+    <a href="" class="item">
+        <span class="material-symbols-outlined bottom-icon">school</span>
+        <span style=" font-size: 14px;">마이클래스</span>
+    </a>
+
+    <a href="mypage" class="item">
+        <span class="material-symbols-outlined bottom-icon">account_circle</span>
+        <span style=" font-size: 14px;">내 정보</span>
+    </a>
+</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="top_block">
     <div class="top_menu">
 
@@ -110,19 +111,52 @@
         <span class="material-symbols-outlined bottom-icon">reorder</span>
         <span style=" font-size: 14px;">카테고리</span>
     </a> -->
+<c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <a href="favoritelist" class="item">
+            <span class="material-symbols-outlined bottom-icon">favorite</span>
+            <span style="font-size: 14px;">찜</span>
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a href="loginpage" class="item">
+            <span class="material-symbols-outlined bottom-icon">favorite</span>
+            <span style="font-size: 14px;">찜</span>
+        </a>
+    </c:otherwise>
+</c:choose>
 
-    <a href="" class="item">
-        <span class="material-symbols-outlined bottom-icon">favorite</span>
-        <span style=" font-size: 14px;">찜</span>
-    </a>
 
-    <a href="" class="item">
-        <span class="material-symbols-outlined bottom-icon">school</span>
-        <span style=" font-size: 14px;">마이클래스</span>
-    </a>
 
-    <a href="" class="item">
-        <span class="material-symbols-outlined bottom-icon">account_circle</span>
-        <span style=" font-size: 14px;">내 정보</span>
-    </a>
+    <c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <a href="asd" class="item">
+            <span class="material-symbols-outlined bottom-icon">school</span>
+            <span style="font-size: 14px;">마이클래스</span>
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a href="loginpage" class="item">
+            <span class="material-symbols-outlined bottom-icon">school</span>
+            <span style="font-size: 14px;">마이클래스</span>
+        </a>
+    </c:otherwise>
+</c:choose>
+
+
+
+<c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <a href="mypage" class="item">
+            <span class="material-symbols-outlined bottom-icon">account_circle</span>
+            <span style="font-size: 14px;">내 정보</span>
+        </a>
+    </c:when>
+    <c:otherwise>
+        <a href="loginpage" class="item">
+            <span class="material-symbols-outlined bottom-icon">account_circle</span>
+            <span style="font-size: 14px;">내 정보</span>
+        </a>
+    </c:otherwise>
+</c:choose>
 </div>

@@ -18,4 +18,8 @@ public class Reply {
 	
 	private String member_nickname;
 	private String member_photo;
+	
+	
+	private String lesson_thumbnail;
+	private String lesson_title;
 }

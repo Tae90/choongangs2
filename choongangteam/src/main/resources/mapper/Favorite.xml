@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.FavoriteDAO">
+	  
+	 <!-- 찜 추가 -->
+    <insert id="addFavorite">
+        insert into favorite (member_email, lesson_number, favorite_title)
+       	select #{member_email}, #{lesson_number}, lesson_title from lesson
+        	where lesson_number = #{lesson_number}
+    </insert>
+
+    <!-- 찜 삭제 -->
+    <delete id="removeFavorite">
+        delete from favorite where member_email = #{member_email} and lesson_number = #{lesson_number}
+    </delete>
+    
+    <!-- 찜 여부 확인 -->
+    <select id="isFavorite" resultType="int">
+    select count(*) from favorite where member_email = #{member_email} and lesson_number = #{lesson_number}
+	</select>
+    
+</mapper>

@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.PaymentDAO;
@@ -26,9 +28,18 @@ public class PaymentService {
 	public Member getMemberEmail(String member_email) {
 		return dao.getMemberEmail(member_email);
 	}
-	
-	public void updatePaymentState(int payment_number, int state) {
-		dao.updatePaymentState(payment_number, state);
+
+	public Payment getPaymentNumber(int payment_number) {
+		return dao.getPaymentNumber(payment_number);
 	}
 
+	public int updatePayment(Payment payment) {
+		return dao.updatePayment(payment);
+	}
+
+	public List<Payment> getPaymentMemberEmail(String member_email) {
+		return dao.getPaymentMemberEmail(member_email);
+	}
+
+	
 }

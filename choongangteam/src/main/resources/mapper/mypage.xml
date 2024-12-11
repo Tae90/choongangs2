@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MypageDAO">
+
+	<update id="updatenickname" parameterType="member">
+
+		UPDATE member
+		SET
+		member_nickname = #{member_nickname}
+		WHERE member_email =
+		#{member_email}
+
+	</update>
+
+
+	<update id="updateprofileimg" parameterType="member">
+
+		UPDATE member
+		SET
+		member_photo = #{member_photo}
+		WHERE member_email =
+		#{member_email}
+
+	</update>
+
+
+	<select id="totalmyfav" resultType="int">
+
+		SELECT COUNT(*) AS
+		total_count
+		FROM choongang.favorite f
+		WHERE f.member_email =
+		#{member_email}
+
+	</select>
+
+
+	<select id="myfavorite" resultType="favorite">
+
+		SELECT f.*,
+		l.lesson_thumbnail, l.lesson_price
+		FROM choongang.favorite f
+		JOIN
+		choongang.lesson l ON f.lesson_number = l.lesson_number
+		WHERE
+		f.member_email = #{member_email}
+
+	</select>
+
+
+	<select id="myreview" resultType="reply">
+
+		SELECT *
+		FROM choongang.payment
+		p
+		LEFT JOIN choongang.lesson l ON p.lesson_number = l.lesson_number
+		LEFT JOIN choongang.reply r ON l.lesson_number = r.lesson_number
+		WHERE
+		p.member_email = #{member_email}
+		AND p.payment_state = '1'
+		ORDER BY
+		p.lesson_number, r.write_date DESC;
+
+	</select>
+
+
+	<delete id="deleteMember" parameterType="String">
+		DELETE member, lesson
+		FROM member
+		LEFT JOIN lesson ON member.member_email = lesson.member_email
+		WHERE member.member_email = #{member_email}
+	</delete>
+
+
+</mapper>
+
+
+
+
