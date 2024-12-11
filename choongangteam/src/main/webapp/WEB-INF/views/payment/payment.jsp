@@ -24,7 +24,7 @@
         <h2>클래스 정보</h2>
         <div class="class-thumbnail">
             <img src="<%= request.getContextPath() %>/uimg/flower.jpeg">
-            <p>나만의 디퓨저 만들기 <br> <h4>&lt;감정오일 디퓨저와 꽃 디퓨저&gt;</h4></p>
+            <p>${lesson.lesson_title}</p>
         </div>
     </div>
 
@@ -43,7 +43,7 @@
     <h2>결제 정보</h2>
     <div class="summary-row">
         <p>레슨 금액</p>
-        <span>${lesson.lesson_price}</span>
+        <span>${lesson.lesson_price}원</span>
     </div>
     <div class="summary-row">
         <p>강의 일정</p>
@@ -55,7 +55,7 @@
     </div>
     <div class="total-row">
         <p>최종 결제금액</p>
-        <span>${lesson.lesson_price}</span>
+        <span>${lesson.lesson_price}원</span>
     </div>
 </div>
     
@@ -130,7 +130,7 @@
 		                          confirmButtonText: '확인',
 		                          confirmButtonColor: '#9832a8',  // 버튼 색상  
 		            			}).then(() => {
-		            			    window.location.href = "mainpage"	// 추후 마이페이지 or 마이페이지 결제내역으로 변경 예정
+		            			    window.location.href = "paymentcancel"	// 추후 마이페이지 or 마이페이지 결제내역으로 변경 예정
 		            			});
 							}
 						},

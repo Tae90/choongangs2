@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,11 +14,15 @@ public interface PaymentDAO {
 
 	int savePayment(Payment payment);
 		    
-	void updatePaymentState(@Param("payment_number")int payment_number, @Param("state")int state);
+	Lesson getLessonNumber(@Param("lesson_number") int lesson_number);
 
-	Lesson getLessonNumber(@Param("lesson_number")int lesson_number);
+	Member getMemberEmail(@Param("member_email") String member_email);
 
-	Member getMemberEmail(@Param("member_email")String member_email);
+	Payment getPaymentNumber(@Param("payment_number") int payment_number);
+
+	int updatePayment(Payment paymentcancel);
+
+	List<Payment> getPaymentMemberEmail(@Param("member_email")String member_email);
 
 	
 }
