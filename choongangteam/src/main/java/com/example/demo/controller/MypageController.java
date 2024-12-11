@@ -234,4 +234,28 @@ public class MypageController {
 	    
 	    return "mypage/delete_result";
 	}
+	
+	
+	// 내가 등록한 클래스
+	@RequestMapping("myregisteredclasses")
+	public String myregisteredclasses(Model model, @ModelAttribute Member member, HttpSession session, Lesson lesson) {
+		
+		UserSession user = (UserSession) session.getAttribute("userSession");
+		
+		String useremail = user.getEmail();	
+		
+		Lesson les = new Lesson();
+		les.setMember_email(useremail);
+		
+		List<Lesson> myclass = service.myclass(les);
+		
+		System.out.println("내가 등록한 클래스: "+myclass);
+		
+		model.addAttribute("myclass", myclass);
+		
+		return "mypage/my_upload_class";
+	}
+	
+	
+	
 }
