@@ -1,70 +1,74 @@
-body {
-<<<<<<< HEAD
+.payment-container {
+	display: flex;
 	font-family: 'Pretendard', sans-serif;
 	font-size: 0.875rem;
 	font-weight: 500;
 	justify-content: center;
 	align-items: center;
 	background-color: #f9f9f9;
-=======
-  font-family: 'Pretendard', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
->>>>>>> e633fabb04ba94fe359f6e2e146861b30604d14b
+	width: 100%;
+	height: auto;
+	gap: 10px;
 }
 
-.payment-container {
+.payment-content {
 	max-width: 1280px;
 	width: 100%;
 	height: auto;
-	margin: 10px 10px;
-	gap: 10px;
-	padding: 10px 10px;
-	display: flex;
-	border: 1px solid black;
+	margin: 10px;
+	display: flex; /*하위 div들 세로로 배치*/
+	justify-content: space-between; /*하위 div를 균등하게 배분*/
+	position: relative; /* 부모 div가 고정된 자식 div와 겹치지 않도록 상대적 위치 설정 */
+}
+
+.payment-right-section, .payment-left-section {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .payment-left-section {
-	float: left; 
-	bottom : 40px;
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	flex: 1;
+	width: 70%;
 	margin-right: 20px;
-	bottom: 40px;
 }
 
 .payment-right-section {
-	float: right;
+	position: sticky; /* 스크롤에 따라 움직이게 설정 */
+	top: 12%; /* 스크롤 시 상단에서 12% 떨어지도록 설정 */
+	height: auto;
+	max-height: 395px; 
+	width : 25%;
 	background-color: #fff;
 	padding: 20px;
-	bottom: 40px;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+	overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
+}
+
+.payment-left-section .header .img {
+	width: calc(100% - 20px);
+	height: auto;
+	margin: 0 10px;
+}
+
+.content {
+	width: calc(100% -20px);
+	height: 1000px; background-color : #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	margin: 10px;
+	background-color: #fff /* 추가적인 여백 */
 }
 
 .review-section {
-	position: absolute; /* 상대 위치로 변경 */
-	bottom: -230px;
-	width: 60%;
+	width: calc(100% -20px);
 	background-color: #fff;
-	left: 0;
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	margin-top: 20px; /* 추가적인 여백 */
+	margin: 10px; /* 추가적인 여백 */
 }
 
 .review-section .review {
@@ -207,9 +211,15 @@ body {
 .icon-container {
 	display: flex; /* 가로로 정렬 */
 	justify-content: space-between; /* 공간을 균등하게 나누기 */
-	gap: 20px;
+	gap: 20px;	 /*요소들 간의 간격*/
 	align-items: center; /* 수직 정렬 */
 	margin-top: 20px;
+}
+.icons{
+	display: flex; /* 가로로 정렬 */
+	justify-content: space-between; /* 공간을 균등하게 나누기 */
+	gap: 20px;
+	align-items: center; /* 수직 정렬 */
 }
 
 .icon-container .icon {
@@ -231,4 +241,52 @@ body {
 	border-radius: 5px;
 	background-color: #f9f9f9;
 	transition: border 0.3s ease;
+}
+
+.payment_bottom {
+	display: none; /*처음에는 안보이게 설정*/
+	height: 55px; 
+	width: 100%;
+	align-items: center;
+	position: fixed;
+	bottom: 55px;/*본래 있던 하단 매뉴바 보다는 위에 있게 하기 위해 55로 설정*/
+	z-index: 1;
+	background-color: white;
+	padding-left: 20px; /* 왼쪽에 20px 여백 */
+  	padding-right: 20px; /* 오른쪽에 20px 여백 */
+  	padding-top: 10px; /* 위쪽에 10px 여백 */
+  	padding-bottom: 10px; /* 아래쪽에 10px 여백 */
+}
+
+
+
+
+@media ( max-width : 935px) {
+	.payment-right-section {
+		max-height: 489px;
+	}
+	
+	.icon-container {
+        flex-direction: column; /* 아이콘들을 세로로 쌓기 */
+        align-items: center; /* 중앙 정렬 */
+    }
+}
+
+@media ( max-width : 768px) {
+	.payment-right-section {
+		display: none;
+	}
+	.icon-container {
+        flex-direction: initial;/* 초기화 */
+        width: 95%;
+        align-items: center; /* 중앙 정렬 */
+    }
+	
+	.payment-left-section {
+		width: 100%;
+		margin-right: 0px;
+	}
+	.payment_bottom {
+		display: flex;
+	}
 }

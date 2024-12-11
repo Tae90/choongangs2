@@ -89,10 +89,6 @@
                         <a href="category_page?Maincategory_number=4&Subcategory_number=403">DIY 홈데코</a>
                     </div>
                 </div>
-
-
-                
-
             </div>
         </div>
     </div>

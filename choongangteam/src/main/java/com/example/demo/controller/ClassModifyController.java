@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Lesson;
 import com.example.demo.model.UserSession;
-import com.example.demo.service.ClassRegisterService;
+import com.example.demo.service.ClassModifyService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
@@ -30,31 +30,32 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class ClassRegisterController {
-	private final ClassRegisterService service;
-
+public class ClassModifyController {
+	private final ClassModifyService service;
+	
 	@Autowired
     private ServletContext servletContext;	
 	
-	@RequestMapping("classRegister")
-	public String classRegister() {
+	@RequestMapping("classModify")
+	public String classModify(@RequestParam("lesson_number") int lesson_number,
+							  Model model) {
 		
-		return "classRegister/classRegister";
+		Lesson lesson = service.getLesson(lesson_number);
+		
+		model.addAttribute("lesson", lesson);
+		model.addAttribute("lesson_number", lesson_number);
+		
+		return "classModify/classModify";
 	}
 	
-	@RequestMapping("writing")
-	public String writing(@ModelAttribute Lesson lesson,
+	@RequestMapping("modify")
+	public String modify(@ModelAttribute Lesson lesson,
 			@RequestParam("lesson_keyword_insert") String keyword,
 			@RequestParam("thumnail") MultipartFile tfile,
 			@RequestParam("classImg") MultipartFile[] files,
 			@RequestParam("lesson_content") String content,
-			Model model,
-			HttpSession session) throws IOException {
+			Model model) throws IOException {
 		
-		//세션처리
-		UserSession us =(UserSession)session.getAttribute("userSession");
-		//등록하는 사람의 email값 넣기
-		lesson.setMember_email(us.getEmail());
 		
 		// 1. content에서 img 태그의 src 값을 추출하여 이미지 경로 목록 만들기
 		List<String> existingImagePaths = extractImagePathsFromContent(content);
@@ -123,7 +124,7 @@ public class ClassRegisterController {
 					file.transferTo(new File(imagePath + newFileName)); // 파일 저장
 					
 					// 정규 표현식으로 <img> 태그에서 src 속성 값 추출
-					Pattern pattern = Pattern.compile("<img[^>]*src=\"([^\"]+)\"[^>]*>");
+					Pattern pattern = Pattern.compile("<img[^>]*src=\"(data:image[^\"]*)\"[^>]*>");
 					Matcher matcher = pattern.matcher(content);
 
 			        StringBuilder result = new StringBuilder();
@@ -146,14 +147,12 @@ public class ClassRegisterController {
 					
 					content=result.toString();
 					
-				
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 		lesson.setLesson_content(content);
-		
 		//디버그용 출력
 //		System.out.println("title : "+lesson.getLesson_title());
 //		System.out.println("content : "+lesson.getLesson_content());
@@ -169,12 +168,12 @@ public class ClassRegisterController {
 //		System.out.println("image : "+lesson.getContent_image());
 //		System.out.println("Maincategory : "+lesson.getMaincategory_number());
 //		System.out.println("Subcategory : "+lesson.getSubcategory_number());
-		int result = service.insertClass(lesson);
+		int result = service.updateClass(lesson);
 		
-		if(result == 1) System.out.println("insert성공");
-		else System.out.println("insert실패");
+		if(result == 1) System.out.println("update성공");
+		else System.out.println("update실패");
 
-		return "writingResult";
+		return "modifyResult";
 	}
 
 	/**
@@ -182,7 +181,7 @@ public class ClassRegisterController {
 	 */
 	private List<String> extractImagePathsFromContent(String content) {
 		List<String> imagePaths = new ArrayList<>();
-		Pattern pattern = Pattern.compile("<img[^>]*src=\"([^\"]+)\"[^>]*>");
+		Pattern pattern = Pattern.compile("<img[^>]*src=\"(data:image[^\"]*)\"[^>]*>");
 		Matcher matcher = pattern.matcher(content);
 
 		while (matcher.find()) {
@@ -230,5 +229,4 @@ public class ClassRegisterController {
         // 두 배열의 내용이 일치하는지 비교
         return Arrays.equals(base64ImageBytes, fileBytes);
     }
-
 }
