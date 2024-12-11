@@ -96,7 +96,7 @@
             <div class="flex-item">
                 <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link"  target="_blank">
                     <div class="image-container">
-                        <img src="'${lesson.lesson_thumbnail }'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                        <img src="${path }/uimg/${lesson.lesson_thumbnail }" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                     </div>
                     <div class="text-container" style="font-size: 14px;">
                         ${lesson.lesson_title }
