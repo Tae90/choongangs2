@@ -53,14 +53,25 @@
 	<select id="myreview" resultType="reply">
 
 		SELECT *
-		FROM choongang.payment p
+		FROM choongang.payment
+		p
 		LEFT JOIN choongang.lesson l ON p.lesson_number = l.lesson_number
 		LEFT JOIN choongang.reply r ON l.lesson_number = r.lesson_number
-		WHERE p.member_email = #{member_email}
+		WHERE
+		p.member_email = #{member_email}
 		AND p.payment_state = '1'
-		ORDER BY p.lesson_number, r.write_date DESC;
+		ORDER BY
+		p.lesson_number, r.write_date DESC;
 
 	</select>
+
+
+	<delete id="deleteMember" parameterType="String">
+		DELETE member, lesson
+		FROM member
+		LEFT JOIN lesson ON member.member_email = lesson.member_email
+		WHERE member.member_email = #{member_email}
+	</delete>
 
 
 </mapper>

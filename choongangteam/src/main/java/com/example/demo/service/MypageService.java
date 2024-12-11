@@ -42,6 +42,11 @@ public class MypageService {
 		return dao.myreview(rep);
 	}
 
+	public void deleteMember(String pass) {
+		
+		dao.deleteMember(pass);
+	}
+
 
 
 
