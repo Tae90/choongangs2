@@ -125,7 +125,7 @@
                 <div class="myreview_class">
                     <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="review_link">
                         <div class="reviewimage-container">
-                            <img src="art6.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                            <img src="${path }/uimg/${lesson.lesson_thumbnail }"style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                         </div>
                         <div class="reviewtext-container" style="font-size: 14px;">
                             <span style="font-weight: 600;">${lesson.lesson_title }</span><br><br>
