@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.MemberMapper">
+    <!-- 이메일로 회원 조회 -->
+    <select id="findMemberByEmail" resultType="member">
+        SELECT * FROM member WHERE member_email = #{email}
+    </select>
+
+    <!-- 닉네임으로 회원 조회 -->
+    <select id="findMemberByNickname" resultType="member">
+        SELECT * FROM member WHERE member_nickname = #{nickname}
+    </select>
+</mapper>
