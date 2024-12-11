@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Lesson;
+import com.example.demo.model.UserSession;
 import com.example.demo.service.ClassRegisterService;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -46,7 +48,13 @@ public class ClassRegisterController {
 			@RequestParam("thumnail") MultipartFile tfile,
 			@RequestParam("classImg") MultipartFile[] files,
 			@RequestParam("lesson_content") String content,
-			Model model) throws IOException {
+			Model model,
+			HttpSession session) throws IOException {
+		
+		//세션처리
+		UserSession us =(UserSession)session.getAttribute("userSession");
+		//등록하는 사람의 email값 넣기
+		lesson.setMember_email(us.getEmail());
 		
 		// 1. content에서 img 태그의 src 값을 추출하여 이미지 경로 목록 만들기
 		List<String> existingImagePaths = extractImagePathsFromContent(content);
@@ -126,7 +134,7 @@ public class ClassRegisterController {
 			            // 목표 인덱스에 해당하는 태그를 찾으면 src를 제거
 			            if (currentIndex == index) {
 			                // <img> 태그에서 src 속성값을 제거한 새로운 태그로 교체
-			                String newImgTag = "<img src=\"${pageContext.request.contextPath}/uimg/"+newFileName +"\"/>";
+			                String newImgTag = "<img src=\"/uimg/"+newFileName +"\"/>";
 			                
 			                // 결과에 새로운 태그 추가
 			                result.append(content, 0, matcher.start());
@@ -137,6 +145,7 @@ public class ClassRegisterController {
 			        }
 					
 					content=result.toString();
+					
 				
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -144,6 +153,7 @@ public class ClassRegisterController {
 			}
 		}
 		lesson.setLesson_content(content);
+		
 		//디버그용 출력
 //		System.out.println("title : "+lesson.getLesson_title());
 //		System.out.println("content : "+lesson.getLesson_content());

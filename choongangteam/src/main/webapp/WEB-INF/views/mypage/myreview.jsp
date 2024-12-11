@@ -77,17 +77,20 @@
 
 		<div class="mypage_container" >
 
-            <div class="side_menu">
+               <div class="side_menu">
                 <div class="myimg_name">
-                    <img src="${path}/uimg/${userSession.user_photo}" style="border-radius: 50%; width: 56px; height: 56px;">
+                    <img src="${path}${empty userSession.user_photo ? '/img/profile/Default.png' : '/uimg/'}${empty userSession.user_photo ? '' : userSession.user_photo}"
+     alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">
                     <div class="nick_email">
-                        <span>${userSession.nickname }</span>
+                        <span style="font-size: 24px;">${userSession.nickname }님</span>
                         <span style="font-size: 14px; color: #8c8c8c;">${userSession.email }</span>
 
                     </div>
                 </div>
 
-                <!--  <button class="write_lesson" onclick="location.href='asd'">클래스 등록</button> -->
+               <c:if test="${userSession.member_number == 1}">
+    					<button class="write_lesson" onclick="location.href='classRegister'">클래스 등록</button>
+			  </c:if>
 
                 <div class="my_menu">
                     <a href="mypage" class="side_link">
@@ -95,21 +98,43 @@
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="payment" class="side_link"  >
-                        <span>결제 내역</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
+                    <c:if test="${userSession.member_number == 1}">
+    						<a href="selllist" class="side_link">
+        						<span>판매 내역</span>
+        						<span class="material-symbols-outlined small-icon">chevron_right</span>
+    					</a>
+					</c:if>
+					<c:if test="${userSession.member_number != 1}">
+    						<a href="paymentcancel" class="side_link">
+        						<span>결제 내역</span>
+        							<span class="material-symbols-outlined small-icon">chevron_right</span>
+   						 </a>
+					</c:if>
 
-                    <a href="favoritelist" class="side_link"  >
-                        <span>찜</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
+                 
+    <c:if test="${userSession.member_number == 1}">
+        <a href="myregisteredclasses" class="side_link">
+            <span>내가 등록한 클래스</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+    </c:if>
 
-                    <a href="reviews" class="side_link" >
-                        <span>리뷰</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
-                </div>
+    <c:if test="${userSession.member_number != 1}">
+        <a href="favoritelist" class="side_link">
+            <span>찜</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+
+        <a href="reviews" class="side_link">
+            <span>리뷰</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+    </c:if>
+
+
+   </div>
+
+
 
             </div>
 
@@ -124,7 +149,7 @@
                 <div class="myreview_class">
                     <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="review_link">
                         <div class="reviewimage-container">
-                            <img src="art6.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                            <img src="${path }/uimg/${lesson.lesson_thumbnail }"style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                         </div>
                         <div class="reviewtext-container" style="font-size: 14px;">
                             <span style="font-weight: 600;">${lesson.lesson_title }</span><br><br>

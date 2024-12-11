@@ -1,14 +1,13 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
 import org.apache.ibatis.type.Alias;
-
 import lombok.Data;
+import java.util.Date;
 
 @Data
 @Alias("payment")
 public class Payment {
+
 
 	private int payment_number; 
 	private Date  payment_date; 
@@ -22,5 +21,7 @@ public class Payment {
 	private int lesson_number;
 	private String payment_imp_uid;
 	private String lesson_thumbnail;
+
 	
+
 }

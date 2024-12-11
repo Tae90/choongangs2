@@ -64,6 +64,7 @@ let page = 4;
 let loading = false;
 let hasMore = true;
 let loadedLessonIds = [];
+var path = '${pageContext.request.contextPath}';
 
 function loadMoreSearchLessons() {
     if (loading || !hasMore) return;
@@ -93,7 +94,7 @@ function loadMoreSearchLessons() {
                             '<div class="flex-item">' +
                                 '<a href="paymentdetail?lesson_number=' + lesson.lesson_number + '" class="class_link"  target="_blank">' +
                                     '<div class="image-container">' +
-                                        '<img src="' + lesson.lesson_thumbnail + '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">' +
+                                        '<img src="' + path + '/uimg/' + lesson.lesson_thumbnail + '" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">' +
                                     '</div>' +
                                     '<div class="text-container" style="font-size: 14px;">' +
                                         lesson.lesson_title +
@@ -204,7 +205,7 @@ $(window).scroll(function() {
 				<div class="flex-item" data-lesson-id="${lesson.lesson_number}">
 					<a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link"  target="_blank">
 						<div class="image-container">
-							<img src="'${lesson.lesson_thumbnail }'"
+							<img src="${path }/uimg/${lesson.lesson_thumbnail }"
 								style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
 						</div>
 						<div class="text-container" style="font-size: 14px;">

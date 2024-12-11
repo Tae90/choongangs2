@@ -107,10 +107,11 @@ public class PaymentController {
 	  String imp_uid = paymentInfo.getPayment_imp_uid();
 	  String reason = "사용자 요청";
 	  String token = iamportservice.getAccessToken();
+	  
 	  int amount = paymentInfo.getPayment_price();
 	  
 	  System.out.println("token : " + token);
-	  
+
 	  String iamportCancel = iamportservice.cancelPayment(token, imp_uid, reason, amount);
 	  	  
       // 결제 취소 상태 설정
@@ -118,6 +119,7 @@ public class PaymentController {
 	  int result = paymentservice.updatePayment(paymentInfo);
 	  	  
       return result;
+
    }
    
 
