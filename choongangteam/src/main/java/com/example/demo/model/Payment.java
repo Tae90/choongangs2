@@ -21,5 +21,6 @@ public class Payment {
 	private String member_email;
 	private int lesson_number;
 	private String payment_imp_uid;
+	private String lesson_thumbnail;
 	
 }

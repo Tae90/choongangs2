@@ -101,7 +101,7 @@ public class PaymentController {
 	  if (paymentInfo == null) {
 	        throw new IllegalArgumentException("결제 정보를 찾을 수 없습니다.");
 	    }
-	  
+  
 	  // 아임포트 결제 취소 요청
 	  String imp_uid = paymentInfo.getPayment_imp_uid();
 	  String reason = "사용자 요청";
@@ -116,7 +116,8 @@ public class PaymentController {
       // 결제 취소 상태 설정
 	  paymentInfo.setPayment_state(0); // 0: 결제 취소
 	  int result = paymentservice.updatePayment(paymentInfo);
-      
+	  
+	  System.out.println("결제 상태 업데이트 완료: payment_state=0");
       return result;
    }
    
