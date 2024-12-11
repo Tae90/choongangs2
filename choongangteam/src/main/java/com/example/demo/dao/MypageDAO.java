@@ -21,6 +21,8 @@ public interface MypageDAO {
 
 	List<Reply> myreview(Reply rep);
 
+	void deleteMember(String pass);
+
 
 
 

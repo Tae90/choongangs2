@@ -116,36 +116,72 @@
 
             <!-- 사이드 버튼 누르면 나오는 메뉴 이거는 나중에 따로 파일 만들어서 불러와야 할듯 -->
             <div class="mypage_content"   id="mypage-content">
-              		<h2>내 찜 클래스</h2>
-              		<span style="color: #474747;  font-size:14px;">찜한 클래스 ${total }개</span>
-              		
-              		 <div class="mylike_container">
-                
-                <c:forEach var="lesson" items="${favoritelist }" >
-                <div class="mylike_class">
-                    <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link">
-                        <div class="image-container">
-                            <img src="${lesson.lesson_thumbnail }" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-                        </div>
-                        <div class="text-container" style="font-size: 14px;">
-                            ${lesson.favorite_title }<br><br>
+              		<h2>회원 탈퇴하기</h2>
 
-                            <div class="text-container" style="font-size: 14px; font-weight: 600;">
-                                ${lesson.lesson_price }원
-                            </div>
-                        </div>             
-                    </a>
-                </div>
-				</c:forEach>
- 
-            </div>
+           			<div class="warning">
+                		<p>※회원 탈퇴시 유의사항※</p>
+                		<p style="font-size: 14px;">지금 탈퇴하시면 수강 예정이거나 현재 수강 중인 수업을 더 이상 이용하실 수 없게 돼요!</p>
+                		<p style="font-size: 14px;">탈퇴 후에는 작성하신 리뷰를 수정 혹은 삭제하실 수 없어요. 탈퇴 신청 전에 꼭 확인해 주세요!</p>
+          			</div>
+
+
+           			<form method="post" action="delete_member_ok">
+           			<div class="delete_me">
+                		<div class="delete_text">
+                    		<span style="font-weight: 600;">이메일(로그인 ID)</span>
+                    		<span>${userSession.email }</span>
+                    		<span></span>
+                		</div>
+
+                		<div class="delete_text">
+                    		<span style="font-weight: 600;">비밀번호</span>
+                    		<input type="password" class="delete_passwd" name="member_password">
+               			 </div>
+
+                		<div style="display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; margin: auto;">
+                    		<span style="display: flex; align-items: center; justify-content: center; font-size: 14px;"><input type="checkbox">상기의 회원 탈퇴 유의사항을 확인하였으며, 탈퇴 신청에 동의합니다.</span>
+                    		<div><button class="delete_ok" type="submit">탈퇴 신청하기</button></div>
+               			</div>
+
+
+           		</div>
+        		</form>
 
             </div>
 
         </div>
 	</div>
 	
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.querySelector('.delete_passwd');
+    const checkbox = document.querySelector('input[type="checkbox"]');
+    const submitButton = document.querySelector('.delete_ok');
 
+    // 초기 버튼 비활성화
+    submitButton.disabled = true;
+    submitButton.style.opacity = '0.5';
+    submitButton.style.cursor = 'not-allowed';
+
+    // 입력값 변경 감지
+    function checkFormValidity() {
+        if (passwordInput.value.trim() !== '' && checkbox.checked) {
+            submitButton.disabled = false;
+            submitButton.style.opacity = '1';
+            submitButton.style.cursor = 'pointer';
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.opacity = '0.5';
+            submitButton.style.cursor = 'not-allowed';
+        }
+    }
+
+    // 이벤트 리스너 등록
+    passwordInput.addEventListener('input', checkFormValidity);
+    checkbox.addEventListener('change', checkFormValidity);
+});
+
+</script>
 	
 	
 		 <!-- 이용약관 footer -->

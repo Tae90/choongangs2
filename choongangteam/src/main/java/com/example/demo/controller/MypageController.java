@@ -19,6 +19,7 @@ import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Reply;
 import com.example.demo.model.UserSession;
+import com.example.demo.service.LoginService;
 import com.example.demo.service.MypageService;
 
 import jakarta.servlet.ServletContext;
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MypageController {
 	 private final MypageService service; 
+	 private final LoginService login_service;
 	 @Autowired
 	    private ServletContext servletContext;
 	
@@ -107,36 +109,33 @@ public class MypageController {
 	
 	
 	
-	 private String saveImage(MultipartFile imageFile) throws IOException {
-	        // 웹 애플리케이션 루트 경로
-	        String webAppRoot = servletContext.getRealPath("/");
+	private String saveImage(MultipartFile imageFile) throws IOException {
+        // 웹 애플리케이션 루트 경로
+        String webAppRoot = servletContext.getRealPath("/");
 
-	        // "uimg" 폴더 경로
-	        String imagePath = webAppRoot + "uimg/";
+        // "uimg" 폴더 경로
+        String imagePath = webAppRoot + "uimg/";
 
-	        // 파일명 생성
-	        String originalFilename = imageFile.getOriginalFilename();
-	        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
-	        String fileName = UUID.randomUUID().toString() + fileExtension;
+        // 파일명 생성
+        String originalFilename = imageFile.getOriginalFilename();
+        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String fileName = UUID.randomUUID().toString() + fileExtension;
 
-	        // 디렉토리 생성
-	        File directory = new File(imagePath);
-	        if (!directory.exists()) {
-	            directory.mkdirs();
-	        }
+        // 디렉토리 생성
+        File directory = new File(imagePath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
 
-	        // 파일 저장
-	        File file = new File(imagePath + fileName);
-	        imageFile.transferTo(file);
+        // 파일 저장
+        File file = new File(imagePath + fileName);
+        imageFile.transferTo(file);
 
-	        return fileName;
-	    }
-	
-	
-	
-	
-	
-	
+        return fileName;
+    }
+
+
+	// 내가 찜한 클래스 불러오기
 	@RequestMapping("favoritelist")
 	public String favoritelist(Favorite favorite, Model model, @ModelAttribute Member member, HttpSession session, Lesson lesson) {
 		
@@ -164,7 +163,7 @@ public class MypageController {
 	}
 	
 	
-	
+	// 내가 구매한 클래스, 리뷰 작성한 클래스 불러오기
 	@RequestMapping("reviews")
 	public String reviews(Reply reply , Model model, @ModelAttribute Member member, HttpSession session, Lesson lesson) {
 		
@@ -185,5 +184,54 @@ public class MypageController {
 		
 		return "mypage/myreview";
 	}
-
+	
+	
+	// 회원 탈퇴 페이지
+	@RequestMapping("delete_member")
+	public String delete_member( Model model, @ModelAttribute Member member, HttpSession session) {
+		
+		UserSession user = (UserSession) session.getAttribute("userSession");
+		String pass = login_service.findpass(user.getEmail());
+		    
+		 System.out.println("회원 비밀번호 : "+ pass);
+	
+		
+		/* model.addAttribute("user", user); */
+		return "mypage/memberdelete";
+	}
+	
+	
+	// 회원 탈퇴
+	@RequestMapping("delete_member_ok")
+	public String delete_member_ok(@RequestParam(value="member_password", required = false) String memberpasswd, HttpSession session, Model model, @ModelAttribute Member member) {
+		int result = 0;
+	    
+	    UserSession user = (UserSession) session.getAttribute("userSession");
+	    String pass = login_service.findpass(user.getEmail());
+	    
+		 System.out.println("회원 비밀번호 : "+ pass);
+	  
+	    System.out.println("memberpasswd:"+memberpasswd);
+	    // 세션에 저장된 비밀번호와 입력된 비밀번호 비교
+	    if (pass.equals(memberpasswd)) {
+	        // 비밀번호가 일치하면 회원 삭제 진행
+	        try {
+				 service.deleteMember(user.getEmail());
+	            result = 1;
+	            // 세션 무효화
+	            session.invalidate();
+	        } catch (Exception e) {
+	            // 삭제 실패 시 예외 처리
+	            e.printStackTrace();
+	            result = -1;
+	        }
+	    } else {
+	        // 비밀번호가 일치하지 않으면 result는 0으로 유지
+	        result = 0;
+	    }
+	    System.out.println("결과 값: " + result);
+	    model.addAttribute("result", result);
+	    
+	    return "mypage/delete_result";
+	}
 }

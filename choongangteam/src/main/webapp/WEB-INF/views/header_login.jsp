@@ -26,7 +26,7 @@
             <button class="messagebox">
             	<a href="/switchMode" style="text-decoration: none;">
                 	<span class="material-symbols-outlined small-icon"
-                    	style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">switch_account</span>
+                    	style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sync_alt</span>
             	</a>
             </button>
 
