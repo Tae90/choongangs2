@@ -49,7 +49,8 @@
 
 /*클래스 설정시 입력값을 넣는 부분*/
 .inputContent {
-	width: 50%; /* 부모 컨테이너 너비에서 좌우 여백(100px씩)을 뺀 값 */
+	width: 100%; /* 부모 컨테이너 너비에서 좌우 여백(100px씩)을 뺀 값 */
+	max-width: 1280px;
 	height: auto; /* 콘텐츠에 따라 자동으로 높이 결정 */
 	margin: 20px 20px 20px 0px; /* 상하 20px 여백 우 20px 좌 0px */
 	border-radius: 10px; /* 둥근 모서리 */
@@ -59,7 +60,7 @@
 
 /*각각의 입력 Section*/
 .contentSction {
-	width: 90%; /* 부모 컨테이너 너비에서 좌우 여백(100px씩)을 뺀 값 */
+	width: calc(100% - 60px); /* 부모 컨테이너 너비에서 좌우 여백(20px씩)을 뺀 값 */
 	height: auto; /* 콘텐츠에 따라 자동으로 높이 결정 */
 	margin: 20px 20px; /* 상하좌우 20px 여백 */
 	border-radius: 10px; /* 둥근 모서리 */
@@ -67,16 +68,16 @@
 	display: flex; /* 두 자식 요소를 가로로 배치 */
 	border: 2px solid #808080; /* 두께, 스타일, 색상 */
 	background-color: #ffffff;
+	justify-content: space-between; /*하위 div를 균등하게 배분*/
 	opacity: 80%;
+	border: 2px solid #808080; /* 두께, 스타일, 색상 */
 }
 
 /*입력label Section*/
 .nameSection {
-	display: inline-block;
 	color: #9832a8;
-	width: 19%; /* 부모 컨테이너 너비에서 좌우 여백(100px씩)을 뺀 값 */
+	width: 15%; 
 	height: auto; /* 콘텐츠에 따라 자동으로 높이 결정 */
-	max-height: 35px;
 	margin: 10px 10px; /* 상하좌우 20px 여백 */
 	border-radius: 10px; /* 둥근 모서리 */
 	padding: 10px;
@@ -88,11 +89,19 @@
 	/* 텍스트 수직 중앙 정렬을 위한 line-height 조정 */
 	line-height: 35px; /* div의 높이에 맞춰 설정 */
 	vertical-align: middle; /* 세로 정렬 */
+	display: flex; /* 세로 텍스트 확장에 대응하기 위해 flex 사용 */
+    justify-content: center; /* 텍스트를 가로로 가운데 정렬 */
+    align-items: center; /* 텍스트를 세로로 가운데 정렬 */
+}
+.nameSection .label{
+	height: auto; /* 콘텐츠에 따라 자동으로 높이 결정 */
+	line-height: normal; /* 세로로 길어진 텍스트에 맞춰 line-height를 기본값으로 설정 */
+    word-wrap: break-word; /* 긴 텍스트가 줄 바꿈 되도록 설정 */
+    text-align: center; /* 글자 정렬 */
 }
 /*입력label Section*/
 .writeSection {
-	display: inline-block;
-	width: 80%; /* 부모 컨테이너 너비에서 좌우 여백(100px씩)을 뺀 값 */
+	width: 75%; 
 	height: auto; /* 콘텐츠에 따라 자동으로 높이 결정 */
 	margin: 10px 10px; /* 상하좌우 10px 여백 */
 	border-radius: 10px; /* 둥근 모서리 */
@@ -102,6 +111,7 @@
 	line-height: 35px; /* div의 높이에 맞춰 설정 */
 	vertical-align: middle; /* 세로 정렬 */
 }
+
 
 /*입력label Section의 input태그 css*/
 .writeSection input {
@@ -146,6 +156,12 @@
 
 /*이미지를 div에 맞춰서 크기 조정을 위한 css*/
 .previewImage {
+	object-fit: cover;
+	width: 90%;
+	height: auto;
+}
+
+img{
 	object-fit: cover;
 	width: 90%;
 	height: auto;
@@ -201,3 +217,18 @@
 .classKeywordError {
 	display: none; /* 기본적으로 숨김 */
 }
+@media ( max-width : 1280px) {
+	.contentSction {
+		flex-direction: column;
+		justify-content: initial;
+	}
+	
+	.nameSection .label{
+		width: 95%;
+	}
+	
+	.nameSection, .writeSection {
+		width: calc(100% - 40px);
+	}
+}
+

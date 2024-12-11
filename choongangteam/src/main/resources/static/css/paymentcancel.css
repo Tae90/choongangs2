@@ -49,6 +49,7 @@ table th {
     font-weight: bold;
 }
 
+
 /* 취소 완료된 행의 짝수 배경색 */
 table tbody tr.cancelled-row {
     background-color: #e9e9e9; /* 취소 완료된 행의 배경색 */
@@ -61,4 +62,12 @@ table tbody tr.cancelled-row:hover {
 
 table tbody tr:hover {
     background-color: #f0f0f0;
+}
+
+table a:link{
+	color: black;
+}
+
+table a:visited{
+	color: black;
 }

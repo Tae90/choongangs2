@@ -5,17 +5,17 @@
 <mapper namespace="com.example.demo.dao.ClassRegisterDAO">
 
 	<insert id="insertClass" useGeneratedKeys="true" keyProperty="lesson_number">
-		INSERT INTO lesson (lesson_number,lesson_title,lesson_content,
+		INSERT INTO lesson (lesson_title,lesson_content,
 							 write_date,start_date,start_hour,start_min,
 							 class_hour,class_min,lesson_keyword,lesson_price,
 							 lesson_apply,reply_count,favorite_count,lesson_thumbnail,
-							 content_image,member_count,member_email,
+							 content_image,member_email,
 							 subcategory_number,maincategory_number)
-        VALUES (#{lesson_number},#{lesson_title},#{lesson_content},
+        VALUES (#{lesson_title},#{lesson_content},
 				now(),#{start_date},#{start_hour},#{start_min},
 				#{class_hour},#{class_min},#{lesson_keyword},#{lesson_price},
 				#{lesson_apply},#{reply_count},#{favorite_count},#{lesson_thumbnail},
-				#{content_image},#{member_count},#{member_email},
+				#{content_image},#{member_email},
 				#{subcategory_number},#{maincategory_number})
 	</insert>
 	
