@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -92,7 +93,7 @@ public class PaymentController {
    @RequestMapping("/save_payment/cancel")
    @ResponseBody
    public Integer cancelPayment(@RequestBody Payment payment, 
-		   						HttpSession session) {
+		   						HttpSession session) throws IOException {
 	   
 	  UserSession userSession = (UserSession)session.getAttribute("userSession");
 	  String member_email = userSession.getEmail();
@@ -105,19 +106,17 @@ public class PaymentController {
 	  // 아임포트 결제 취소 요청
 	  String imp_uid = paymentInfo.getPayment_imp_uid();
 	  String reason = "사용자 요청";
+	  String token = iamportservice.getAccessToken();
 	  int amount = paymentInfo.getPayment_price();
 	  
-	  boolean iamportCancel = iamportservice.cancelPayment(imp_uid, reason, amount);
+	  System.out.println("token : " + token);
 	  
-	  if (!iamportCancel) {
-	        throw new RuntimeException("아임포트 결제 취소가 실패했습니다.");
-	    }
-	  
+	  String iamportCancel = iamportservice.cancelPayment(token, imp_uid, reason, amount);
+	  	  
       // 결제 취소 상태 설정
 	  paymentInfo.setPayment_state(0); // 0: 결제 취소
 	  int result = paymentservice.updatePayment(paymentInfo);
-	  
-	  System.out.println("결제 상태 업데이트 완료: payment_state=0");
+	  	  
       return result;
    }
    
