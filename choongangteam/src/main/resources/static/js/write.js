@@ -1,6 +1,8 @@
 /**
  * 
  */
+
+let resizeTimeout;
 $(document).ready(function() {
 
 	//오늘 날짜 구하기
@@ -176,7 +178,7 @@ function addImageInput() {
 		// 없다면 버튼 아래에 추가
 		$('#mulimage button:last').after(input);
 	}
-	
+
 	cnt++;
 }
 
@@ -351,9 +353,9 @@ function check() {
 		$('#editableDiv').focus();
 		return false;
 	}
-	
+
 	$('#lesson_content').val(content);
-	
+
 
 	/*숫자만 입력받기위한 정규표현식*/
 	var pattern = new RegExp(/^[0-9]+$/);
@@ -385,3 +387,43 @@ function check() {
 		return false;
 	}
 }
+function checkViewportWidth() {
+	var viewportWidth = document.documentElement.clientWidth; // 뷰포트의 너비
+	if (viewportWidth <= 1280) {
+		function adjustSelectWidth(selectElement) {
+			var maxLength = 0;
+
+			// 각 option의 텍스트 길이를 비교하여 가장 긴 텍스트의 길이를 구함
+			$(selectElement).find('option').each(function() {
+				var optionLength = $(this).text().length;
+				if (optionLength > maxLength) {
+					maxLength = optionLength;
+				}
+			});
+
+			// select 박스의 너비를 가장 긴 텍스트 길이에 맞게 설정
+			$(selectElement).css('width', (maxLength + 1) + 'ch'); // ch 단위는 문자의 너비 기준
+		}
+
+		// 모든 select 요소에 대해 크기 조정
+		$('select').each(function() {
+			adjustSelectWidth(this);
+		});
+
+		// select 요소에서 선택된 옵션이 변경될 때마다 크기 조정
+		$('select').on('change', function() {
+			adjustSelectWidth(this);
+		});
+	} else {
+		// viewportWidth가 1280을 초과할 때 select의 크기를 원래대로 되돌림
+		$('select').each(function() {
+			$(this).css('width', ''); // 기본 width 값으로 리셋
+		});
+	}
+}
+
+// resize 이벤트에 디바운싱 적용
+window.addEventListener('resize', function() {
+	clearTimeout(resizeTimeout);  // 이전 타이머를 취소
+	resizeTimeout = setTimeout(checkViewportWidth, 100); // 200ms 후에 함수 실행
+});

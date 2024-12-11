@@ -21,12 +21,52 @@
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <script src="/js/write.js"></script>
+
+<script>
+	//DB에서 가져온 값들 적용
+	var mainC = ${lesson.maincategory_number};
+	var subC = ${lesson.subcategory_number};
+	var content = '${lesson.lesson_content}';
+	var title = "${lesson.lesson_title}";
+	var start_date ="${lesson.start_date}";
+	var start_hour ="${lesson.start_hour}";
+	var start_min ="${lesson.start_min}";
+	var class_hour ="${lesson.class_hour}";
+	var class_min ="${lesson.class_min}";
+	var keyword ="${lesson.lesson_keyword}";
+	var price =${lesson.lesson_price};
+	var apply =${lesson.lesson_apply};
+	var thumbnail ="${lesson.lesson_thumbnail}";
+	
+	$(document).ready(function(){
+		$('#price').val(price);
+		$('#applyNum').val(apply);
+		$('#editableDiv').html(content);
+		$('#previewImage').prop('src', '/uimg/'+thumbnail);
+		$("#maincategory_number").val(mainC);
+		$("#lesson_keyword_insert").val(keyword);
+		$("#subject").val(title);
+		$("#start_date").val(start_date);
+		$("#time1").val(start_hour);
+		$("#time2").val(start_min);
+		$("#time3").val(class_hour);
+		$("#time4").val(class_min);
+		
+		if($("#maincategory_number").val() !=""){
+			$('#subcategory_number').empty();
+			selectCategory(mainC.toString());
+			$("#subcategory_number").val(subC);
+		}
+		
+	});
+
+</script>
 <body>
 	<div class="container">
 		<!-- 탑 메뉴 -->
 		<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
-		<form  id="Form" action="writing" method="post" enctype="multipart/form-data" onsubmit="return check()">
-		
+		<form  id="Form" action="modify" method="post" enctype="multipart/form-data" onsubmit="return check()">
+		<input type="hidden" name = "lesson_number" value="${lesson_number}">
 		<!-- 제출 버튼 -->
 		<div class="submitButtonDiv">
 			<input type="submit" class="SummitButton" value="제출하기">
@@ -51,7 +91,8 @@
 							<option value="2">라이프스타일</option>
 							<option value="3">미술</option>
 							<option value="4">홈데코</option>
-						</select> <select id="subcategory_number" name="subcategory_number">
+						</select> 
+						<select id="subcategory_number" name="subcategory_number">
 							<!-- 기본 옵션, 첫 번째 select의 값을 선택할 때마다 변경됩니다. -->
 							<!-- 맨 처음에는 카테고리를 선택해주세요만 보이게 구현 -->
 							<option value="">1차 카테고리를 선택해주세요</option>
@@ -143,7 +184,7 @@
 						<br>
 						<div id="errorMessage" class="error-message"></div>
 						<br> 
-						<img id="previewImage" class="previewImage" style="display: none;" alt="이미지 미리보기" />
+						<img id="previewImage" class="previewImage"  alt="이미지 미리보기" />
 					</div>
 				</div>
 			
