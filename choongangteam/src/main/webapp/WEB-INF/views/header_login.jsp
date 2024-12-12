@@ -30,10 +30,11 @@
             	</a>
             </button>
 
-    <!--         <button class="messagebox" onclick="location.href='asd'">
+	<!-- 채팅 버튼 -->
+            <button class="messagebox" onclick="location.href='asd'">
                 <span class="material-symbols-outlined small-icon"
                     style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sms</span>
-            </button> -->
+            </button> 
 
             <div class="dropdown_mypage">
                 <button onclick="myFunction()" class="dropbtn">${user.nickname } <span

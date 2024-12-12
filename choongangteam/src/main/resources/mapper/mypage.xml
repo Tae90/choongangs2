@@ -72,6 +72,13 @@
 		LEFT JOIN lesson ON member.member_email = lesson.member_email
 		WHERE member.member_email = #{member_email}
 	</delete>
+	
+	
+	<select id="myclass"  resultType="lesson">
+	
+	select * from lesson where member_email = #{member_email};
+	
+	</select>
 
 
 </mapper>
