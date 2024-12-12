@@ -31,12 +31,12 @@ public class PaymentController {
    
    @RequestMapping("/paymentdetail")
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
-		   					   HttpSession session, Model model) {
+		   					   Model model) {
       	   
-	    String member_email = (String)session.getAttribute("email");
-	    Lesson lesson = paymentservice.getLessonNumber(lesson_number);
+	  Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	    
-        model.addAttribute("lesson", lesson);
+      model.addAttribute("lesson", lesson);
+      model.addAttribute("lesson_number", lesson_number);
       
       return "payment/paymentdetail";
    }

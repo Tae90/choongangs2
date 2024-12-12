@@ -171,10 +171,9 @@ public class ClassRegisterController {
 //		System.out.println("Subcategory : "+lesson.getSubcategory_number());
 		int result = service.insertClass(lesson);
 		
-		if(result == 1) System.out.println("insert성공");
-		else System.out.println("insert실패");
+		model.addAttribute("result", result);
 
-		return "writingResult";
+		return "classRegister/registerResult";
 	}
 
 	/**

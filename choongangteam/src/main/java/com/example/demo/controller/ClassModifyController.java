@@ -56,7 +56,11 @@ public class ClassModifyController {
 			@RequestParam("lesson_content") String content,
 			Model model) throws IOException {
 		
+		//섬네일을 그대로 두고 싶을때는 섬네일 파일값은 0이므로 이때 처리를 위한 변수
+		int size = (int) tfile.getSize(); // 첨부파일의 크기 (단위:Byte)
 		
+		Lesson preLesson = service.getLesson(lesson.getLesson_number());
+				
 		// 1. content에서 img 태그의 src 값을 추출하여 이미지 경로 목록 만들기
 		List<String> existingImagePaths = extractImagePathsFromContent(content);
 		
@@ -75,15 +79,19 @@ public class ClassModifyController {
         //컨탠츠 이미지 이름처리와 이미지를 모델 안에 넣을때 null값이 들어가는걸 방지하기 위한 변수
         int cnt=1;
         
-        //섬네일처리 코드
-        String tfilename = tfile.getOriginalFilename(); // 첨부파일명
-		Date td = new Date();
-		SimpleDateFormat tsd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
-		String tnewdate = tsd.format(td);
-		String textension = tfilename.substring(tfilename.lastIndexOf("."), tfilename.length());
-		String tnewFileName =  "thumbnail"+tnewdate+textension;
-		tfile.transferTo(new File(imagePath + tnewFileName)); // 파일 저장
-		lesson.setLesson_thumbnail(tnewFileName);
+        if(size>0) {
+        	//섬네일처리 코드
+        	String tfilename = tfile.getOriginalFilename(); // 첨부파일명
+			Date td = new Date();
+			SimpleDateFormat tsd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
+			String tnewdate = tsd.format(td);
+			String textension = tfilename.substring(tfilename.lastIndexOf("."), tfilename.length());
+			String tnewFileName =  "thumbnail"+tnewdate+textension;
+			tfile.transferTo(new File(imagePath + tnewFileName)); // 파일 저장
+			lesson.setLesson_thumbnail(tnewFileName);
+        }else {
+        	lesson.setLesson_thumbnail(preLesson.getLesson_thumbnail());
+        }
 		
 		//키워드 처리코드
 		String[] key = keyword.split(",");
@@ -115,7 +123,7 @@ public class ClassModifyController {
 
 					String newFileName =  Integer.toString(cnt)+newdate+extension;
 					
-					if(cnt==1) {
+					if(lesson.getContent_image()==null) {
 						lesson.setContent_image(newFileName);
 					}else {
 						lesson.setContent_image(lesson.getContent_image()+","+newFileName);
@@ -150,6 +158,8 @@ public class ClassModifyController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}else {
+				lesson.setContent_image(preLesson.getContent_image());
 			}
 		}
 		lesson.setLesson_content(content);
@@ -170,10 +180,11 @@ public class ClassModifyController {
 //		System.out.println("Subcategory : "+lesson.getSubcategory_number());
 		int result = service.updateClass(lesson);
 		
-		if(result == 1) System.out.println("update성공");
-		else System.out.println("update실패");
+		model.addAttribute("lesson_number", lesson.getLesson_number());
+		model.addAttribute("result", result);
+		
 
-		return "modifyResult";
+		return "classModify/modifyResult";
 	}
 
 	/**

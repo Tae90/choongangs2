@@ -20,7 +20,8 @@
 <link href="/css/header.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
-<script src="/js/write.js"></script>
+<link href="/css/footer.css" rel="stylesheet">
+<script src="/js/classModify.js"></script>
 
 <script>
 	//DB에서 가져온 값들 적용
@@ -63,13 +64,21 @@
 </script>
 <body>
 	<div class="container">
-		<!-- 탑 메뉴 -->
-		<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+		<!-- 헤더 부분 -->
+   		<!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
+   		<c:choose>
+      		<c:when test="${not empty sessionScope.userSession}">
+         		<jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
+      		</c:when>
+      		<c:otherwise>
+        		<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+      		</c:otherwise>
+   		</c:choose>
 		<form  id="Form" action="modify" method="post" enctype="multipart/form-data" onsubmit="return check()">
 		<input type="hidden" name = "lesson_number" value="${lesson_number}">
 		<!-- 제출 버튼 -->
 		<div class="submitButtonDiv">
-			<input type="submit" class="SummitButton" value="제출하기">
+			<input type="submit" class="SummitButton" value="수정하기">
 		</div>
 		<!-- 수평선 -->
 		<hr class="classHr">
@@ -158,7 +167,7 @@
 				<!-- 클래스 수업시간 설정 -->
 				<div class="contentSction">
 					<div class="nameSection">
-						<label class="classLabel" for="classTime">클래스 수업시간</label>
+						<label class="classLabel" for="classTime">클래스 종료시간</label>
 					</div>
 					<div class="writeSection">
 						<select id="time3" name="class_hour">
@@ -229,6 +238,7 @@
 			</div>
 		</div>
 		</form>
+		<jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>
