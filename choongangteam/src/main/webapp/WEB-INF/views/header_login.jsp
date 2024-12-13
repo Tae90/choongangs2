@@ -75,7 +75,7 @@
             }
         </script>
 
-
+	<hr style="border-style: ridge; border-width: 1px; width: 100%; position: absolute; bottom: 0;">
 
     </div>
 
