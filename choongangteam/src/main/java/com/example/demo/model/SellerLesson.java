@@ -9,10 +9,10 @@ public class SellerLesson {
     private int lesson_number;
     private String lesson_title;
     private String lesson_thumbnail;
+    private String start_time; // 필드 이름이 SQL 별칭과 일치해야 함
 
-    // 추가: Payment 관련 필드
-    private String payment_date;      // 결제 날짜
-    private String payment_nickname;  // 구매자 닉네임
-    private String buyer_email;       // 구매자 이메일
+    private String payment_date;
+    private String payment_nickname;
+    private String buyer_email;
     private int payment_number;
 }

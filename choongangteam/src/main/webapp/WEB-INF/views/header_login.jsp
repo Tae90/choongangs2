@@ -9,7 +9,7 @@
                 <span class="racing-sans-one-regular">Kit</span>
             </a>
             <div class="search">
-               <form action="keyword_search"  method="get" style="margin-top: 5px;">
+               <form action="keyword_search" method="get" style="margin-top: 5px;">
                     <input type="text" placeholder="키워드를 검색하세요" id="lesson_keyword" name="lesson_keyword" class="search_word">
                     <button type="submit" style="background-color: #F6F6F6; border-style: none; cursor: pointer;">
                         <span class="material-symbols-outlined" style="color: #8c8c8c;">search</span>
@@ -18,19 +18,15 @@
             </div>
         </div>
 
-
-
-
-
         <div class="top_right_menu">
             <button class="messagebox">
-            	<a href="/switchMode" style="text-decoration: none;">
-                	<span class="material-symbols-outlined small-icon"
-                    	style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sync_alt</span>
-            	</a>
+                <a href="/switchMode" style="text-decoration: none;">
+                    <span class="material-symbols-outlined small-icon"
+                        style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sync_alt</span>
+                </a>
             </button>
 
-	<!-- 채팅 버튼 -->
+            <!-- 채팅 버튼 -->
             <button class="messagebox" onclick="location.href='asd'">
                 <span class="material-symbols-outlined small-icon"
                     style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sms</span>
@@ -40,8 +36,9 @@
                 <button onclick="myFunction()" class="dropbtn">${user.nickname } <span
                         class="material-symbols-outlined small-icon">keyboard_arrow_down</span></button>
                 <div id="myDropdown" class="dropdown-content-mypage">
-                    <a href="#home"> <span
-                            class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스</a>
+                    <a href="/classPage"> <!-- 수정된 경로 -->
+                        <span class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스
+                    </a>
                     <hr style="margin: 0; color: #ddd;">
                     <a href="mypage"><span
                             class="material-symbols-outlined bottom-icon">account_circle</span>&nbsp;&nbsp;내 정보</a>
@@ -54,8 +51,6 @@
 
         <!-- 닉네임 누르면 메뉴 나오는 함수 -->
         <script>
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
             function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
             }
@@ -64,8 +59,7 @@
             window.onclick = function (event) {
                 if (!event.target.matches('.dropbtn')) {
                     var dropdowns = document.getElementsByClassName("dropdown-content-mypage");
-                    var i;
-                    for (i = 0; i < dropdowns.length; i++) {
+                    for (var i = 0; i < dropdowns.length; i++) {
                         var openDropdown = dropdowns[i];
                         if (openDropdown.classList.contains('show')) {
                             openDropdown.classList.remove('show');
@@ -74,8 +68,6 @@
                 }
             }
         </script>
-
-
 
     </div>
 
@@ -99,8 +91,7 @@
                     </div>
 
                 </div>
-                
-                
+
                 <div class="dropright">
                     <a style="display: flex; align-items: center;">라이프 스타일<span class="material-symbols-outlined"
                             style="position: absolute; right: 0px;">chevron_right</span></a>
@@ -112,7 +103,6 @@
                         <a href="category_page?Maincategory_number=2&Subcategory_number=204">캔들</a>
                     </div>
                 </div>
-
 
                 <div class="dropright">
                     <a style="display: flex; align-items: center;">미술<span class="material-symbols-outlined"
@@ -127,7 +117,6 @@
                     </div>
                 </div>
 
-
                 <div class="dropright">
                     <a style="display: flex; align-items: center;">홈 데코<span class="material-symbols-outlined"
                             style="position: absolute; right: 0px;">chevron_right</span></a>
@@ -139,36 +128,25 @@
                     </div>
                 </div>
 
-
-                
-
             </div>
         </div>
     </div>
 
-
 </header>
 
-
-
  <!-- 크기가 작아지면 하단에 생기는 메뉴 -->
-  <div class="bottom_menu">
+<div class="bottom_menu">
     <a href="mainpage" class="item">
-        <span class="material-symbols-outlined bottom-icon"> home</span>
+        <span class="material-symbols-outlined bottom-icon">home</span>
         <span style=" font-size: 14px;">홈</span>
     </a>
-
-<!--     <a href="" class="item">
-        <span class="material-symbols-outlined bottom-icon">reorder</span>
-        <span style=" font-size: 14px;">카테고리</span>
-    </a> -->
 
     <a href="favoritelist" class="item">
         <span class="material-symbols-outlined bottom-icon">favorite</span>
         <span style=" font-size: 14px;">찜</span>
     </a>
 
-    <a href="" class="item">
+    <a href="/classPage" class="item"> <!-- 수정된 경로 -->
         <span class="material-symbols-outlined bottom-icon">school</span>
         <span style=" font-size: 14px;">마이클래스</span>
     </a>
