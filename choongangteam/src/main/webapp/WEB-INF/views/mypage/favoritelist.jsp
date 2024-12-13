@@ -161,6 +161,14 @@
                     </a>
                 </div>
 				</c:forEach>
+				
+				
+				<c:if test="${empty favoriteclass}">
+			<p align="center" style="font-size: 20px; margin-top: 100px;">
+				<span style="font-weight: 600;  color: #4C4C4C">찜한 클래스가 없습니다.</span>
+			
+			</p>
+				</c:if>
  
             </div>
 

@@ -3,12 +3,12 @@
 <header class="top_block">
     <div class="top_menu">
 
-        <div class="title_search">
+        <div class="title_search_login">
             <a href="mainpage" class="title">
                 <span class="do-hyeon-regular">메이</span>
                 <span class="racing-sans-one-regular">Kit</span>
             </a>
-            <div class="search">
+            <div class="search_login">
                <form action="keyword_search"  method="get" style="margin-top: 5px;">
                     <input type="text" placeholder="키워드를 검색하세요" id="lesson_keyword" name="lesson_keyword" class="search_word">
                     <button type="submit" style="background-color: #F6F6F6; border-style: none; cursor: pointer;">
@@ -37,10 +37,10 @@
             </button> 
 
             <div class="dropdown_mypage">
-                <button onclick="myFunction()" class="dropbtn">${user.nickname } <span
+                <button onclick="myFunction(event)" class="dropbtn">${user.nickname } <span  onclick="myFunction(event)"
                         class="material-symbols-outlined small-icon">keyboard_arrow_down</span></button>
                 <div id="myDropdown" class="dropdown-content-mypage">
-                    <a href="#home"> <span
+                    <a href="myclass"> <span
                             class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스</a>
                     <hr style="margin: 0; color: #ddd;">
                     <a href="mypage"><span
@@ -54,28 +54,27 @@
 
         <!-- 닉네임 누르면 메뉴 나오는 함수 -->
         <script>
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
+        function myFunction(event) {
+            event.stopPropagation(); // 이벤트 버블링 방지
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function (event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content-mypage");
-                    var i;
-                    for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.small-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content-mypage");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
                     }
                 }
             }
+        }
         </script>
 
-
+	<hr style="border-style: ridge; border-width: 1px; width: 100%; position: absolute; bottom: 0;">
 
     </div>
 
@@ -168,7 +167,7 @@
         <span style=" font-size: 14px;">찜</span>
     </a>
 
-    <a href="" class="item">
+    <a href="myclass" class="item">
         <span class="material-symbols-outlined bottom-icon">school</span>
         <span style=" font-size: 14px;">마이클래스</span>
     </a>

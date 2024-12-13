@@ -27,7 +27,7 @@
             <a href="loginpage" class="login">로그인</a>
         </div>
 
-        <hr style="border-style: ridge; border-width: 1px; width: 100%; position: absolute; bottom: 0;">
+ 
 
     </div>
 
@@ -130,7 +130,7 @@
 
     <c:choose>
     <c:when test="${not empty sessionScope.userSession}">
-        <a href="asd" class="item">
+        <a href="myclass" class="item">
             <span class="material-symbols-outlined bottom-icon">school</span>
             <span style="font-size: 14px;">마이클래스</span>
         </a>

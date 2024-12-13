@@ -39,12 +39,7 @@
                 <div class="contact">
                     고객센터: 1234-5678 | makeit@taling.me
                 </div>
-                <div class="social-links">
-                    <a href="#" class="facebook">Facebook</a>
-                    <a href="#" class="instagram">Instagram</a>
-                    <a href="#" class="youtube">YouTube</a>
-                    <a href="#" class="naver">Naver</a>
-                </div>
+                
                 <div class="copyright">
                     Copyright © 2024 MakeIt Inc. All rights reserved.
                 </div>
