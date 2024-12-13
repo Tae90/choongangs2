@@ -130,7 +130,7 @@
 
     <c:choose>
     <c:when test="${not empty sessionScope.userSession}">
-        <a href="asd" class="item">
+        <a href="myclass" class="item">
             <span class="material-symbols-outlined bottom-icon">school</span>
             <span style="font-size: 14px;">마이클래스</span>
         </a>

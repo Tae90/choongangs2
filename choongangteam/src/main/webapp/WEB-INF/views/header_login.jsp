@@ -40,7 +40,7 @@
                 <button onclick="myFunction(event)" class="dropbtn">${user.nickname } <span  onclick="myFunction(event)"
                         class="material-symbols-outlined small-icon">keyboard_arrow_down</span></button>
                 <div id="myDropdown" class="dropdown-content-mypage">
-                    <a href="#home"> <span
+                    <a href="myclass"> <span
                             class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스</a>
                     <hr style="margin: 0; color: #ddd;">
                     <a href="mypage"><span
@@ -167,7 +167,7 @@
         <span style=" font-size: 14px;">찜</span>
     </a>
 
-    <a href="" class="item">
+    <a href="myclass" class="item">
         <span class="material-symbols-outlined bottom-icon">school</span>
         <span style=" font-size: 14px;">마이클래스</span>
     </a>
