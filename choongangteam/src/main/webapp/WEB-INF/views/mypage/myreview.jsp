@@ -180,7 +180,7 @@
                     
                     <c:if test="${empty lesson.reply_content}">
     					<div class="review_buttonbox">
-        						<button class="write_review" onclick="location.href='asdasd'">리뷰 작성하러 가기</button>
+        						<button class="write_review" onclick="location.href='paymentdetail?lesson_number=${lesson.lesson_number}'">리뷰 작성하러 가기</button>
     					</div>
 					</c:if>
                 </div>

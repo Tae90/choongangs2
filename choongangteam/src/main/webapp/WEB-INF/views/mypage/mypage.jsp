@@ -263,7 +263,7 @@
 
 
 
-                <div class="my_profile" style="float: right; font-size: 12px; padding-right: 20px;">
+                <div class="my_profile" style="float: right; font-size: 12px; padding-right: 20px; border-top-color: rgba(0,0,0,0)">
                     <a href="logout1" class="logout">로그아웃</a>&nbsp;&nbsp;
                     <a href="delete_member" class="logout">회원탈퇴</a>
                 </div>
