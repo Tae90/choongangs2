@@ -101,6 +101,15 @@
     		<!-- 오른쪽 섹션 -->
     		<div class="payment-right-section">
       			<div class="details" id ="payment_title">
+        			
+        			
+        			<!-- 찜 및 리뷰 카운트 -->
+        			<div class="favorite-count">
+        				<img src="<%= request.getContextPath() %>/uimg/heart_pink.png" class="icon-small">
+        				<span>${lesson.favorite_count}</span>
+        				<img src="<%= request.getContextPath() %>/uimg/star.png" class="icon-small">
+        				<span>${lesson.reply_count}</span>
+        			</div>
         			<div class="price-info" id="price">
         			</div>
         			<div class="summary-info">
@@ -181,36 +190,58 @@
  	// 초기 하트 상태 업데이트
   	updateHeartIcon();
     
-	//찜 버튼 클릭 이벤트
+  	//찜 버튼 클릭 이벤트
     $(document).on('click', '.heart_icon', function() {
-    	console.log('찜 버튼 클릭됨');
-    	const $this = $(this);
-    	const favorite = $this.attr('data-favorite') === "true";
-    	const lesson_number = $this.data('lesson_number');
-    	console.log('lesson_number:', lesson_number);
-    	
-    	$.ajax({
-    		url : favorite ? '/favorite/remove' : '/favorite/add',
-    		method : 'POST',
-    		data : {lesson_number: lesson_number},
-    		contentType: 'application/x-www-form-urlencoded',
-    		success : function(response){
-    			if(response) {
-    				const newFavorite = !favorite;
-    				$this
-    				 .attr('data-favorite', newFavorite)
-    		         .attr('src', newFavorite
-    		        	? '<%= request.getContextPath() %>/uimg/heart_pink.png'
-    					: '<%= request.getContextPath() %>/uimg/heart.png');
-    			} else{
-    				alert("찜 처리에 실패했습니다.");
-    			}						
-    		},
-    		error: function(){
-    			alert("서버와의 통신에 문제가 발생했습니다.");
-    		}
-    	});
+       console.log('찜 버튼 클릭됨');
+       const $this = $(this);
+       const favorite = $this.attr('data-favorite') === "true";
+       const lesson_number = $this.data('lesson_number');
+       console.log('lesson_number:', lesson_number);
+       
+       $.ajax({
+          url : favorite ? '/favorite/remove' : '/favorite/add',
+          method : 'POST',
+          data : {lesson_number: lesson_number},
+          contentType: 'application/x-www-form-urlencoded',
+          success : function(response){
+             if(response) {
+                const newFavorite = !favorite;
+                $this
+                 .attr('data-favorite', newFavorite)
+                   .attr('src', newFavorite
+                     ? '<%= request.getContextPath() %>/uimg/heart_pink.png'
+                   : '<%= request.getContextPath() %>/uimg/heart.png');
+             } else{
+                alert("회원가입 및 로그인 후 이용 가능합니다.");
+                location.href="/loginpage";
+             }                  
+          },
+          error: function(){
+             alert("찜 처리 중 오류 발생");
+          }
+       });
     });
+ 	// 결제하기 버튼 클릭 이벤트
+    $('.pay-button').on('click',function(){
+       const $this = $(this);
+    
+         $.ajax({
+            url : '/check-login',
+            method : 'POST',
+            success : function(Login){
+               if(Login){
+                  location.href = $this.attr('href');
+               }else{
+                  alert("회원가입 및 로그인 후 이용 가능합니다.");
+                  location.href = "/loginpage";
+               }
+            },
+            error: function(){
+               alert("로그인 상태 확인 중 오류 발생");
+            }
+         });
+    
+  	});
 	
 	// 창 크기 변경 시 하트 아이콘 상태 갱신
  	$(window).on('resize',function(){
