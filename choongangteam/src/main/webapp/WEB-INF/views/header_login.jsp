@@ -3,12 +3,12 @@
 <header class="top_block">
     <div class="top_menu">
 
-        <div class="title_search">
+        <div class="title_search_login">
             <a href="mainpage" class="title">
                 <span class="do-hyeon-regular">메이</span>
                 <span class="racing-sans-one-regular">Kit</span>
             </a>
-            <div class="search">
+            <div class="search_login">
                <form action="keyword_search"  method="get" style="margin-top: 5px;">
                     <input type="text" placeholder="키워드를 검색하세요" id="lesson_keyword" name="lesson_keyword" class="search_word">
                     <button type="submit" style="background-color: #F6F6F6; border-style: none; cursor: pointer;">

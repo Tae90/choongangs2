@@ -24,7 +24,7 @@
 }
 
 /* 메인타이틀, 검색박스 들어가는 div */
-.title_search {
+.title_search_login {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -55,12 +55,12 @@
 /* 검색창 */
 
 
-.search {
+.search_login {
     flex: 0 1 450px;
     min-width: 150px;
 }
 
-.search form {
+.search_login form {
     width: 100%;
     border-radius: 4px;
     border: 1px solid rgb(229, 231, 235);
@@ -71,7 +71,7 @@
     transition: border-color 0.3s ease;
 }
 
-.search form:focus-within {
+.search_login form:focus-within {
     border-color: #9832a8;
     border-style: solid;
     border-width: 2px;
@@ -296,11 +296,11 @@
     }
 
 
-    .title_search {
+    .title_search_login {
         width: calc(100% - 80px);
     }
 
-    .search {
+    .search_login {
     	flex: 0 1 400px;
         min-width: 120px;
     }
@@ -349,7 +349,7 @@
             
 
     
-    .title_search{
+    .title_search_login{
     	gap: 2px;
     }
     
@@ -357,12 +357,12 @@
         font-size: 18px;
     }
     
-    .search {
-        flex: 0 1 200px;
+    .search_login {
+        flex: 0 1 100%;
         min-width: 100px;
     }
     
-    .search form {
+    .search_login form {
         max-width: 100%;
     }
 
