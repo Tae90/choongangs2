@@ -23,4 +23,8 @@ public class ClassModifyService {
 	public int updateClass(Lesson lesson) {
 		return dao.updateClass(lesson);
 	}
+
+	public int deleteLesson(int lesson_number) {
+		return dao.deleteLesson(lesson_number);
+	}
 }

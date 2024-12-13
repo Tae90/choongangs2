@@ -11,4 +11,6 @@ public interface ClassModifyDAO {
 	Lesson getLesson(int lesson_number);
 
 	int updateClass(Lesson lesson);
+
+	int deleteLesson(int lesson_number);
 }

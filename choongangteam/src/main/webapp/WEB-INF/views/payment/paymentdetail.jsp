@@ -31,6 +31,7 @@
 	var price =${lesson.lesson_price};
 	var apply =${lesson.lesson_apply};
 	var thumbnail ="${lesson.lesson_thumbnail}";
+	var lesson_number="${lesson_number}";
 	
 	$(document).ready(function(){
 		$('#price').html("<p>"+price+"</p>");
@@ -48,6 +49,31 @@
 		}
 		
 	});
+	var lesson_number="${lesson_number}";
+	function confirmDelete() {
+        const result = window.confirm("정말로 삭제를 진행하시겠습니다?");
+        if (result) {
+        	$.ajax({
+                url: '/deleteClass', // 서버의 URL
+                type: 'post', // DELETE 요청
+                data: {
+                    lesson_number: lesson_number // 삭제할 클래스의 ID 예시 (동적으로 설정 가능)
+					},
+                success: function(response) {
+                    if (response==1) {
+                        alert("삭제가 완료되었습니다.");
+                        location.href = '/mainpage'; // 리다이렉트
+                    } else {
+                        alert("삭제에 실패했습니다.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert("서버와의 통신에 실패했습니다.");
+                }
+            });
+        } 
+    }
 
 
 </script>
@@ -89,7 +115,7 @@
 				<c:if test="${userSession.email == lesson.member_email}">
 				<div class="modifyAndDelete_768">
 					<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
-					<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="ModifyDelete">삭제하기</a>
+					<a href="javascript:void(0);" class="ModifyDelete" onclick="confirmDelete()">삭제하기</a>
 				</div>
 				</c:if>
 				</c:if>   
@@ -137,7 +163,7 @@
 					<c:if test="${userSession.email == lesson.member_email}">
 					<div class="modifyAndDelete">
 						<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
-						<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="ModifyDelete">삭제하기</a>
+						<a href="javascript:void(0);" class="ModifyDelete" onclick="confirmDelete()">삭제하기</a>
 					</div>
 					</c:if>
 					</c:if>   
