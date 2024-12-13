@@ -12,26 +12,27 @@
 .top_menu {
     display: flex;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
+  	margin: 0 auto;
     height: 80px;
     position: relative;
-    max-width: 1300px;
-    width: min(100%, 1300px);
-    margin-inline: max(0px, calc((100% - 1300px) / 2));
-
+    max-width: 1280px;
+    width: min(100%, 1280px);
+    margin-inline: max(0px, calc((100% - 1280px) / 2));
+	/* padding: 0 20px; */
+	width: 100%;
 
 }
 
 /* 메인타이틀, 검색박스 들어가는 div */
-.title_search {
+.title_search_login {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     /* 왼쪽 정렬 */
-    max-width: 90%;
+    width: calc(100% - 100px);
+  	gap: 20px;
     height: 40px;
-    width: 100%;
+   
     /* 전체 너비 사용 */
 
 }
@@ -40,9 +41,7 @@
 .title {
     font-size: 32px;
     text-decoration: none;
-    margin-right: 40px;
-    position: relative;
-    /* 타이틀과 검색창 사이 간격 */
+    white-space: nowrap;
 }
 
 .title:link {
@@ -56,27 +55,23 @@
 /* 검색창 */
 
 
-.search {
-    flex-grow: 1;
-    margin-left: 10px;
-    margin-right: 10px;
-    max-width: 448px;
-    width: auto;
+.search_login {
+    flex: 0 1 450px;
+    min-width: 150px;
 }
 
-.search form {
+.search_login form {
     width: 100%;
     border-radius: 4px;
     border: 1px solid rgb(229, 231, 235);
     display: flex;
     align-items: center;
     background-color: #F6F6F6;
-
     border: 1px solid transparent;
     transition: border-color 0.3s ease;
 }
 
-.search form:focus-within {
+.search_login form:focus-within {
     border-color: #9832a8;
     border-style: solid;
     border-width: 2px;
@@ -100,11 +95,10 @@
 /* 상단 우측 메뉴(로그인) */
 .top_right_menu {
     display: flex;
-    position: absolute;
-    right: 0px;
+    gap: 2px;
     align-items: center;
-
-
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .login {
@@ -299,17 +293,16 @@
 
     .title {
         font-size: 22px;
-        margin-right: 24px;
     }
 
 
-    .title_search {
-        min-width: 200px;
-        width: 100%;
+    .title_search_login {
+        width: calc(100% - 80px);
     }
 
-    .search {
-        max-width: 80%;
+    .search_login {
+    	flex: 0 1 400px;
+        min-width: 120px;
     }
 
     .search_word {
@@ -320,7 +313,14 @@
         display: none;
     }
 
+	.top_right_menu{
+		gap: 0;
+	}
    
+   
+   .messagebox{
+   		padding: 0;
+   }
 
     .dropdown_mypage {
         display: none;
@@ -347,8 +347,23 @@
 
 @media(max-width : 425px) {
             
-    form{
-        max-width: 240px;
+
+    
+    .title_search_login{
+    	gap: 2px;
+    }
+    
+    .title {
+        font-size: 18px;
+    }
+    
+    .search_login {
+        flex: 0 1 100%;
+        min-width: 100px;
+    }
+    
+    .search_login form {
+        max-width: 100%;
     }
 
 }

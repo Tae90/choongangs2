@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
@@ -15,9 +16,42 @@
 <link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
+<link href="/css/footer.css" rel="stylesheet">
 <link href="/css/paymentdetail.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>상세 페이지</title>
+<script>
+	//controller에서 가져온 값들 적용
+	var content = '${lesson.lesson_content}';
+	var title = "${lesson.lesson_title}";
+	var date ="${lesson.start_date}";
+	var start_hour ="${lesson.start_hour}";
+	var start_min ="${lesson.start_min}";
+	var class_hour ="${lesson.class_hour}";
+	var class_min ="${lesson.class_min}";
+	var price =${lesson.lesson_price};
+	var apply =${lesson.lesson_apply};
+	var thumbnail ="${lesson.lesson_thumbnail}";
+	
+	$(document).ready(function(){
+		$('#price').html("<p>"+price+"</p>");
+		$('#apply').append('<p>모집 인원 '+apply+'인</p>');
+		$('#content').html(content);
+		$('#thumbnail').prop('src', '/uimg/'+thumbnail);
+		$("#class_title").html("<h2>"+title+"</h2>");
+		$("#payment_title").prepend("<h2>"+title+"</h2>");
+		$('#agreementSection').append(date+" "+start_hour+":"+start_min+"~"+class_hour+":"+class_min)
+		if(Number(start_min) === Number(class_min)){
+			$('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour))+"시간");
+		}else{
+			if(Number(start_min)===30) $('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour)-1)+"시간 30분");
+			else $('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour))+"시간 30분");
+		}
+		
+	});
+
+
+</script>
 </head>
 <body>
 
@@ -37,9 +71,11 @@
     		<!-- 왼쪽 섹션 -->
     		<div class="payment-left-section">
       			<div class="header">
-        			<img class="img" src="<%= request.getContextPath() %>/uimg/class.png">
+        			<img class="img" id="thumbnail" src="">
       			</div>
-      			<div class="content">
+      			<div class="class_title" id ="class_title">
+      			</div>
+      			<div class="content" id="content">
       			</div>
       			<div class="review-section">
     				<h2>베스트 리뷰</h2>
@@ -50,6 +86,19 @@
         				<div class="review-text">모두가 너무 좋아하는 체험이었습니다. <br>다음에 또 가고 싶습니다.</div>
     				</div>
 				</div>
+				<c:if test="${not empty sessionScope.userSession}">
+				<c:if test="${userSession.email == lesson.member_email}">
+				<div class="modifyAndDelete">
+					<div class="modify">
+						<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="md-button">수정하기</a>
+					</div>
+					<div class="delete">
+						<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="md-button">삭제하기</a>
+					</div>
+				</div>
+				
+				</c:if>
+				</c:if>
     		</div>
     		<!-- 오른쪽 섹션 -->
     		<div class="payment-right-section">
@@ -65,13 +114,15 @@
         			</div>
         			<div class="price-info">
         				<span class="price">${lesson.lesson_price}원</span>
+      			<div class="details" id ="payment_title">
+        			<div class="price-info" id="price">
         			</div>
         			<div class="summary-info">
-         				<div class="summary-item">
+         				<div class="summary-item" id="apply">
             				<img src="<%= request.getContextPath()%>/uimg/people.png">
             				<span>모집인원 ${lesson.lesson_apply}인</span>
           				</div>
-          				<div class="summary-item">
+          				<div class="summary-item" id="classTime">
             				<img src="<%= request.getContextPath()%>/uimg/clock.png" alt="시간">
             				<span>소요시간 ${lesson.class_hour}시간</span>
           				</div>
@@ -83,6 +134,7 @@
         			<!-- 일정 선택 버튼 -->
       				<div class="agreement-section" id="agreementSection">
           				<input type="radio" value="agree"> ${lesson.start_date} ${lesson.start_hour}:${lesson.start_min}
+          				<input type="radio" value="agree"> 
       				</div>
         			<!-- 아이콘 섹션 -->
       				<div class="icon-container">
@@ -209,6 +261,6 @@
  });
 	
 </script>
-
+<jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

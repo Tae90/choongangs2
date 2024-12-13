@@ -39,6 +39,7 @@ public class PaymentController {
 	    
         model.addAttribute("lesson", lesson);
         model.addAttribute("user", userSession);
+
       
       return "payment/paymentdetail";
    }
