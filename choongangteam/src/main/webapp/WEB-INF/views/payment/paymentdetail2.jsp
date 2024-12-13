@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -12,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="/css/header.css" rel="stylesheet">
-<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/paymentdetail.css" rel="stylesheet">
@@ -22,15 +20,7 @@
 <body>
 
 	<!-- 헤더 부분 -->
-	   <!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
-   <c:choose>
-    <c:when test="${not empty sessionScope.userSession}">
-        <jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
-    </c:when>
-    <c:otherwise>
-        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
-    </c:otherwise>
-   </c:choose>
+	<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include> 
   
   	<div class="payment-container">
   		<div class="payment-content">
@@ -114,33 +104,11 @@
 
 <script>
   $(document).ready(function() {
-	
+	  
     // 일정 버튼 클릭 시 테두리 색상 변경
     $('#agreementSection input').on('change', function() {
       $('#agreementSection').css('border', '1px solid #9832a8');
     });
-    
-    // 결제하기 버튼 클릭 이벤트
-    $('.pay-button').on('click',function(){
-    	const $this = $(this);
-    
-   		$.ajax({
-   			url : '/check-login',
-   			method : 'POST',
-   			success : function(Login){
-   				if(Login){
-   					location.href = $this.attr('href');
-   				}else{
-   					alert("회원가입 및 로그인 후 이용 가능합니다.");
-   					location.href = "/loginpage";
-   				}
-   			},
-   			error: function(){
-   				alert("로그인 상태 확인 중 오류 발생");
-   			}
-   		});
-    
-  });
     
     const updateHeartIcon = function(){
     $('.heart_icon').each(function(){
@@ -191,12 +159,11 @@
     		        	? '<%= request.getContextPath() %>/uimg/heart_pink.png'
     					: '<%= request.getContextPath() %>/uimg/heart.png');
     			} else{
-    				alert("회원가입 및 로그인 후 이용 가능합니다.");
-    				location.href="/loginpage";
+    				alert("찜 처리에 실패했습니다.");
     			}						
     		},
     		error: function(){
-    			alert("찜 처리 중 오류 발생");
+    			alert("서버와의 통신에 문제가 발생했습니다.");
     		}
     	});
     });

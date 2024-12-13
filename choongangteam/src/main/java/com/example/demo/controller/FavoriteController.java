@@ -25,6 +25,11 @@ public class FavoriteController {
 							   HttpSession session) {
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
+		
+		if (userSession == null) {
+	        return false;
+	    }
+		
 		String member_email = userSession.getEmail();
 				
 		return favoriteservice.addFavorite(member_email, lesson_number);
@@ -36,6 +41,11 @@ public class FavoriteController {
 								  HttpSession session) {
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
+		
+		if (userSession == null) {
+	        return false;
+	    }
+		
 		String member_email = userSession.getEmail();
 			
 		return favoriteservice.removeFavorite(member_email, lesson_number);

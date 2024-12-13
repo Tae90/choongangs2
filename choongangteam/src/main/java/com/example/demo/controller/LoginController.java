@@ -296,9 +296,15 @@ public class LoginController {
 			return "redirect:/mainpage";
 		}
 	
+		@PostMapping("/check-login")
+		@ResponseBody
+		public boolean checkLogin(HttpSession session) {
+			
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			
+			return userSession != null;
+		}
 	
-	
-	
-	
+
 	
 }

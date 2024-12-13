@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,9 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-     	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"
         rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
+<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/paymentcancel.css" rel="stylesheet">
@@ -24,9 +26,17 @@
     <title>결제 내역</title>
 </head>
 <body>
-	<!-- 헤더 부분 -->
-      <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include> 
-	
+   <!-- 헤더 부분 -->
+      <!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
+   <c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
+    </c:when>
+    <c:otherwise>
+        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+    </c:otherwise>
+   </c:choose>
+   
     <div class="payment-container">
         <!-- 상단 제목 -->
         <h1 class="page-title">결제 내역</h1>
@@ -54,7 +64,7 @@
                             <td>${payment.payment_nickname}</td>
                     <td><a href="paymentdetail?lesson_number=${payment.lesson_number}" style="text-decoration:none">${payment.payment_title}</a></td>
                             <td>${payment.payment_price}원</td>
-                            <td>${payment.payment_date}</td>
+                            <td><fmt:formatDate value="${payment.payment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                             <td>${payment.payment_method}</td>
                             <td>
                                 <c:choose>
@@ -80,7 +90,7 @@
             $(".cancelbutton").click(function () {
                 var payment_number = $(this).data("payment");
                 var payment_imp_uid = $(this).data("imp_uid");
-				
+            
                 console.log("취소 요청 - payment_number:", payment_number);
                 console.log("취소 요청 - imp_uid:", payment_imp_uid);
                 

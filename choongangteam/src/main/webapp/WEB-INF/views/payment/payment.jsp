@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    	pageEncoding="UTF-8"%>
+       pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -24,7 +24,7 @@
         <h2>클래스 정보</h2>
         <div class="class-thumbnail">
             <img src="<%= request.getContextPath() %>/uimg/flower.jpeg">
-            <p>${lesson.lesson_title}</p>
+            <br><span>${lesson.lesson_title}</span>
         </div>
     </div>
 
@@ -47,11 +47,11 @@
     </div>
     <div class="summary-row">
         <p>강의 일정</p>
-        <span>2024-12-03 16:00~18:00</span>
+        <span>${lesson.start_date} ${lesson.start_hour}:${lesson.start_min}</span>
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>
-        <span>3명</span>
+        <span>총 ${lesson.lesson_apply}인</span>
     </div>
     <div class="total-row">
         <p>최종 결제금액</p>
@@ -64,88 +64,88 @@
         <button type="button" class="pay-button" id="paybutton">결제하기</button>
     </div>
 </div>
-	
-	<input type="hidden" id="payment_number" value="${lesson.lesson_number}">
-	<input type="hidden" id="payment_price" value="${lesson.lesson_price}">
-	<input type="hidden" id="payment_title" value="${lesson.lesson_title}">
-	<input type="hidden" id="member_email" value="${member.member_email}">
-	<input type="hidden" id="member_nickname" value="${member.member_nickname}">
+   
+   <input type="hidden" id="payment_number" value="${lesson.lesson_number}">
+   <input type="hidden" id="payment_price" value="${lesson.lesson_price}">
+   <input type="hidden" id="payment_title" value="${lesson.lesson_title}">
+   <input type="hidden" id="member_email" value="${member.member_email}">
+   <input type="hidden" id="member_nickname" value="${member.member_nickname}">
 
 <script>
     $(document).ready(function() {
         $("#paybutton").on("click", function() {
-        	var payment_number = Math.floor(Math.random() * 100000);	 	// 주문번호
-            var member_email = $("#member_email").val();					// 유저이메일
-            var payment_title = $("#payment_title").val();	 	 			// 레슨이름
-            var payment_price = $("#payment_price").val();  				// 레슨가격
-            var payment_agency = $("input[name='agency']:checked").val();	// 결제대행사
+           var payment_number = Math.floor(Math.random() * 100000);         // 주문번호
+            var member_email = $("#member_email").val();                    // 유저이메일
+            var payment_title = $("#payment_title").val();                  // 레슨이름
+            var payment_price = $("#payment_price").val();              	// 레슨가격
+            var payment_agency = $("input[name='agency']:checked").val();   // 결제대행사
 
             var IMP = window.IMP;
             IMP.init('imp23067864'); // 가맹점 식별코드 입력
-			
+         
             // 결제 요청
             IMP.request_pay({
-                pg: payment_agency,           				// 등록된 pg사: kg이니시스(html5_inicis), 카카오페이(kakaopay)
-                pay_method: "card",         				// 결제방식: card(신용카드)
-                merchant_uid: payment_number, 				// 주문번호
-                name: payment_title,           				// 상품명
-                amount: payment_price,           			// 금액
-                buyer_name: '${member.member_nickname}',	// 이름
-                buyer_email: '${member.member_email}'		// 이메일
+                pg: payment_agency,                       // 등록된 pg사: kg이니시스(html5_inicis), 카카오페이(kakaopay)
+                pay_method: "card",                       // 결제방식: card(신용카드)
+                merchant_uid: payment_number,             // 주문번호
+                name: payment_title,                      // 상품명
+                amount: payment_price,                    // 금액
+                buyer_name: '${member.member_nickname}',  // 이름
+                buyer_email: '${member.member_email}'     // 이메일
                 
             }, function (rsp) {
-            	console.log("결제 응답 객체:", rsp);
-            	console.log("lesson_number:", '${lesson.lesson_number}');
-            	console.log("member_email:", '${member.member_email}');
-            	console.log("payment_nickname:", '${member.member_nickname}');
-            	
-                if (rsp.success) {         	
-                	console.log("rsp.success:"+ rsp.success);
-                	 
-                	 // 결제 정보 저장
-                   	$.ajax({
+               console.log("결제 응답 객체:", rsp);
+               console.log("lesson_number:", '${lesson.lesson_number}');
+               console.log("member_email:", '${member.member_email}');
+               console.log("payment_nickname:", '${member.member_nickname}');
+               
+                if (rsp.success) {            
+                   console.log("rsp.success:"+ rsp.success);
+                    
+                    // 결제 정보 저장
+                      $.ajax({
                         type: "POST",
                         url: "/save_payment", // 서버의 처리 URL
                         contentType: "application/json",
                         data: JSON.stringify({
-                           "payment_number": rsp.merchant_uid,				// 주문번호
-                           "payment_title": payment_title,					// 상품명
-                           "payment_price": rsp.paid_amount,				// 결제금액
-                           "payment_method": rsp.pay_method,				// 결제방식
-                           "payment_agency": rsp.pg_provider,				// 결제대행사
-                           "lesson_number": '${lesson.lesson_number}', 		// 레슨넘버
-                           "member_email": '${member.member_email}',		// 이메일
-                           "payment_nickname": '${member.member_nickname}',	// 닉네임
-                           "payment_date": new Date(rsp.paid_at * 1000).toISOString(), // 결제날짜
-                           "payment_state": rsp.status === "paid" ? 1 : 0,	// 결제상태 (1: 성공, 0: 실패)
+                           "payment_number": rsp.merchant_uid,               // 주문번호
+                           "payment_title": payment_title,                   // 상품명
+                           "payment_price": rsp.paid_amount,               	 // 결제금액
+                           "payment_method": rsp.pay_method,                 // 결제방식
+                           "payment_agency": rsp.pg_provider,                // 결제대행사
+                           "lesson_number": '${lesson.lesson_number}',       // 레슨넘버
+                           "member_email": '${member.member_email}',         // 이메일
+                           "payment_nickname": '${member.member_nickname}',  // 닉네임
+                           "payment_date": new Date(rsp.paid_at * 1000).toISOString().slice(0, 19).replace('T', ' '),   // 결제날짜
+                           "payment_state": rsp.status === "paid" ? 1 : 0,   // 결제상태 (1: 성공, 0: 실패)
                            "payment_imp_uid": rsp.imp_uid
 
                         }),                       
                         success: function(result) {
-                        	console.log("결제 정보 저장 성공");
-							if(result == 1){
-								// 결제 완료 메시지 표시
-		            			Swal.fire({
-		                          text: "결제가 완료되었습니다.",
-		                          icon: 'success',                // 아이콘 (성공)
-		                          confirmButtonText: '확인',
-		                          confirmButtonColor: '#9832a8',  // 버튼 색상  
-		            			}).then(() => {
-		            			    window.location.href = "paymentcancel"	// 추후 마이페이지 or 마이페이지 결제내역으로 변경 예정
-		            			});
-							}
-						},
+                           console.log("결제 정보 저장 성공");
+                     if(result == 1){
+                        // 결제 완료 메시지 표시
+                           Swal.fire({
+                                text: "결제가 완료되었습니다.",
+                                icon: 'success',                // 아이콘 (성공)
+                                confirmButtonText: '확인',
+                                confirmButtonColor: '#9832a8',  // 버튼 색상  
+                           }).then(() => {
+                               window.location.href = "paymentcancel"   // 추후 마이페이지 or 마이페이지 결제내역으로 변경 예정
+                           });
+                     }
+                  },
                         error: function() {
-                       	 	console.log("결제 정보 저장 실패");
-                       	 	Swal.fire({
+                              console.log("결제 정보 저장 실패");
+                              Swal.fire({
                              text: "결제 정보 저장 중 오류가 발생했습니다.",
                              icon: 'error',
                              confirmButtonText: '확인',
                              confirmButtonColor: '#9832a8'
-                         	});
-                    	}
+                            });
+                       }
                     });
-                   	
+                      
                 } else {
                     Swal.fire({
                         text: "결제를 실패하였습니다.",

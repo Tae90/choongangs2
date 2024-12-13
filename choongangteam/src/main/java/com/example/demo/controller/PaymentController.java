@@ -33,10 +33,12 @@ public class PaymentController {
    @RequestMapping("/paymentdetail")
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
 		   					   HttpSession session, Model model) {
-      	   
+	   
+	    UserSession userSession = (UserSession) session.getAttribute("userSession");
 	    Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	    
         model.addAttribute("lesson", lesson);
+        model.addAttribute("user", userSession);
       
       return "payment/paymentdetail";
    }
@@ -85,6 +87,7 @@ public class PaymentController {
 	   System.out.println("paymentList:" + paymentList);
 	   
 	   model.addAttribute("paymentList", paymentList);
+	   model.addAttribute("user", userSession);
 	   
 	   return "payment/paymentcancel";
    }
