@@ -186,14 +186,14 @@
                 </div>
                 
                 </c:forEach>
-
-           
-
-
-               
-
-
             </div>
+            
+            	<c:if test="${empty myreview}">
+			<p align="center" style="font-size: 20px; margin-top: 100px;">
+				<span style="font-weight: 600;  color: #4C4C4C">리뷰작성이 가능한 클래스가 없습니다.</span>
+			
+			</p>
+				</c:if>
 
             </div>
 
