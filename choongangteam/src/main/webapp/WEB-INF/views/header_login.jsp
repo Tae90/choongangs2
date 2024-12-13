@@ -40,9 +40,9 @@
                 <button onclick="myFunction(event)" class="dropbtn">${user.nickname } <span  onclick="myFunction(event)"
                         class="material-symbols-outlined small-icon">keyboard_arrow_down</span></button>
                 <div id="myDropdown" class="dropdown-content-mypage">
-                    <a href="myclass"> <span
-                            class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스</a>
-                    <hr style="margin: 0; color: #ddd;">
+                    <a href="/classPage"> <!-- 수정된 경로 -->
+                        <span class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스
+                    </a>
                     <a href="mypage"><span
                             class="material-symbols-outlined bottom-icon">account_circle</span>&nbsp;&nbsp;내 정보</a>
                     <hr style="margin: 0; color: #ddd;">
@@ -167,7 +167,7 @@
         <span style=" font-size: 14px;">찜</span>
     </a>
 
-    <a href="myclass" class="item">
+    <a href="/classPage" class="item"> <!-- 수정된 경로 -->
         <span class="material-symbols-outlined bottom-icon">school</span>
         <span style=" font-size: 14px;">마이클래스</span>
     </a>

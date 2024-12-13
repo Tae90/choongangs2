@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,7 +26,15 @@
 </head>
 <body>
 	<!-- 헤더 부분 -->
-      <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include> 
+      <!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
+   <c:choose>
+    <c:when test="${not empty sessionScope.userSession}">
+        <jsp:include page="${path}/WEB-INF/views/header_login.jsp"></jsp:include>
+    </c:when>
+    <c:otherwise>
+        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
+    </c:otherwise>
+   </c:choose>
 	
     <div class="payment-container">
         <!-- 상단 제목 -->
@@ -54,7 +63,7 @@
                             <td>${payment.payment_nickname}</td>
                     <td><a href="paymentdetail?lesson_number=${payment.lesson_number}" style="text-decoration:none">${payment.payment_title}</a></td>
                             <td>${payment.payment_price}원</td>
-                            <td>${payment.payment_date}</td>
+                            <td><fmt:formatDate value="${payment.payment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                             <td>${payment.payment_method}</td>
                             <td>
                                 <c:choose>

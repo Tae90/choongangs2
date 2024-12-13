@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Payment;
+import com.example.demo.model.Reply;
 
 @Mapper
 public interface PaymentDAO {
@@ -22,7 +23,10 @@ public interface PaymentDAO {
 
 	int updatePayment(Payment paymentcancel);
 
-	List<Payment> getPaymentMemberEmail(@Param("member_email")String member_email);
+	List<Payment> getPaymentMemberEmail(@Param("member_email") String member_email);
+
+	Double getAvgReplyScore(@Param("lesson_number") int lesson_number);
+
 
 	
 }
