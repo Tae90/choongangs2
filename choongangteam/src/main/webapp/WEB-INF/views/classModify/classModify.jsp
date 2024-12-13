@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
 <link href="/css/write.css" rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
+<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">

@@ -87,23 +87,16 @@
 				</div>
 				<c:if test="${not empty sessionScope.userSession}">
 				<c:if test="${userSession.email == lesson.member_email}">
-				<div class="modifyAndDelete">
-					<div class="modify">
-						<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="md-button">수정하기</a>
-					</div>
-					<div class="delete">
-						<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="md-button">삭제하기</a>
-					</div>
+				<div class="modifyAndDelete_768">
+					<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
+					<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="ModifyDelete">삭제하기</a>
 				</div>
-				
 				</c:if>
-				</c:if>
+				</c:if>   
     		</div>
     		<!-- 오른쪽 섹션 -->
     		<div class="payment-right-section">
       			<div class="details" id ="payment_title">
-        			
-        			
         			<!-- 찜 및 리뷰 카운트 -->
         			<div class="favorite-count">
         				<img src="<%= request.getContextPath() %>/uimg/heart_pink.png" class="icon-small">
@@ -139,7 +132,15 @@
         				</div>
         				<!-- 결제하기 버튼 -->
           				<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
-      				</div>   
+      				</div>
+      				<c:if test="${not empty sessionScope.userSession}">
+					<c:if test="${userSession.email == lesson.member_email}">
+					<div class="modifyAndDelete">
+						<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
+						<a href="<%= request.getContextPath()%>/classDelete?lesson_number=${lesson.lesson_number}" class="ModifyDelete">삭제하기</a>
+					</div>
+					</c:if>
+					</c:if>   
     			</div>
     		</div>
 		</div>
