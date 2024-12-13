@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MypageDAO;
 import com.example.demo.model.Favorite;
+import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Reply;
 
@@ -45,6 +46,11 @@ public class MypageService {
 	public void deleteMember(String pass) {
 		
 		dao.deleteMember(pass);
+	}
+
+	public List<Lesson> myclass(Lesson les) {
+		
+		return dao.myclass(les);
 	}
 
 

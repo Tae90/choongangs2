@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,8 @@ public class PaymentController {
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
 		   					   Model model) {
       	   
-	  Lesson lesson = paymentservice.getLessonNumber(lesson_number);
+
+	    Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	    
       model.addAttribute("lesson", lesson);
       model.addAttribute("lesson_number", lesson_number);
@@ -93,18 +95,33 @@ public class PaymentController {
    @RequestMapping("/save_payment/cancel")
    @ResponseBody
    public Integer cancelPayment(@RequestBody Payment payment, 
-		   						HttpSession session) {
+		   						HttpSession session) throws IOException {
 	   
 	  UserSession userSession = (UserSession)session.getAttribute("userSession");
 	  String member_email = userSession.getEmail();
 	  
 	  Payment paymentInfo = paymentservice.getPaymentNumber(payment.getPayment_number());
-	        
+	  if (paymentInfo == null) {
+	        throw new IllegalArgumentException("결제 정보를 찾을 수 없습니다.");
+	    }
+  
+	  // 아임포트 결제 취소 요청
+	  String imp_uid = paymentInfo.getPayment_imp_uid();
+	  String reason = "사용자 요청";
+	  String token = iamportservice.getAccessToken();
+	  
+	  int amount = paymentInfo.getPayment_price();
+	  
+	  System.out.println("token : " + token);
+
+	  String iamportCancel = iamportservice.cancelPayment(token, imp_uid, reason, amount);
+	  	  
       // 결제 취소 상태 설정
-	  payment.setPayment_state(0); // 0: 결제 취소
-	  int result = paymentservice.updatePayment(payment);
-      
+	  paymentInfo.setPayment_state(0); // 0: 결제 취소
+	  int result = paymentservice.updatePayment(paymentInfo);
+	  	  
       return result;
+
    }
    
 

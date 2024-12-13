@@ -140,19 +140,19 @@
 
             <!-- 사이드 버튼 누르면 나오는 메뉴 이거는 나중에 따로 파일 만들어서 불러와야 할듯 -->
             <div class="mypage_content"   id="mypage-content">
-              		<h2>내 찜 클래스</h2>
-              		<span style="color: #474747;  font-size:14px;">찜한 클래스 ${total }개</span>
+              		<h2>내가 등록한 클래스</h2>
+          
               		
               		 <div class="mylike_container">
                 
-                <c:forEach var="lesson" items="${favoritelist }" >
+                <c:forEach var="lesson" items="${myclass }" >
                 <div class="mylike_class">
                     <a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link">
                         <div class="image-container">
                             <img src="${path }/uimg/${lesson.lesson_thumbnail }"style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                         </div>
                         <div class="text-container" style="font-size: 14px;">
-                            ${lesson.favorite_title }<br><br>
+                            ${lesson.lesson_title }<br><br>
 
                             <div class="text-container" style="font-size: 14px; font-weight: 600;">
                                 ${lesson.lesson_price }원
