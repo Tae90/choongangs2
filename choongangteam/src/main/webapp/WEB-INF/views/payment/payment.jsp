@@ -47,11 +47,11 @@
     </div>
     <div class="summary-row">
         <p>강의 일정</p>
-        <span>2024-12-03 16:00~18:00</span>
+        <span>${lesson.start_date} ${lesson.start_hour}:${lesson.start_min}</span>
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>
-        <span>3명</span>
+        <span>총 ${lesson.lesson_apply}인</span>
     </div>
     <div class="total-row">
         <p>최종 결제금액</p>
@@ -116,7 +116,7 @@
                            "lesson_number": '${lesson.lesson_number}', 		// 레슨넘버
                            "member_email": '${member.member_email}',		// 이메일
                            "payment_nickname": '${member.member_nickname}',	// 닉네임
-                           "payment_date": new Date(rsp.paid_at * 1000).toISOString(), // 결제날짜
+                           "payment_date": new Date(rsp.paid_at * 1000).toISOString().slice(0, 19).replace('T', ' '), // 결제날짜
                            "payment_state": rsp.status === "paid" ? 1 : 0,	// 결제상태 (1: 성공, 0: 실패)
                            "payment_imp_uid": rsp.imp_uid
 

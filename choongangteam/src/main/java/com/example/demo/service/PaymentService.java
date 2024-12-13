@@ -8,6 +8,7 @@ import com.example.demo.dao.PaymentDAO;
 import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Payment;
+import com.example.demo.model.Reply;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +41,11 @@ public class PaymentService {
 	public List<Payment> getPaymentMemberEmail(String member_email) {
 		return dao.getPaymentMemberEmail(member_email);
 	}
+
+	public Double getAvgReplyScore(int lesson_number) {
+		return dao.getAvgReplyScore(lesson_number);
+	}
+
 
 	
 }

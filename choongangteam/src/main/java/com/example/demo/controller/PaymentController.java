@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.model.Lesson;
 import com.example.demo.model.Member;
 import com.example.demo.model.Payment;
+import com.example.demo.model.Reply;
 import com.example.demo.model.UserSession;
 import com.example.demo.service.IamportService;
 import com.example.demo.service.PaymentService;
@@ -32,13 +33,18 @@ public class PaymentController {
    
    @RequestMapping("/paymentdetail")
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
-		   					   Model model) {
+		   					   HttpSession session, Model model) {
       	   
-
-	    Lesson lesson = paymentservice.getLessonNumber(lesson_number);
+	   UserSession userSession = (UserSession) session.getAttribute("userSession");
+	   Lesson lesson = paymentservice.getLessonNumber(lesson_number);
+	   Double avgReplyScore = paymentservice.getAvgReplyScore(lesson_number);
+	   
+	   // 소수점 첫째 자리로 포맷팅
+	   String AverageScore = String.format("%.1f", avgReplyScore);
 	    
       model.addAttribute("lesson", lesson);
-      model.addAttribute("lesson_number", lesson_number);
+      model.addAttribute("avgReplyScore", AverageScore);
+      model.addAttribute("user", userSession);
       
       return "payment/paymentdetail";
    }
@@ -51,7 +57,7 @@ public class PaymentController {
 	   UserSession userSession = (UserSession) session.getAttribute("userSession");
      	   
 	   Lesson lesson = paymentservice.getLessonNumber(lesson_number);
-	   Member member = paymentservice.getMemberEmail(userSession.getEmail()); 
+	   Member member = paymentservice.getMemberEmail(userSession.getEmail());
 	                     
        model.addAttribute("lesson", lesson);
        model.addAttribute("member", member);
@@ -87,6 +93,7 @@ public class PaymentController {
 	   System.out.println("paymentList:" + paymentList);
 	   
 	   model.addAttribute("paymentList", paymentList);
+	   model.addAttribute("user", userSession);
 	   
 	   return "payment/paymentcancel";
    }

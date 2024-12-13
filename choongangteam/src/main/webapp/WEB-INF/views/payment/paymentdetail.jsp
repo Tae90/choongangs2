@@ -102,7 +102,7 @@
         				<img src="<%= request.getContextPath() %>/uimg/heart_pink.png" class="icon-small">
         				<span>${lesson.favorite_count}</span>
         				<img src="<%= request.getContextPath() %>/uimg/star.png" class="icon-small">
-        				<span>${lesson.reply_count}</span>
+        				<span>(${avgReplyScore})${lesson.reply_count}</span>
         			</div>
         			<div class="price-info" id="price">
         			</div>

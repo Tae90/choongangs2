@@ -40,5 +40,9 @@
     <update id="updatePayment" parameterType="payment">
         update payment set payment_state = #{payment_state} where payment_number = #{payment_number}
     </update>
-
+        
+    <!-- 평균 reply_score 가져오기 -->
+	<select id="getAvgReplyScore" parameterType="int" resultType="double">
+		select avg(reply_score) from reply where lesson_number = #{lesson_number}
+	</select>
 </mapper>
