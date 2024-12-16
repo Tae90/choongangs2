@@ -31,8 +31,13 @@
         select * from payment where payment_number = #{payment_number}
     </select>
     
-    <!-- 결제 내역 가져오기 -->
-    <select id="getPaymentMemberEmail" parameterType="String" resultType="payment">
+    <!-- 구매자 결제 내역 가져오기 -->
+    <select id="getPaymentByBuyer" parameterType="String" resultType="payment">
+    	select * from payment where member_email = #{member_email} order by payment_date desc
+	</select>
+	
+	<!-- 판매자 결제 내역 가져오기 -->
+    <select id="getPaymentBySeller" parameterType="String" resultType="payment">
     	select * from payment where member_email = #{member_email} order by payment_date desc
 	</select>
 	

@@ -17,6 +17,7 @@
      	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Racing+Sans+One&display=swap"
         rel="stylesheet">
 <link href="/css/header.css" rel="stylesheet">
+<link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/paymentcancel.css" rel="stylesheet">
@@ -37,17 +38,16 @@
    </c:choose>
 	
     <div class="payment-container">
-        <!-- 상단 제목 -->
-        <h1 class="page-title">결제 내역</h1>
+        <!-- 구매자 결제 내역 -->
+        <c:if test="${mode == 'buyer'}">
+        <h1 class="page-title">${nickname}님의 구매내역</h1>
 
-        <!-- 결제 내역 테이블 -->
         <div class="section">
-            <h2>결제 상세 정보</h2>
+            <h2>구매 상세 정보</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>주문 번호</th>
-                        <th>닉네임</th>
+                        <th>주문번호</th>
                         <th>상품명</th>
                         <th>결제금액</th>
                         <th>결제날짜</th>
@@ -57,10 +57,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="payment" items="${paymentList}">
+                	<c:choose>
+                	<c:when test="${not empty buyer_paymentList}">
+                    <c:forEach var="payment" items="${buyer_paymentList}">
                         <tr class="${payment.payment_state == 0 ? 'cancelled-row' : ''}">
                             <td>${payment.payment_number}</td>
-                            <td>${payment.payment_nickname}</td>
                     <td><a href="paymentdetail?lesson_number=${payment.lesson_number}" style="text-decoration:none">${payment.payment_title}</a></td>
                             <td>${payment.payment_price}원</td>
                             <td><fmt:formatDate value="${payment.payment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -79,11 +80,59 @@
                             </td>
                         </tr>
                     </c:forEach>
+                   </c:when>
+                   <c:otherwise>
+                            <tr>
+                                <td colspan="7" style="text-align: center;">결제 내역이 없습니다.</td>
+                            </tr>
+                       </c:otherwise>
+                   </c:choose>
                 </tbody>
             </table>
         </div>
-    </div>
-
+       </c:if>
+       
+    <!-- 판매자 내역 -->
+    <c:if test="${mode == 'seller'}">
+	 <h1 class="page-title">${nickname}님의 판매내역</h1>
+	 	<div class="section">
+            <h2>판매 상세 정보</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>주문번호</th>
+                        <th>구매자</th>
+                        <th>상품명</th>
+                        <th>결제금액</th>
+                        <th>결제날짜</th>
+                        <th>판매상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<c:choose>
+                		<c:when test="${not empty seller_paymentList}">
+                    <c:forEach var="payment" items="${seller_paymentList}">
+                        <tr class="${payment.payment_state == 0 ? 'cancelled-row' : ''}">
+                            <td>${payment.payment_number}</td>
+                            <td>${payment.payment_nickname}</td>
+                            <td><a href="paymentdetail?lesson_number=${payment.lesson_number}" style="text-decoration:none">${payment.payment_title}</a></td>
+                            <td>${payment.payment_price}원</td>
+                            <td><fmt:formatDate value="${payment.payment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                            <td>${payment.payment_state == 1 ? "신청완료" : "신청취소"}</td>
+                        </tr>
+                    </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                            <tr>
+                                <td colspan="6" style="text-align: center;">판매 내역이 없습니다.</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
+        </div>
+	</c:if>
+ </div>
     <script>
         $(document).ready(function () {
             $(".cancelbutton").click(function () {

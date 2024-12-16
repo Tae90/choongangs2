@@ -23,7 +23,9 @@ public interface PaymentDAO {
 
 	int updatePayment(Payment paymentcancel);
 
-	List<Payment> getPaymentMemberEmail(@Param("member_email") String member_email);
+	List<Payment> getPaymentByBuyer(@Param("member_email") String member_email);
+	
+	List<Payment> getPaymentBySeller(@Param("member_email") String member_email);
 
 	Double getAvgReplyScore(@Param("lesson_number") int lesson_number);
 

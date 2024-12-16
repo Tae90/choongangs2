@@ -38,8 +38,12 @@ public class PaymentService {
 		return dao.updatePayment(payment);
 	}
 
-	public List<Payment> getPaymentMemberEmail(String member_email) {
-		return dao.getPaymentMemberEmail(member_email);
+	public List<Payment> getPaymentByBuyer(String member_email) {
+		return dao.getPaymentByBuyer(member_email);
+	}
+	
+	public List<Payment> getPaymentBySeller(String member_email) {
+		return dao.getPaymentBySeller(member_email);
 	}
 
 	public Double getAvgReplyScore(int lesson_number) {
