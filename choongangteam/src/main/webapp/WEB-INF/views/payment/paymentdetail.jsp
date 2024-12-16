@@ -34,9 +34,6 @@
 	var thumbnail ="${lesson.lesson_thumbnail}";
 	var lesson_number="${lesson_number}";
 	
-	console.log("1");
-	
-	
 	$(document).ready(function(){
 		$('#price').html("<p>"+price+'원'+"</p>");
 		if(applyCount) {
@@ -58,10 +55,9 @@
 				
 	});
 	
-	console.log("2");
-	var lesson_number="${lesson_number}";
 	function confirmDelete() {
         const result = window.confirm("정말로 삭제를 진행하시겠습니다?");
+        
         if (result) {
         	$.ajax({
                 url: '/deleteClass', // 서버의 URL
@@ -84,7 +80,7 @@
             });
         } 
     }
-	console.log("3");
+	
 	$(function() {
 		var lesson_number="${lesson.lesson_number}";
 
@@ -92,8 +88,6 @@
 		$('#reply_listSection').load('/reply_list?lesson_number='+lesson_number);
 	});
 	
-	console.log("4");
-////////////////////////////////////////////////////////////////////////////////////////
 	
 
 </script>

@@ -49,6 +49,7 @@ public class PaymentController {
       model.addAttribute("avgReplyScore", AverageScore);
       model.addAttribute("user", userSession);
       model.addAttribute("applyCount", applyCount);
+      model.addAttribute("lesson_number", lesson_number);
       
       return "payment/paymentdetail";
    }
