@@ -20,6 +20,7 @@
 <link href="/css/header_login.css" rel="stylesheet">
 <link href="/css/font.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
+<link href="/css/footer.css" rel="stylesheet">
 <link href="/css/paymentcancel.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,6 +38,7 @@
     </c:otherwise>
    </c:choose>
 	
+	<div class="main-content">
     <div class="payment-container">
         <!-- 구매자 결제 내역 -->
         <c:if test="${mode == 'buyer'}">
@@ -133,6 +135,7 @@
         </div>
 	</c:if>
  </div>
+</div>
     <script>
         $(document).ready(function () {
             $(".cancelbutton").click(function () {
@@ -174,5 +177,6 @@
             });
         });
     </script>
+<jsp:include page="${path}/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
