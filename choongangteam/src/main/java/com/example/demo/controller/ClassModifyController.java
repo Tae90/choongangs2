@@ -39,12 +39,16 @@ public class ClassModifyController {
 	
 	@RequestMapping("classModify")
 	public String classModify(@RequestParam("lesson_number") int lesson_number,
-							  Model model) {
+							  Model model,
+							  HttpSession session) {
 		
 		Lesson lesson = service.getLesson(lesson_number);
+		//세션처리
+		UserSession us =(UserSession)session.getAttribute("userSession");
 		
 		model.addAttribute("lesson", lesson);
 		model.addAttribute("lesson_number", lesson_number);
+		model.addAttribute("user", us);
 		
 		return "classModify/classModify";
 	}
@@ -67,7 +71,7 @@ public class ClassModifyController {
 			@RequestParam("classImg") MultipartFile[] files,
 			@RequestParam("lesson_content") String content,
 			Model model) throws IOException {
-		
+				
 		//섬네일을 그대로 두고 싶을때는 섬네일 파일값은 0이므로 이때 처리를 위한 변수
 		int size = (int) tfile.getSize(); // 첨부파일의 크기 (단위:Byte)
 		
@@ -194,7 +198,6 @@ public class ClassModifyController {
 		
 		model.addAttribute("lesson_number", lesson.getLesson_number());
 		model.addAttribute("result", result);
-		
 
 		return "classModify/modifyResult";
 	}

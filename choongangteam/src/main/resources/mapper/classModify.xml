@@ -26,7 +26,7 @@
 		select * from lesson where lesson_number= #{lesson_number};
 	</select>
 	
-	<delete id="deleteLesson" parameterType="int">
-		delete from lesson where lesson_number= #{lesson_number};
-	</delete>
+	<update id="deleteLesson" parameterType="int">
+		update lesson set lesson_delete = 1 where lesson_number= #{lesson_number};
+	</update>
 </mapper>
