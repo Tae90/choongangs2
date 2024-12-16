@@ -11,7 +11,8 @@
 	<c:if test="${result==1}">
 		<script>
 			alert("클래스 등록에 성공했습니다");
-			location.href="classPage";
+			location.href="myregisteredclasses";
+
 		</script>
 	</c:if>
 	<c:if test="${result!=1}">
