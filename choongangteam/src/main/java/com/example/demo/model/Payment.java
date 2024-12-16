@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 @Alias("payment")
 public class Payment {
-    private int payment_number; 
+    private int payment_number;
     private Date payment_date; 
     private String payment_title;
     private String payment_method;
