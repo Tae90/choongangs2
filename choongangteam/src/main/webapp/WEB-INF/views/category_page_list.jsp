@@ -187,7 +187,7 @@ $(window).scroll(function() {
 	
 	
 
-	<div style="margin: auto; max-width: 1280px;">
+	<div style="margin: auto; max-width: 1280px; min-height: 500px;">
 
 		<div class="second_cate">
 

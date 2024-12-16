@@ -253,6 +253,7 @@ public class MypageController {
 		System.out.println("내가 등록한 클래스: "+myclass);
 		
 		model.addAttribute("myclass", myclass);
+		model.addAttribute("user", user);	
 		
 		return "mypage/my_upload_class";
 	}

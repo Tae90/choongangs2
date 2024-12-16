@@ -1,7 +1,7 @@
 .mypage_container {
     display: flex;
     align-items: flex-start; /* 수직 정렬을 위해 사용 */
-    padding: 20px; /* 전체적인 패딩 */
+    padding: 0px, 20px; /* 전체적인 패딩 */
     box-sizing: border-box; /* 패딩 포함한 박스 크기 계산 */
 }
 

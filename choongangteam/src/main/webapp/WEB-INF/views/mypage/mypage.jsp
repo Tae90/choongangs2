@@ -73,9 +73,9 @@
 
 
 	<!-- 여기에 내용넣기 -->
-    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif; ">
 
-		<div class="mypage_container" style="height: 960px;">
+		<div class="mypage_container" style="min-height: 500px;">
 
             <div class="side_menu">
                 <div class="myimg_name">
@@ -188,10 +188,15 @@
                     });
 
                     editForm.addEventListener('submit', function (e) {
-                        // 폼 제출은 그대로 진행되도록 e.preventDefault()를 제거했습니다.
-                        // 백엔드에서 처리 후 페이지가 새로고침되거나 리다이렉트될 것입니다.
+                        if (newNicknameInput.value.length < 4) {
+                            e.preventDefault(); // 폼 제출을 막습니다.
+                            alert('닉네임은 4글자 이상이어야 합니다.');
+                            return false;
+                        }
+                        // 4글자 이상인 경우 폼 제출이 정상적으로 진행됩니다.
                     });
                 });
+
 
                 </script>
 
@@ -263,7 +268,7 @@
 
 
 
-                <div class="my_profile" style="float: right; font-size: 12px; padding-right: 20px; border-top-color: rgba(0,0,0,0)">
+                <div class="my_profile" style="float: right; font-size: 12px;  border-top-color: rgba(0,0,0,0)">
                     <a href="logout1" class="logout">로그아웃</a>&nbsp;&nbsp;
                     <a href="delete_member" class="logout">회원탈퇴</a>
                 </div>
