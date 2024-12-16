@@ -1,10 +1,8 @@
-
-//        4???
-let page = 4;
-let loading = false;
-let hasMore = true;
-let loadedReplyNum = [];
-let scrollTimeout;
+var page = 4;
+var loading = false;
+var hasMore = true;
+var loadedReplyNum = [];
+var scrollTimeout;
 
 
 // 맨처음 리스트를 불러올 때 실행되는 함수
@@ -16,7 +14,7 @@ $(document).ready(function() {
 	// 클래스에 공백이 있으면 인식을 못하므로 여러개의 클래스값을 쓰려면 공백대신
 	// .을 삽입
 	$('.flex.flex-col.gap-4.text-sm').each(function(){
-		let replyNum = $(this).attr('id');
+		var replyNum = $(this).attr('id');
 		if (replyNum) {
 			// 초기에 출력된 댓글들 넘버를 삽입
 			loadedReplyNum.push(replyNum);
@@ -91,65 +89,109 @@ function loadMoreReply(){
 							}else{
 								imgSrc = '/uimg/'+reply.member_photo;
 							}
-						let replyHtml =
-							'<div id='+reply.reply_number+' class="flex flex-col gap-4 text-sm">'+
-								'<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">'+							
-									'<div class="flex gap-3">'+
-										'<div class="shrink-0">'+
-//											<!-- 프사 넣을곳 -->
-											'<img src="'+imgSrc+'" alt="Profile Image" style="border-radius: 50%; width: 56px; height: 56px;">' +
-										'</div>'+
-										'<div class="w-full">'+
-											'<div>'+
-												'<div class="flex justify-between">'+
-													'<div class="flex space-x-1 gap-1 ml-1.5">'+
-//														<!-- 닉네임 -->
-														reply.member_nickname+
-													'</div>'+
-													'<div class="flex items-center gap-2">'+
-//														<!-- 작성일 -->
-														reply.write_date+
-													'</div>'+
-												'</div>'+
-												'<div class="flex items-center mt-1">'+
-//													<!-- 별점 공간 -->
-													(() => {
-                               						let starsHtml = '';
-                               						for (let i = 1; i <= 5; i++) {
-                                   						if (i <= reply.reply_score) {
-                                       						starsHtml += '<span class="star_on">★</span>'; // 채워진 별
-                                   						} else {
-                                       						starsHtml += '<span class="star_off">★</span>'; // 빈 별
-                                   						}
-                               						}
-                               						return starsHtml;
-                          							 })() +
-												'</div>'+
-											'</div>'+				
-										'</div>'+			
-									'</div>'+
-									'<div class="flex">'+
-										'<div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">'+reply.reply_content+'</div>'+			
-									'</div>';
-									 if (reply.member_email === userEmail) {
-									                replyHtml += 
-									                    '<div onclick="redelete('+reply.reply_number+','+lesson_number+')" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">' +
-									                        '<button>삭제</button>' +
-									                    '</div>';
-									            }
-
-									    replyHtml += '</div></div>';  // 닫는 태그 추가
+							var replyHtml = `
+							                    <div id="${reply.reply_number}" class="flex flex-col gap-4 text-sm">
+							                        <div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
+							                            <div class="flex gap-3">
+							                                <div class="shrink-0">
+							                                    <img src="${imgSrc}" alt="Profile Image" style="border-radius: 50%; width: 56px; height: 56px;">
+							                                </div>
+							                                <div class="w-full">
+							                                    <div>
+							                                        <div class="flex justify-between">
+							                                            <div class="flex space-x-1 gap-1 ml-1.5">${reply.member_nickname}</div>
+							                                            <div class="flex items-center gap-2">${reply.write_date}</div>
+							                                        </div>
+							                                        <div class="flex items-center mt-1">
+							                                            ${(() => {
+							                                                let starsHtml = '';
+							                                                for (let i = 1; i <= 5; i++) {
+							                                                    starsHtml += (i <= reply.reply_score) ? '<span class="star_on">★</span>' : '<span class="star_off">★</span>';
+							                                                }
+							                                                return starsHtml;
+							                                            })()}
+							                                        </div>
+							                                    </div>
+							                                </div>
+							                            </div>
+							                            <div class="flex">
+							                                <div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">${reply.reply_content}</div>
+							                            </div>
+							                            ${reply.member_email === userEmail ? 
+							                                `<div onclick="redelete(${reply.reply_number},${lesson_number})" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
+							                                    <button>삭제</button>
+							                                </div>` 
+							                                : ''}
+							                        </div>
+							                    </div>
+							                `;
+//						let replyHtml =
+//							'<div id='+reply.reply_number+' class="flex flex-col gap-4 text-sm">'+
+//							
+//								'<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">'+	
+//														
+//									'<div class="flex gap-3">'+
+//									
+//										'<div class="shrink-0">'+
+////											<!-- 프사 넣을곳 -->
+//											'<img src="'+imgSrc+'" alt="Profile Image" style="border-radius: 50%; width: 56px; height: 56px;">' +
+//										'</div>'+
+//										
+//										'<div class="w-full">'+
+//										
+//											'<div>'+
+//											
+//												'<div class="flex justify-between">'+												
+//													'<div class="flex space-x-1 gap-1 ml-1.5">'+
+////														<!-- 닉네임 -->
+//														reply.member_nickname+
+//													'</div>'+
+//													
+//													'<div class="flex items-center gap-2">'+
+////														<!-- 작성일 -->
+//														reply.write_date+
+//													'</div>'+													
+//												'</div>'+
+//												
+//												'<div class="flex items-center mt-1">'+
+////													<!-- 별점 공간 -->
+//													(() => {
+//                               						let starsHtml = '';
+//                               						for (let i = 1; i <= 5; i++) {
+//                                   						if (i <= reply.reply_score) {
+//                                       						starsHtml += '<span class="star_on">★</span>'; // 채워진 별
+//                                   						} else {
+//                                       						starsHtml += '<span class="star_off">★</span>'; // 빈 별
+//                                   						}
+//                               						}
+//                               						return starsHtml;
+//                          							 })() +
+//												'</div>'+
+//												
+//											'</div>'+				
+//										'</div>'+			
+//									'</div>'+
+//									'<div class="flex">'+
+//										'<div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">'+reply.reply_content+'</div>'+			
+//									'</div>';
+//									 if (reply.member_email === userEmail) {
+//									                replyHtml += 
+//									                    '<div onclick="redelete('+reply.reply_number+','+lesson_number+')" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">' +
+//									                        '<button>삭제</button>' +
+//									                    '</div>';
+//									            }
+//
+//									    replyHtml += '</div></div>';  // 닫는 태그 추가
 
 									console.log(replyHtml); 
-								'</div>'+
-							'</div>';
+
 						// 불러온 댓글을 아래에 삽입하고 불러온 댓글목록에 댓글번호를 추가한다
 						$('#reply_listSection').append(replyHtml);
 						loadedReplyNum.push(reply.reply_number);
 					});
 					
 					
-					page++;
+//					page++;
 					
 					
 					// 불러왓으니 로딩상태 false
@@ -244,7 +286,7 @@ function redelete(rnum,lnum){
 	    }).then((result) => {
 	      if (result.isConfirmed) {
 	        // replyNumber를 URL에 추가하여 삭제 요청을 보냅니다.
-	        window.location.href = "/reply_delete?reply_number=" + rnum+"&lesson_number="+lnum+"&size="+size;
+	        window.location.href = "/reply_delete?reply_number=" + rnum+"&lesson_number="+lnum;
 	      } else if(result.isDismissed){
 	        console.log("취소되었습니다.");
 	      }

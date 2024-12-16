@@ -33,6 +33,9 @@
 	var thumbnail ="${lesson.lesson_thumbnail}";
 	var lesson_number="${lesson_number}";
 	
+	console.log("1");
+	
+	
 	$(document).ready(function(){
 		$('#price').html("<p>"+price+"</p>");
 		$('#apply').append('<p>모집 인원 '+apply+'인</p>');
@@ -49,6 +52,8 @@
 		}
 		
 	});
+	
+	console.log("2");
 	var lesson_number="${lesson_number}";
 	function confirmDelete() {
         const result = window.confirm("정말로 삭제를 진행하시겠습니다?");
@@ -74,14 +79,17 @@
             });
         } 
     }
+	console.log("3");
 	$(function() {
 		var lesson_number="${lesson.lesson_number}";
 
-		console.log("lesson_number132 : " + lesson_number)
-		$('.reply_insertSection').load('/reply?lesson_number='+lesson_number);  			
-		$('.reply_listSection').load('/reply_list?lesson_number='+lesson_number);
+		$('#reply_insertSection').load('/reply?lesson_number='+lesson_number);  			
+		$('#reply_listSection').load('/reply_list?lesson_number='+lesson_number);
 	});
-
+	
+	console.log("4");
+////////////////////////////////////////////////////////////////////////////////////////
+	
 
 </script>
 </head>
@@ -110,8 +118,8 @@
       			<div class="content" id="content">
       			</div>
       			<div class="review-section">
-    				<div class="reply_insertSection"></div>
-      				<div class="reply_listSection"></div>
+    				<div id="reply_insertSection"></div>
+      				<div id="reply_listSection"></div>
 				</div>
 				<c:if test="${not empty sessionScope.userSession}">
 				<c:if test="${userSession.email == lesson.member_email}">

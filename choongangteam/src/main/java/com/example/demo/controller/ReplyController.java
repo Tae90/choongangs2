@@ -47,8 +47,17 @@ public class ReplyController {
 	
 	
 	// 리뷰 페이지로 이동
+	@RequestMapping("/test")
+	public String comment() {
+		System.out.println("comment page in");
+		
+		
+		return "/test";
+	}
+	
+	// 리뷰 페이지로 이동
 	@RequestMapping("/reply")
-	public String comment(@RequestParam("lesson_number") String lesson_number,
+	public String comment(@RequestParam("lesson_number") int lesson_number,
 						  Model model) {
 		System.out.println("comment page in");
 		
@@ -61,19 +70,18 @@ public class ReplyController {
 	@RequestMapping("/reply_list")
 	public String comment_list(@RequestParam(name ="page", defaultValue = "0") int page,
 							   @RequestParam(name = "size", defaultValue = "4") String size,
-							   @RequestParam("lesson_number") String lesson_number,
+							   @RequestParam("lesson_number") int lesson_number,
 							   Model model) {
 		System.out.println("comment_list in");
 		
 		System.out.println("lesson_number : "+lesson_number);
 		
 		// 글넘버에 댓글들 불러오기
-		List<Reply> clist = service.commentList(lesson_number);
+		List<Reply> clist = service.commentList(Integer.toString(lesson_number));
 		System.out.println(clist);
 		
 		model.addAttribute("clist", clist);
 		model.addAttribute("lesson_number", lesson_number);
-		model.addAttribute("size", size);
 				
 		return "/reply/reply_list";
 	}
@@ -81,7 +89,7 @@ public class ReplyController {
 	@GetMapping("/loadMoreReply")
 	@ResponseBody
 	public List<Reply> loadMoreReply(@RequestParam ("page") int page,
-									 @RequestParam("lesson_number") String lesson_number,
+									 @RequestParam("lesson_number") int lesson_number,
 									 @RequestParam("loadedReplyNum") List<Integer> loadedReplyNum){
 		
 		System.out.println("loadedReply in");
@@ -154,17 +162,14 @@ public class ReplyController {
 	// 리뷰 삭제
 	@RequestMapping("/reply_delete")
 	public String reply_delete(@RequestParam("reply_number") int reply_number,
-							   @RequestParam("lesson_number") String lesson_number,
-							   @RequestParam("size") String size) {
+							   @RequestParam("lesson_number") int lesson_number) {
 		System.out.println("reply_delete in");
 		
-		System.out.println("size : "+ size);
 		
 		System.out.println("reply_number : " + reply_number);
 		
-		service.replyDelete(reply_number);
 		
-		return "redirect:paymentdetail?lesson_number="+lesson_number+"&size="+size;
+		return "redirect:paymentdetail?lesson_number="+lesson_number;
 	}
 		
 	

@@ -7,11 +7,9 @@
 <head>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="./css/font.css"></script>
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <!-- 	sweetalert 사용 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
-	<script src="./js/reply.js"></script>
 	
 <style >
 
@@ -101,8 +99,8 @@
 	</div>
 	
 	<!-- 댓글 -->
-	<c:forEach var="cl" items="${clist }" begin="0" end="${size }">
-	<div id=${cl.reply_number } class="flex flex-col gap-4 text-sm ">
+	<c:forEach var="cl" items="${clist }" begin="0" end="4">
+	<div id="${cl.reply_number }" class="flex flex-col gap-4 text-sm ">
 		<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
 		
 			<div class="flex gap-3">
