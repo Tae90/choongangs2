@@ -79,6 +79,9 @@ public class PaymentController {
       UserSession userSession = (UserSession) session.getAttribute("userSession");
       Lesson lesson = paymentservice.getLessonNumber(payment.getLesson_number());
       
+      // 결제 시 모집 인원 증가
+      paymentservice.lessonCurrentApplyUpdate(payment.getLesson_number());
+      
       // 결제 정보 저장
       int result = paymentservice.savePayment(payment);
             

@@ -41,6 +41,10 @@
     	select * from payment where member_email = #{member_email} order by payment_date desc
 	</select>
 	
+	<update id="lessonCurrentApplyUpdate" parameterType="int">
+    	update lesson set lesson_currentapply = lesson_currentapply + 1 where lesson_number = #{lesson_number}
+	</update>
+	
 	<!-- 결제 정보 업데이트 -->
     <update id="updatePayment" parameterType="payment">
         update payment set payment_state = #{payment_state} where payment_number = #{payment_number}

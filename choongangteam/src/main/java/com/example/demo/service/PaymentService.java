@@ -50,6 +50,10 @@ public class PaymentService {
 		return dao.getAvgReplyScore(lesson_number);
 	}
 
+	public void lessonCurrentApplyUpdate(int lesson_number) {
+		dao.lessonCurrentApplyUpdate(lesson_number);
+	}
+
 
 	
 }
