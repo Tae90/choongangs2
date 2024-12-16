@@ -37,7 +37,11 @@ public class ClassRegisterController {
     private ServletContext servletContext;	
 	
 	@RequestMapping("classRegister")
-	public String classRegister() {
+	public String classRegister(Model model,HttpSession session) {
+		//세션처리
+		UserSession us =(UserSession)session.getAttribute("userSession");
+		
+		model.addAttribute("user", us);
 		
 		return "classRegister/classRegister";
 	}
