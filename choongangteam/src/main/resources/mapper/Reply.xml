@@ -22,7 +22,7 @@
 			now(),
 			#{reply_score},
 			#{member_email},
-			123
+			#{lesson_number}
 		)
 	</insert>
 	
@@ -63,8 +63,19 @@
 	
 	
 	<select id="replycheck">	
-		select count(*) from reply where lesson_number = 123 and member_email = #{member_email};		
+		select count(*) from reply where lesson_number = #{lesson_number} and member_email = #{member_email};	
 	</select>
 	
+	<select id="pcheck" parameterType="reply">	
+		select count(*) from payment where lesson_number = #{lesson_number} and member_email = #{member_email} and payment_state = 1;	
+	</select>
+	
+	
+		
+			
+	
+	<delete id="replyDelete" parameterType="int">
+		delete from reply where reply_number = #{reply_number}
+	</delete>
 	
 </mapper>
