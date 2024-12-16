@@ -35,7 +35,7 @@
 	var lesson_number="${lesson_number}";
 	
 	$(document).ready(function(){
-		$('#price').html("<p>"+price+"</p>");
+		$('#price').html("<p>"+price+'원'+"</p>");
 		if(applyCount) {
 			$('#apply').append('<p>모집 인원 마감</p>');
 		}else{
