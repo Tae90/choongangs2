@@ -46,6 +46,7 @@
 		choongang.lesson l ON f.lesson_number = l.lesson_number
 		WHERE
 		f.member_email = #{member_email}
+		AND l.lesson_delete != 1
 
 	</select>
 
@@ -60,6 +61,8 @@
 		WHERE
 		p.member_email = #{member_email}
 		AND p.payment_state = '1'
+		AND
+		l.lesson_delete != 1
 		ORDER BY
 		p.lesson_number, r.write_date DESC;
 
@@ -67,19 +70,30 @@
 
 
 	<delete id="deleteMember" parameterType="String">
-		DELETE member, lesson
-		FROM member
-		LEFT JOIN lesson ON member.member_email = lesson.member_email
-		WHERE member.member_email = #{member_email}
+		DELETE FROM member
+		WHERE member_email = #{member_email}
 	</delete>
-	
-	
-	<select id="myclass"  resultType="lesson">
-	
-	select * from lesson where member_email = #{member_email};
-	
+
+
+	<select id="myclass" resultType="lesson">
+
+		SELECT *
+		FROM lesson
+		WHERE member_email = #{member_email}
+		AND lesson_delete != '1';
+
 	</select>
 
+
+	<update id="updatedeletenum" parameterType="String">
+
+		UPDATE lesson
+		SET
+		lesson_delete = '1'
+		WHERE member_email =
+		#{member_email}
+
+	</update>
 
 </mapper>
 

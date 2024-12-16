@@ -14,11 +14,13 @@
 		choongang.lesson l
 		LEFT JOIN
 		choongang.reply r ON l.lesson_number = r.lesson_number
-		GROUP
-		BY
+		WHERE
+		l.lesson_delete != 1
+		GROUP BY
 		l.lesson_number
 		ORDER BY
 		l.favorite_count DESC;
+
 
 	</select>
 
@@ -45,6 +47,8 @@
 		r.lesson_number
 		WHERE
 		l.subcategory_number = #{subcategory_number}
+		AND
+		l.lesson_delete != 1
 		GROUP
 		BY
 		l.lesson_number
@@ -65,9 +69,12 @@
 		FROM
 		choongang.lesson l
 		LEFT JOIN
-		choongang.reply r ON l.lesson_number = r.lesson_number
+		choongang.reply r ON l.lesson_number =
+		r.lesson_number
 		WHERE
 		l.subcategory_number = #{subcategory_number}
+		AND
+		l.lesson_delete != 1
 		AND l.lesson_number NOT IN
 		<foreach item="id" collection="loadedLessonIds" open="("
 			separator="," close=")">
@@ -95,9 +102,11 @@
 		FROM
 		choongang.lesson l
 		LEFT JOIN
-		choongang.reply r ON l.lesson_number = r.lesson_number
+		choongang.reply r ON l.lesson_number =
+		r.lesson_number
 		WHERE
-		 l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
+		l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
+		AND l.lesson_delete != 1
 		GROUP BY
 		l.lesson_number
 		ORDER BY
@@ -108,9 +117,9 @@
 		</choose>
 
 	</select>
-	
-	
-		<select id="getSearchLessons" parameterType="HashMap"
+
+
+	<select id="getSearchLessons" parameterType="HashMap"
 		resultType="lesson">
 		SELECT DISTINCT
 		l.*,
@@ -118,10 +127,14 @@
 		FROM
 		choongang.lesson l
 		LEFT JOIN
-		choongang.reply r ON l.lesson_number = r.lesson_number
+		choongang.reply r ON l.lesson_number =
+		r.lesson_number
 		WHERE
-		l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
-		AND l.lesson_number NOT IN
+		l.lesson_keyword LIKE CONCAT('%',
+		REPLACE(#{lesson_keyword}, ' ', ''), '%')
+		AND l.lesson_delete != 1
+		AND
+		l.lesson_number NOT IN
 		<foreach item="id" collection="loadedLessonIds" open="("
 			separator="," close=")">
 			#{id}
