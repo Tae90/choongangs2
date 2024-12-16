@@ -27,7 +27,7 @@
             <a href="loginpage" class="login">로그인</a>
         </div>
 
- 
+ 	<hr style="border-style: ridge; border-width: 1px; width: 100%; max-width: 1280px; position: absolute; bottom: 0;">
 
     </div>
 

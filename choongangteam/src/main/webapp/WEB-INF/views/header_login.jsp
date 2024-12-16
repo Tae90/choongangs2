@@ -43,9 +43,10 @@
                     <a href="/classPage"> <!-- 수정된 경로 -->
                         <span class="material-symbols-outlined bottom-icon">school</span>&nbsp;&nbsp;마이클래스
                     </a>
+                    <hr style="margin: 0; color: #ddd; max-width:1280px;">
                     <a href="mypage"><span
                             class="material-symbols-outlined bottom-icon">account_circle</span>&nbsp;&nbsp;내 정보</a>
-                    <hr style="margin: 0; color: #ddd;">
+                    <hr style="margin: 0; color: #ddd; max-width:1280px;">
                     <a href="logout1"><span
                             class="material-symbols-outlined bottom-icon">logout</span>&nbsp;&nbsp;로그아웃</a>
                 </div>
@@ -74,7 +75,7 @@
         }
         </script>
 
-	<hr style="border-style: ridge; border-width: 1px; width: 100%; position: absolute; bottom: 0;">
+	<hr style="border-style: ridge; border-width: 1px; width: 100%; max-width: 1280px; position: absolute; bottom: 0;">
 
     </div>
 

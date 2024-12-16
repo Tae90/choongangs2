@@ -42,11 +42,7 @@
 </c:choose>
 	
 	
-	 <!-- 여기에 내용넣기 -->
-    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
-    	
-
-        <!-- Slideshow container -->
+		      <!-- Slideshow container -->
         <div class="slideshow-container">
 
             <!-- Full-width images with number and caption text -->
@@ -83,6 +79,12 @@
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
+	
+	 <!-- 여기에 내용넣기 -->
+    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+    	
+
+  
 
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 100px;">
