@@ -26,10 +26,17 @@
     <link href="/css/mainpage.css" rel="stylesheet">
     <link href="/css/mainpage_slideshow.css" rel="stylesheet">
     <script src="/js/mainpage_slideshow.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+    
+
+</script>
+   
+    
 <title>Insert title here</title>
 </head>
 <body>
-
 	<!-- 헤더 부분 -->
 	<!-- 세션값이 있으면 header_login 없으면 header를 불러온다. -->
 	<c:choose>
@@ -40,7 +47,20 @@
         <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
     </c:otherwise>
 </c:choose>
-	
+
+<c:if test="${not empty message}">
+   <script type="text/javascript">
+       $(document).ready(function() {
+           Swal.fire({
+               title: "알림",
+               text: "${message}",  // 전달된 메시지
+               icon: 'info',
+               confirmButtonText: '확인',
+               confirmButtonColor: '#9832A8'
+           });
+       });
+   </script>
+</c:if>
 	
 		      <!-- Slideshow container -->
         <div class="slideshow-container">

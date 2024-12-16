@@ -26,18 +26,27 @@ public class ReplyService {
 		return dao.insert(reply);
 	}
 
-	public List<Reply> commentList(int i) {
+	public List<Reply> commentList(String i) {
 		return dao.commentList(i);
 	}
 
-	public int replycheck(String member_email) {
-		return dao.replycheck(member_email);
+	public int replycheck(Reply reply) {
+		return dao.replycheck(reply);
 	}
 
 	public List<Reply> getReply(HashMap map) {
 		return dao.getReply(map);
 	}
 
+	public int replyDelete(int reply_number) {
+		return dao.replyDelete(reply_number);
+	}
+
+	public int pcheck(Reply reply) {
+		return dao.pcheck(reply);
+	}
+
+	
 	
 	
 	

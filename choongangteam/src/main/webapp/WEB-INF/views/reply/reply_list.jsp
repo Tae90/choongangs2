@@ -7,9 +7,11 @@
 <head>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="./css/font.css"></script>
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	<script src="./js/reply.js"></script>
+<!-- 	sweetalert 사용 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+	<script src="/js/reply.js"></script>
+	
 	
 <style >
 
@@ -66,8 +68,8 @@
 	
 	/* 	로딩표시 */
 	.loading-spinner {
-    	position: fixed;
-    	bottom: 20px;
+     	position: absolute;
+    	bottom: -50px;
     	left: 50%;
     	transform: translateX(-50%);
     	display: none;
@@ -85,29 +87,34 @@
 	
 </style>
 
-
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 <!-- 댓글 전체 컨테이너 -->
-<div id="reply_listSection" class="flex flex-col gap-4">
+<div id="reply_listSection" class="flex flex-col gap-4" style="position: relative;">
 	<input type="hidden" name="lesson_number" value="${lesson_number }">
+	<input type="hidden" name="userEmail" value="${userSession.email }">
 	<div>
 		<h2 class="text-lg font-semibold">수강생 리뷰</h2>
 	</div>
 	
 	<!-- 댓글 -->
 	<c:forEach var="cl" items="${clist }" begin="0" end="4">
-	<div id=${cl.reply_number } class="flex flex-col gap-4 text-sm ">
+	<div id="${cl.reply_number }" class="flex flex-col gap-4 text-sm ">
 		<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
 		
 			<div class="flex gap-3">
 				<div class="shrink-0">
 					<!-- 프사 넣을곳 -->
-					<img src="/static/img/profile/Default.png">
+					<c:if test="${cl.member_photo == null }">
+						<img src="${pageContext.request.contextPath}/resource/static/img/profile/${cl.member_photo}"
+     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
+					
+					</c:if>
+						<img src="/uimg/${cl.member_photo}"
+     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
 				</div>
 				<div class="w-full">
 					<div>
@@ -139,13 +146,14 @@
 				<div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">${cl.reply_content }</div>			
 			</div>
 			<c:if test="${cl.member_email == userSession.email }">
-				<div class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
-					<button>삭제</button>
+				<div onclick="redelete(${cl.reply_number },${lesson_number })" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
+					<button >삭제</button>
 				</div>
 			</c:if>
 		</div>
 	</div>
 	</c:forEach>
+		<div id="loading" class="loading-spinner" style="display: none;"></div>	
 </div>
 			
 </body>
