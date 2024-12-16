@@ -39,12 +39,16 @@ public class PaymentController {
 	   Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	   Double avgReplyScore = paymentservice.getAvgReplyScore(lesson_number);
 	   
+	   // 모집 마감 여부 계산
+	   boolean applyCount = lesson.getLesson_currentapply() >= lesson.getLesson_apply();
+	   
 	   // 소수점 첫째 자리로 포맷팅
 	   String AverageScore = String.format("%.1f", avgReplyScore);
 	    
       model.addAttribute("lesson", lesson);
       model.addAttribute("avgReplyScore", AverageScore);
       model.addAttribute("user", userSession);
+      model.addAttribute("applyCount", applyCount);
       
       return "payment/paymentdetail";
    }

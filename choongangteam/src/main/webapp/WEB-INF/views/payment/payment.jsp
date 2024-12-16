@@ -45,9 +45,10 @@
         <p>레슨 금액</p>
         <span>${lesson.lesson_price}원</span>
     </div>
+    
     <div class="summary-row">
         <p>강의 일정</p>
-        <span>${lesson.start_date} ${lesson.start_hour}:${lesson.start_min}</span>
+        <span>${lesson.start_date}&nbsp;${lesson.start_hour}:${lesson.start_min}~${lesson.class_hour}:${lesson.class_min}</span>
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>

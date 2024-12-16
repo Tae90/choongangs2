@@ -43,6 +43,6 @@
         
     <!-- 평균 reply_score 가져오기 -->
 	<select id="getAvgReplyScore" parameterType="int" resultType="double">
-		select avg(reply_score) from reply where lesson_number = #{lesson_number}
+		select coalesce(avg(reply_score), 0) from reply where lesson_number = #{lesson_number}
 	</select>
 </mapper>
