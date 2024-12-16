@@ -220,6 +220,7 @@ $(window).scroll(function() {
 
 
 			<c:forEach var="lesson" items="${cateclass }" begin="0" end="11">
+			
 				<div class="flex-item" data-lesson-id="${lesson.lesson_number}">
 					<a href="paymentdetail?lesson_number=${lesson.lesson_number}" class="class_link" target="_blank">
 						<div class="image-container">
@@ -236,6 +237,7 @@ $(window).scroll(function() {
 						</div>
 					</a>
 				</div>
+			
 			</c:forEach>
 
 		</div>

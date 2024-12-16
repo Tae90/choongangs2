@@ -108,7 +108,7 @@
                         <span style="color: gold; font-size: 16px; text-align: center;">★</span>&nbsp;${lesson.avg_reply_score }&nbsp;(${lesson.reply_count })
                     </div>
                 </a>
-            </div>
+            </div>    
      </c:forEach>
 
             

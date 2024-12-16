@@ -53,6 +53,11 @@ public class MypageService {
 		return dao.myclass(les);
 	}
 
+	public void updatedeletenum(String pass) {
+		
+		dao.updatedeletenum(pass);
+	}
+
 
 
 
