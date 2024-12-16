@@ -13,11 +13,16 @@ public interface ReplyDAO {
 
 	int insert(Reply reply);
 
-	List<Reply> commentList(int i);
+	List<Reply> commentList(String i);
 
-	int replycheck(String member_email);
+	int replycheck(Reply reply);
 
 	List<Reply> getReply(HashMap map);
+
+	int replyDelete(int reply_number);
+
+	int pcheck(Reply reply);
+
 
 	
 	

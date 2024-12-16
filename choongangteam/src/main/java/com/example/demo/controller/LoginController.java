@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.Member;
@@ -276,7 +277,8 @@ public class LoginController {
 	
 		// 구매자 및 판매자 전환
 		@RequestMapping("/switchMode")
-		public String switchMode(HttpSession session) {
+		public String switchMode(HttpSession session,
+								 RedirectAttributes redirectAttributes) {
 			System.out.println("switchMode in");		
 			
 		    UserSession userSession = (UserSession) session.getAttribute("userSession");
@@ -284,10 +286,12 @@ public class LoginController {
 		    if (userSession.getMember_number() == 0) {
 		        userSession.setMember_number(1);	// 판매자로 전환
 		        session.setAttribute("userSession", userSession); // 변경된 값 저장
+		        redirectAttributes.addFlashAttribute("message", "튜터 모드입니다.");
 		        System.out.println("member_number : " + userSession.getMember_number());
 		    } else if (userSession.getMember_number() == 1) {
 		        userSession.setMember_number(0);	// 구매자로 전환
 		        session.setAttribute("userSession", userSession); // 변경된 값 저장
+		        redirectAttributes.addFlashAttribute("message", "튜티 모드입니다.");
 		        System.out.println("member_number : " + userSession.getMember_number());
 		    }
 			

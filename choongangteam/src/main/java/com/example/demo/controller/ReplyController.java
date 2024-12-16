@@ -31,6 +31,7 @@ import com.example.demo.model.UserSession;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.ReplyService;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -46,9 +47,21 @@ public class ReplyController {
 	
 	
 	// 리뷰 페이지로 이동
-	@RequestMapping("/reply")
+	@RequestMapping("/test")
 	public String comment() {
 		System.out.println("comment page in");
+		
+		
+		return "/test";
+	}
+	
+	// 리뷰 페이지로 이동
+	@RequestMapping("/reply")
+	public String comment(@RequestParam("lesson_number") int lesson_number,
+						  Model model) {
+		System.out.println("comment page in");
+		
+		model.addAttribute("lesson_number", lesson_number);
 		
 		return "/reply/reply";
 	}
@@ -56,7 +69,7 @@ public class ReplyController {
 	// 리뷰 리스트 출력
 	@RequestMapping("/reply_list")
 	public String comment_list(@RequestParam(name ="page", defaultValue = "0") int page,
-							   @RequestParam(name = "size", defaultValue = "5") int size,
+							   @RequestParam(name = "size", defaultValue = "4") String size,
 							   @RequestParam("lesson_number") int lesson_number,
 							   Model model) {
 		System.out.println("comment_list in");
@@ -64,7 +77,7 @@ public class ReplyController {
 		System.out.println("lesson_number : "+lesson_number);
 		
 		// 글넘버에 댓글들 불러오기
-		List<Reply> clist = service.commentList(lesson_number);
+		List<Reply> clist = service.commentList(Integer.toString(lesson_number));
 		System.out.println(clist);
 		
 		model.addAttribute("clist", clist);
@@ -120,26 +133,44 @@ public class ReplyController {
 		
 		if(result == 1) System.out.println("리뷰등록 성공");
 	
-		return "";
+		return "redirect:paymentdetail?lesson_number="+reply.getLesson_number();
 	}
 	
-		// 리뷰 중복 확인
-		@RequestMapping("/reply_check")
-		@ResponseBody
-		public int reply_check(@ModelAttribute Reply reply){
+	// 리뷰 중복 확인
+	@RequestMapping("/reply_check")
+	@ResponseBody
+	public int reply_check(@ModelAttribute Reply reply){
 			
-			System.out.println("reply_check in");
-			System.out.println("reply : "+reply);
-			
-			int result = service.replycheck(reply.getMember_email());
-			
-			System.out.println("result : " + result);
+		System.out.println("reply_check in");
+		System.out.println("reply : "+reply);
+		
+		int result = service.replycheck(reply);
+		
+		System.out.println("result1 : " + result);
+
+		
+		int pcheck = service.pcheck(reply);
+		
+		if (pcheck == 0) result = 2;
+		
+		System.out.println("result2 : " + result);
 								
-			return result;
-		}
+		return result;
+	}
 	
+	
+	// 리뷰 삭제
+	@RequestMapping("/reply_delete")
+	public String reply_delete(@RequestParam("reply_number") int reply_number,
+							   @RequestParam("lesson_number") int lesson_number) {
+		System.out.println("reply_delete in");
 		
 		
+		System.out.println("reply_number : " + reply_number);
+		
+		
+		return "redirect:paymentdetail?lesson_number="+lesson_number;
+	}
 		
 	
 	

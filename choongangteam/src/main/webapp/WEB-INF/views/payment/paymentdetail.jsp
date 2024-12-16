@@ -34,6 +34,9 @@
 	var thumbnail ="${lesson.lesson_thumbnail}";
 	var lesson_number="${lesson_number}";
 	
+	console.log("1");
+	
+	
 	$(document).ready(function(){
 		$('#price').html("<p>"+price+'원'+"</p>");
 		if(applyCount) {
@@ -54,6 +57,8 @@
 		}
 				
 	});
+	
+	console.log("2");
 	var lesson_number="${lesson_number}";
 	function confirmDelete() {
         const result = window.confirm("정말로 삭제를 진행하시겠습니다?");
@@ -79,7 +84,17 @@
             });
         } 
     }
+	console.log("3");
+	$(function() {
+		var lesson_number="${lesson.lesson_number}";
 
+		$('#reply_insertSection').load('/reply?lesson_number='+lesson_number);  			
+		$('#reply_listSection').load('/reply_list?lesson_number='+lesson_number);
+	});
+	
+	console.log("4");
+////////////////////////////////////////////////////////////////////////////////////////
+	
 
 </script>
 </head>
@@ -108,13 +123,8 @@
       			<div class="content" id="content">
       			</div>
       			<div class="review-section">
-    				<h2>베스트 리뷰</h2>
-    				<div class="review">
-        				<img src="<%= request.getContextPath()%>/uimg/flower.jpeg">
-        				<div class="review-name">파크종찬</div>
-        				<div class="star-score">★★★★★</div>
-        				<div class="review-text">모두가 너무 좋아하는 체험이었습니다. <br>다음에 또 가고 싶습니다.</div>
-    				</div>
+    				<div id="reply_insertSection"></div>
+      				<div id="reply_listSection"></div>
 				</div>
 				<c:if test="${not empty sessionScope.userSession}">
 				<c:if test="${userSession.email == lesson.member_email}">

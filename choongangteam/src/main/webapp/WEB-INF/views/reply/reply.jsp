@@ -7,9 +7,9 @@
 <head>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="./css/font.css"></script>
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	<script src="./js/reply.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+	
 	
 <style >
 
@@ -54,33 +54,24 @@
 	
 </style>
 
-<script>
-$(function() {
-	$('#reply_listSection').load('/reply_list');		
-		
-});
-</script>
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<!-- <div id="reply_insertSection" class="min-h-screen"> -->
+<c:if test="${userSession.email != null}">
 <div id="reply_insertSection">
-<!-- 	<div class="min-h-screen-mt-[2rem]"> -->
 	<div class="mt-4">
-<!-- 		<div class="sm:mx-auto sm:w-full sm:max-w-sm"> -->
 		<div class="sm:mx-auto sm:w-full">
 		
 		
-<!-- 		<form method="post" action="/reply_insert" id="form" name="form" onsubmit="replychk(event)" class=" sm:mx-auto sm:w-full sm:max-w-sm"> -->
-<!-- 		<form method="post" action="/reply_insert" id="form" name="form" class=" sm:mx-auto sm:w-full sm:max-w-sm"> -->
+<!-- 		<form method="post" action="/reply_insert" id="form" name="form" onsubmit="replychk(event)" class=" sm:mx-auto sm:w-full"> -->
 		<form method="post" action="/reply_insert" id="form" name="form" class=" sm:mx-auto sm:w-full">
 			<input type="hidden" name="member_email" value="${userSession.email }">
 			<!-- 게시판 번호도 히든으로 추가해야함 -->
-			
-			
+			<input type="hidden" name="lesson_number" value="${lesson_number}">		
 			
 			<fieldset class="block text-left text-sm font-medium leading-6 w-full">
 				<span class=" text-gray ">별점을 선택해주세요</span>
@@ -102,8 +93,9 @@ $(function() {
 		</div>
 	</div>
 </div>
+</c:if>
 		
-<div id="reply_listSection" class="mt-4"></div>			
+
 
 
 
