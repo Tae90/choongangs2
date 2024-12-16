@@ -11,7 +11,7 @@
         member_email, lesson_number, payment_date, payment_state, payment_nickname, payment_imp_uid
     ) values (
         #{payment_number}, #{payment_title}, #{payment_price}, #{payment_method}, 
-        #{payment_agency}, #{member_email}, #{lesson_number}, #{payment_date}, #{payment_state},
+        #{payment_agency}, #{member_email}, #{lesson_number}, now(), #{payment_state},
         #{payment_nickname}, #{payment_imp_uid}
     )
 </insert>
