@@ -31,6 +31,7 @@ import com.example.demo.model.UserSession;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.ReplyService;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -47,7 +48,7 @@ public class ReplyController {
 	
 	// 리뷰 페이지로 이동
 	@RequestMapping("/reply")
-	public String comment(@RequestParam("lesson_number") int lesson_number,
+	public String comment(@RequestParam("lesson_number") String lesson_number,
 						  Model model) {
 		System.out.println("comment page in");
 		
@@ -59,8 +60,8 @@ public class ReplyController {
 	// 리뷰 리스트 출력
 	@RequestMapping("/reply_list")
 	public String comment_list(@RequestParam(name ="page", defaultValue = "0") int page,
-							   @RequestParam(name = "size", defaultValue = "5") int size,
-							   @RequestParam("lesson_number") int lesson_number,
+							   @RequestParam(name = "size", defaultValue = "4") String size,
+							   @RequestParam("lesson_number") String lesson_number,
 							   Model model) {
 		System.out.println("comment_list in");
 		
@@ -72,6 +73,7 @@ public class ReplyController {
 		
 		model.addAttribute("clist", clist);
 		model.addAttribute("lesson_number", lesson_number);
+		model.addAttribute("size", size);
 				
 		return "/reply/reply_list";
 	}
@@ -79,7 +81,7 @@ public class ReplyController {
 	@GetMapping("/loadMoreReply")
 	@ResponseBody
 	public List<Reply> loadMoreReply(@RequestParam ("page") int page,
-									 @RequestParam("lesson_number") int lesson_number,
+									 @RequestParam("lesson_number") String lesson_number,
 									 @RequestParam("loadedReplyNum") List<Integer> loadedReplyNum){
 		
 		System.out.println("loadedReply in");
@@ -134,13 +136,16 @@ public class ReplyController {
 		System.out.println("reply_check in");
 		System.out.println("reply : "+reply);
 		
-		int result = service.replycheck(reply.getMember_email());
+		int result = service.replycheck(reply);
+		
+		System.out.println("result1 : " + result);
+
 		
 		int pcheck = service.pcheck(reply);
 		
 		if (pcheck == 0) result = 2;
 		
-		System.out.println("result : " + result);
+		System.out.println("result2 : " + result);
 								
 		return result;
 	}
@@ -149,14 +154,17 @@ public class ReplyController {
 	// 리뷰 삭제
 	@RequestMapping("/reply_delete")
 	public String reply_delete(@RequestParam("reply_number") int reply_number,
-							   @RequestParam("lesson_number") int lesson_number) {
+							   @RequestParam("lesson_number") String lesson_number,
+							   @RequestParam("size") String size) {
 		System.out.println("reply_delete in");
+		
+		System.out.println("size : "+ size);
 		
 		System.out.println("reply_number : " + reply_number);
 		
 		service.replyDelete(reply_number);
 		
-		return "redirect:paymentdetail?lesson_number="+lesson_number;
+		return "redirect:paymentdetail?lesson_number="+lesson_number+"&size="+size;
 	}
 		
 	

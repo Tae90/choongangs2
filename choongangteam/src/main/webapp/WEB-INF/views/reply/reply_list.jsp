@@ -68,8 +68,8 @@
 	
 	/* 	로딩표시 */
 	.loading-spinner {
-    	position: fixed;
-    	bottom: 20px;
+     	position: absolute;
+    	bottom: -50px;
     	left: 50%;
     	transform: translateX(-50%);
     	display: none;
@@ -93,21 +93,28 @@
 <body>
 
 <!-- 댓글 전체 컨테이너 -->
-<div id="reply_listSection" class="flex flex-col gap-4">
+<div id="reply_listSection" class="flex flex-col gap-4" style="position: relative;">
 	<input type="hidden" name="lesson_number" value="${lesson_number }">
+	<input type="hidden" name="userEmail" value="${userSession.email }">
 	<div>
 		<h2 class="text-lg font-semibold">수강생 리뷰</h2>
 	</div>
 	
 	<!-- 댓글 -->
-	<c:forEach var="cl" items="${clist }" begin="0" end="4">
+	<c:forEach var="cl" items="${clist }" begin="0" end="${size }">
 	<div id=${cl.reply_number } class="flex flex-col gap-4 text-sm ">
 		<div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
 		
 			<div class="flex gap-3">
 				<div class="shrink-0">
 					<!-- 프사 넣을곳 -->
-						<img src="${path}/img/profile/${cl.member_photo}" style="width: 50px; height: 50px; border-radius: 50%">					
+					<c:if test="${cl.member_photo == null }">
+						<img src="${pageContext.request.contextPath}/resource/static/img/profile/${cl.member_photo}"
+     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
+					
+					</c:if>
+						<img src="/uimg/${cl.member_photo}"
+     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
 				</div>
 				<div class="w-full">
 					<div>
@@ -146,6 +153,7 @@
 		</div>
 	</div>
 	</c:forEach>
+		<div id="loading" class="loading-spinner" style="display: none;"></div>	
 </div>
 			
 </body>

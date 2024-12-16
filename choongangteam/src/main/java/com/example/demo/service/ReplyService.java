@@ -26,12 +26,12 @@ public class ReplyService {
 		return dao.insert(reply);
 	}
 
-	public List<Reply> commentList(int i) {
+	public List<Reply> commentList(String i) {
 		return dao.commentList(i);
 	}
 
-	public int replycheck(String member_email) {
-		return dao.replycheck(member_email);
+	public int replycheck(Reply reply) {
+		return dao.replycheck(reply);
 	}
 
 	public List<Reply> getReply(HashMap map) {

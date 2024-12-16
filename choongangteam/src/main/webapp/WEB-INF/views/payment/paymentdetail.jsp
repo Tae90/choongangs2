@@ -74,9 +74,12 @@
             });
         } 
     }
-	$(function() {	  	
-		$('.reply_insertSection').load('/reply?lesson_number=${lesson_number}');  			
-		$('.reply_listSection').load('/reply_list?lesson_number=${lesson_number}');
+	$(function() {
+		var lesson_number="${lesson.lesson_number}";
+
+		console.log("lesson_number132 : " + lesson_number)
+		$('.reply_insertSection').load('/reply?lesson_number='+lesson_number);  			
+		$('.reply_listSection').load('/reply_list?lesson_number='+lesson_number);
 	});
 
 

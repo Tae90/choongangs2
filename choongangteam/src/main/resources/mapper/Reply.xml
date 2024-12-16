@@ -26,7 +26,7 @@
 		)
 	</insert>
 	
-	<select id="commentList" parameterType="int" resultType="reply">
+	<select id="commentList" parameterType="String" resultType="reply">
 		select 
 				s1.*,
 				at1.member_nickname as member_nickname,
@@ -62,7 +62,7 @@
 	
 	
 	
-	<select id="replycheck">	
+	<select id="replycheck" parameterType="reply">	
 		select count(*) from reply where lesson_number = #{lesson_number} and member_email = #{member_email};	
 	</select>
 	

@@ -34,7 +34,7 @@ public class PaymentController {
    @RequestMapping("/paymentdetail")
    public String paymentdetail(@RequestParam("lesson_number") int lesson_number,
 		   					   HttpSession session, Model model) {
-      	   
+      
 	   UserSession userSession = (UserSession) session.getAttribute("userSession");
 	   Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	   Double avgReplyScore = paymentservice.getAvgReplyScore(lesson_number);
