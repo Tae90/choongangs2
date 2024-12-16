@@ -39,12 +39,16 @@ public class PaymentController {
 	   Lesson lesson = paymentservice.getLessonNumber(lesson_number);
 	   Double avgReplyScore = paymentservice.getAvgReplyScore(lesson_number);
 	   
+	   // 모집 마감 여부 계산
+	   boolean applyCount = lesson.getLesson_currentapply() >= lesson.getLesson_apply();
+	   
 	   // 소수점 첫째 자리로 포맷팅
 	   String AverageScore = String.format("%.1f", avgReplyScore);
 	    
       model.addAttribute("lesson", lesson);
       model.addAttribute("avgReplyScore", AverageScore);
       model.addAttribute("user", userSession);
+      model.addAttribute("applyCount", applyCount);
       
       return "payment/paymentdetail";
    }
@@ -85,16 +89,36 @@ public class PaymentController {
    public String paymentList(HttpSession session, Model model) {
 	   
 	   UserSession userSession = (UserSession)session.getAttribute("userSession");
+	   String nickname = userSession.getNickname();
 	   
-	   String member_email = userSession.getEmail();
-	   System.out.println("member_email: " + member_email);
+	   if (userSession.getMember_number() == 0) {
+	       
+		   // 구매자 데이터
+	       String buyer_email = userSession.getEmail();
+	       List<Payment> buyer_paymentList = paymentservice.getPaymentByBuyer(buyer_email);
+	        
+	       System.out.println("buyer_paymentList:" + buyer_paymentList);
+	 	   System.out.println("buyer_email:" + buyer_email);
+	        
+	       model.addAttribute("buyer_paymentList", buyer_paymentList);
+	       model.addAttribute("mode", "buyer");		// 구매자 모드
 	   
-	   List<Payment> paymentList = paymentservice.getPaymentMemberEmail(member_email);
-	   System.out.println("paymentList:" + paymentList);
+	   }else if(userSession.getMember_number() == 1) {
+		   
+		   // 판매자 데이터
+		   String seller_email = userSession.getEmail();	   
+		   List<Payment> seller_paymentList = paymentservice.getPaymentBySeller(seller_email);
+		   
+		   System.out.println("seller_paymentList:" + seller_paymentList);
+		   System.out.println("seller_email:" + seller_email);
+		   
+		   model.addAttribute("seller_paymentList", seller_paymentList);
+		   model.addAttribute("mode", "seller");	// 판매자 모드
+	   }
 	   
-	   model.addAttribute("paymentList", paymentList);
 	   model.addAttribute("user", userSession);
-	   
+	   model.addAttribute("nickname", nickname);
+	   	   
 	   return "payment/paymentcancel";
    }
    

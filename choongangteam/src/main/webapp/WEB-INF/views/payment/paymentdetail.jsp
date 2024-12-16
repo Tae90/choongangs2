@@ -28,14 +28,19 @@
 	var start_min ="${lesson.start_min}";
 	var class_hour ="${lesson.class_hour}";
 	var class_min ="${lesson.class_min}";
-	var price =${lesson.lesson_price};
-	var apply =${lesson.lesson_apply};
+	var price = ${lesson.lesson_price};
+	var apply = ${lesson.lesson_apply};
+	var applyCount = ${applyCount};
 	var thumbnail ="${lesson.lesson_thumbnail}";
 	var lesson_number="${lesson_number}";
 	
 	$(document).ready(function(){
-		$('#price').html("<p>"+price+"</p>");
-		$('#apply').append('<p>모집 인원 '+apply+'인</p>');
+		$('#price').html("<p>"+price+'원'+"</p>");
+		if(applyCount) {
+			$('#apply').append('<p>모집 인원 마감</p>');
+		}else{
+			$('#apply').append('<p>클래스 '+apply+'인</p>');
+		}
 		$('#content').html(content);
 		$('#thumbnail').prop('src', '/uimg/'+thumbnail);
 		$("#class_title").html("<h2>"+title+"</h2>");
@@ -47,7 +52,7 @@
 			if(Number(start_min)===30) $('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour)-1)+"시간 30분");
 			else $('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour))+"시간 30분");
 		}
-		
+				
 	});
 	var lesson_number="${lesson_number}";
 	function confirmDelete() {
@@ -130,6 +135,8 @@
         				<img src="<%= request.getContextPath() %>/uimg/star.png" class="icon-small">
         				<span>(${avgReplyScore})${lesson.reply_count}</span>
         			</div>
+        			
+        			<!-- 가격 및 모집 상태 -->
         			<div class="price-info" id="price">
         			</div>
         			<div class="summary-info">
@@ -137,7 +144,7 @@
             				<img src="<%= request.getContextPath()%>/uimg/people.png">
           				</div>
           				<div class="summary-item" id="classTime">
-            				<img src="<%= request.getContextPath()%>/uimg/clock.png" alt="시간">
+            				<img src="<%= request.getContextPath()%>/uimg/clock.png">
           				</div>
         			</div>
         			<!-- 강의 일정 -->
@@ -157,7 +164,14 @@
         					<a href="asd"><img src="<%= request.getContextPath()%>/uimg/contact.png" class="icon" id="messageIcon"></a>
         				</div>
         				<!-- 결제하기 버튼 -->
-          				<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
+        				<c:choose>
+        					<c:when test="${applyCount}">
+        						 <button class="pay-button" disabled>결제하기</button>
+        					</c:when>
+        					<c:otherwise>
+        						<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
+        					</c:otherwise>
+        				</c:choose>  
       				</div>
       				<c:if test="${not empty sessionScope.userSession}">
 					<c:if test="${userSession.email == lesson.member_email}">

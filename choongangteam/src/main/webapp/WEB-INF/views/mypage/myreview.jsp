@@ -73,7 +73,7 @@
 
 
 	<!-- 여기에 내용넣기 -->
-    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+    <div style="margin: auto; max-width: 1280px; min-height: 500px; font-family: 'Pretendard', sans-serif;">
 
 		<div class="mypage_container" >
 
@@ -184,7 +184,6 @@
     					</div>
 					</c:if>
                 </div>
-                
                 </c:forEach>
             </div>
             

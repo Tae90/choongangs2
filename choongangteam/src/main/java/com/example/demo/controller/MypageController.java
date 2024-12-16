@@ -216,7 +216,8 @@ public class MypageController {
 	    if (pass.equals(memberpasswd)) {
 	        // 비밀번호가 일치하면 회원 삭제 진행
 	        try {
-				 service.deleteMember(user.getEmail());
+	        	service.updatedeletenum(user.getEmail());
+	        	service.deleteMember(user.getEmail());
 	            result = 1;
 	            // 세션 무효화
 	            session.invalidate();
@@ -252,6 +253,7 @@ public class MypageController {
 		System.out.println("내가 등록한 클래스: "+myclass);
 		
 		model.addAttribute("myclass", myclass);
+		model.addAttribute("user", user);	
 		
 		return "mypage/my_upload_class";
 	}

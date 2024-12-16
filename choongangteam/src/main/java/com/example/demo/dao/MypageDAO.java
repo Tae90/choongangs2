@@ -26,6 +26,8 @@ public interface MypageDAO {
 
 	List<Lesson> myclass(Lesson les);
 
+	void updatedeletenum(String pass);
+
 
 
 

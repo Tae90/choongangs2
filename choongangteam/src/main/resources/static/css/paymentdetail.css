@@ -273,6 +273,13 @@
 	background-color: #c6b7ca;
 }
 
+.pay-button[disabled] {
+    background-color: #ccc; /* 비활성화된 버튼 색상 */
+    color: #666; /* 비활성화된 텍스트 색상 */
+    cursor: not-allowed; /* 클릭 불가한 커서 */
+    pointer-events: none; /* 클릭 이벤트 비활성화 */
+}
+
 /* 결제하기 버튼 옆에 아이콘 배치 */
 .icon-container {
 	display: flex; /* 가로로 정렬 */
