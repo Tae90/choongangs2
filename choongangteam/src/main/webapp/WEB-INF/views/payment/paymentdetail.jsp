@@ -197,7 +197,14 @@
        		<a href="asd"><img src="<%= request.getContextPath()%>/uimg/contact.png" class="icon" id="messageIcon"></a>
         	
         	<!-- 결제하기 버튼 -->
+        	<c:choose>
+        	<c:when test="${applyCount}">
+        		<button class="pay-button" disabled>결제하기</button>
+        	</c:when>
+        		<c:otherwise>
         	<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
+        		</c:otherwise>
+        	</c:choose>
       	</div>  
 	</div>
 
