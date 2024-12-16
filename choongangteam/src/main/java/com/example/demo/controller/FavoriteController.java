@@ -26,7 +26,7 @@ public class FavoriteController {
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
 		if (userSession == null) {
-	        return false;
+	        return false; 
 	    }
 		
 		String member_email = userSession.getEmail();
