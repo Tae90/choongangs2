@@ -24,6 +24,7 @@ public class Lesson {
 	private int lesson_price;
 	private int lesson_apply;
 	private int lesson_currentapply;
+	private int lesson_delete;
 
 	private int reply_count;
 	private int favorite_count;

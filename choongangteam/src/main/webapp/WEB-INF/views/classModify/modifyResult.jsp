@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>클래스 수정 확인</title>
 </head>
 <body>
 	<c:if test="${result==1}">
