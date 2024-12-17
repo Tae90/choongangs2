@@ -217,9 +217,9 @@
         	</c:when>
         	<c:when test="${paidCheck}">
         		<!-- 중복 결제인 경우 -->
-        		<button type="button" class="pay-button" data-message="중복 결제 불가합니다.">결제하기</button>
+        		 <button type="button" class="pay-button" data-message="중복 결제 불가합니다.">결제하기</button>
         	</c:when>
-        		<c:otherwise>
+        	 <c:otherwise>
         	<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
         		</c:otherwise>
         	</c:choose>
