@@ -109,12 +109,14 @@
 				<div class="shrink-0">
 					<!-- 프사 넣을곳 -->
 					<c:if test="${cl.member_photo == null }">
-						<img src="${pageContext.request.contextPath}/resource/static/img/profile/${cl.member_photo}"
+						<img src="/img/profile/Default.png"						
      						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
 					
 					</c:if>
+					<c:if test="${cl.member_photo != null }">
 						<img src="/uimg/${cl.member_photo}"
-     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">					
+     						alt="Profile Image"  style="border-radius: 50%; width: 56px; height: 56px;">
+     				</c:if>					
 				</div>
 				<div class="w-full">
 					<div>

@@ -168,6 +168,8 @@ public class ReplyController {
 		
 		System.out.println("reply_number : " + reply_number);
 		
+		service.replyDelete(reply_number);
+		
 		
 		return "redirect:paymentdetail?lesson_number="+lesson_number;
 	}
