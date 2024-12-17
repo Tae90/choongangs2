@@ -34,6 +34,9 @@
 	var thumbnail ="${lesson.lesson_thumbnail}";
 	var lesson_number="${lesson_number}";
 	
+	if(start_min==='0') start_min='00';
+	if(class_min==='0') class_min='00';
+	
 	$(document).ready(function(){
 		$('#price').html("<p>"+price+'원'+"</p>");
 		if(applyCount) {
@@ -107,8 +110,17 @@
   
   	<div class="payment-container">
   		<div class="payment-content">
+  			
     		<!-- 왼쪽 섹션 -->
     		<div class="payment-left-section">
+    			<c:if test="${not empty sessionScope.userSession}">
+				<c:if test="${userSession.email == lesson.member_email}">
+				<div class="modifyAndDelete_768">
+					<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
+					<a href="javascript:void(0);" class="ModifyDelete" onclick="confirmDelete()">삭제하기</a>
+				</div>
+				</c:if>
+				</c:if>  
       			<div class="header">
         			<img class="img" id="thumbnail" src="">
       			</div>
@@ -119,15 +131,7 @@
       			<div class="review-section">
     				<div id="reply_insertSection"></div>
       				<div id="reply_listSection"></div>
-				</div>
-				<c:if test="${not empty sessionScope.userSession}">
-				<c:if test="${userSession.email == lesson.member_email}">
-				<div class="modifyAndDelete_768">
-					<a href="<%= request.getContextPath()%>/classModify?lesson_number=${lesson.lesson_number}" class="ModifyDelete">수정하기</a>&nbsp;&nbsp;
-					<a href="javascript:void(0);" class="ModifyDelete" onclick="confirmDelete()">삭제하기</a>
-				</div>
-				</c:if>
-				</c:if>   
+				</div> 
     		</div>
     		<!-- 오른쪽 섹션 -->
     		<div class="payment-right-section">
