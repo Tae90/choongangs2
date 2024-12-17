@@ -158,7 +158,7 @@
         
         			<!-- 일정 선택 버튼 -->
       				<div class="agreement-section" id="agreementSection">
-          				<input type="radio" value="agree"> 
+          				<input type="radio" value="agree" id="scheduleButton"> 
       				</div>
         			<!-- 아이콘 섹션 -->
       				<div class="icon-container">
@@ -170,7 +170,16 @@
         				<!-- 결제하기 버튼 -->
         				<c:choose>
         					<c:when test="${applyCount}">
-        						 <button class="pay-button" disabled>결제하기</button>
+        						<!-- 모집 인원이 마감된 경우 -->
+        						 <button type="button" class="pay-button" disabled>결제하기</button>
+        					</c:when>
+        					<c:when test="${classCheck}">
+        						<!-- 본인이 등록한 클래스인 경우 -->
+        		 				<button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다">결제하기</button>
+        					</c:when>
+        					<c:when test="${paidCheck}">
+        						<!-- 중복 결제인 경우 -->
+        						<button type="button" class="pay-button" data-message="중복 결제 불가합니다">결제하기</button>
         					</c:when>
         					<c:otherwise>
         						<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
@@ -199,14 +208,23 @@
         	<!-- 결제하기 버튼 -->
         	<c:choose>
         	<c:when test="${applyCount}">
-        		<button class="pay-button" disabled>결제하기</button>
+        		<!-- 모집 인원이 마감된 경우 -->
+        		<button type="button" class="pay-button" disabled>결제하기</button>
+        	</c:when>
+        	<c:when test="${classCheck}">
+        		<!-- 본인이 등록한 클래스인 경우 -->
+        		 <button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다">결제하기</button>
+        	</c:when>
+        	<c:when test="${paidCheck}">
+        		<!-- 중복 결제인 경우 -->
+        		<button type="button" class="pay-button" data-message="중복 결제 불가합니다">결제하기</button>
         	</c:when>
         		<c:otherwise>
         	<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
         		</c:otherwise>
         	</c:choose>
       	</div>  
-	</div>
+	</div>	
 
 <script>
   $(document).ready(function() {
@@ -215,7 +233,7 @@
     $('#agreementSection input').on('change', function() {
       $('#agreementSection').css('border', '1px solid #9832a8');
     });
-    
+        
     const updateHeartIcon = function(){
     $('.heart_icon').each(function(){
     	const $this = $(this);
@@ -287,9 +305,22 @@
        });
     });
  	// 결제하기 버튼 클릭 이벤트
-    $('.pay-button').on('click',function(){
+    $('.pay-button').on('click',function(e){
+    	e.preventDefault();
        const $this = $(this);
-    
+       const message = $this.data('message');
+    	
+    	// 일정 선택 여부 확인
+       if(!$('#scheduleButton').is(':checked')) {
+           alert("일정을 선택해주세요.");
+          return;
+       }
+      
+       if(message){
+    	   alert(message);
+    	   return;
+       }
+       
          $.ajax({
             url : '/check-login',
             method : 'POST',

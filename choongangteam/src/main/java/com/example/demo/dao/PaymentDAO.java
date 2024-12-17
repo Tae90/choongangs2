@@ -33,7 +33,8 @@ public interface PaymentDAO {
 
 	void lessonCurrentApplyDrop(@Param("lesson_number") int lesson_number);
 
+	int paidCheck(@Param("email") String email, @Param("lesson_number") int lesson_number);
 
-
+	String classCheck(@Param("lesson_number") int lesson_number);
 	
 }
