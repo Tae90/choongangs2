@@ -52,6 +52,15 @@ body {
     text-align: left;
 }
 
+.lesson-title {
+    display: inline-block; /* 블록 요소처럼 작동하지만 가로 정렬 유지 */
+    font-size: 18px; /* 글씨 크기 키우기 */
+    font-weight: bold; /* 굵은 글씨 */
+    padding: 3px 5px; /* 안쪽 여백 추가 */
+    margin-top: 5px; /* 위쪽 여백 */
+    margin-bottom: 5px;
+}
+
 /* 각 섹션 스타일 */
 .section {
     border: 1px solid #e0e0e0; /* 선 추가 */

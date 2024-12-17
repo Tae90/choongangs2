@@ -44,12 +44,20 @@ public class PaymentController {
 	   
 	   // 소수점 첫째 자리로 포맷팅
 	   String AverageScore = String.format("%.1f", avgReplyScore);
+	   
+	   // 본인이 등록한 클래스인지 확인
+	   boolean classCheck = userSession != null && paymentservice.classCheck(userSession.getEmail(), lesson_number);
+	   
+	   // 중복 결제 확인
+	   boolean paidCheck = userSession != null && paymentservice.paidCheck(userSession.getEmail(), lesson_number);
 	    
       model.addAttribute("lesson", lesson);
       model.addAttribute("avgReplyScore", AverageScore);
       model.addAttribute("user", userSession);
       model.addAttribute("applyCount", applyCount);
       model.addAttribute("lesson_number", lesson_number);
+      model.addAttribute("classCheck", classCheck);
+      model.addAttribute("paidCheck", paidCheck);
       
       return "payment/paymentdetail";
    }

@@ -59,6 +59,16 @@ public class PaymentService {
 		dao.lessonCurrentApplyDrop(lesson_number);
 	}
 
+	public boolean paidCheck(String email, int lesson_number) {
+		return dao.paidCheck(email, lesson_number) > 0;
+	}
+	
+	public boolean classCheck(String email, int lesson_number) {
+        
+		String classEmail = dao.classCheck(lesson_number);
+        return email.equals(classEmail);
+    }
+
 
 	
 }

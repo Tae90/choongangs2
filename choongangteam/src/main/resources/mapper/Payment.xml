@@ -61,4 +61,14 @@
 		select coalesce(avg(reply_score), 0) from reply where lesson_number = #{lesson_number}
 	</select>
 	
+	<!-- 중복 결제 확인 -->
+    <select id="paidCheck" parameterType="map" resultType="int">
+        select count(*) from payment where member_email = #{email} and lesson_number = #{lesson_number}
+    </select>
+    
+    <!-- 클래스 등록자 이메일 가져오기 -->
+    <select id="classCheck" parameterType="int" resultType="string">
+        select member_email from lesson where lesson_number = #{lesson_number}
+    </select>
+	
 </mapper>

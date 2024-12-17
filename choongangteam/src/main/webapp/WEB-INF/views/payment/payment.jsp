@@ -22,9 +22,9 @@
     <!-- 클래스 정보 섹션 -->
     <div class="section class-info">
         <h2>클래스 정보</h2>
+        <span class="lesson-title">&lt;${lesson.lesson_title}&gt;</span>
         <div class="class-thumbnail">
-            <img src="<%= request.getContextPath() %>/uimg/flower.jpeg">
-            <p>${lesson.lesson_title}</p>
+            <img src="<%= request.getContextPath() %>${lesson.lesson_thumbnail}"><br>
         </div>
     </div>
 
@@ -122,8 +122,8 @@
 
                         }),                       
                         success: function(result) {
-                        	console.log("결제 정보 저장 성공");
 							if(result == 1){
+								console.log("결제 정보 저장 성공");
 								// 결제 완료 메시지 표시
 		            			Swal.fire({
 		                          text: "결제가 완료되었습니다.",
@@ -137,12 +137,6 @@
 						},
                         error: function() {
                        	 	console.log("결제 정보 저장 실패");
-                       	 	Swal.fire({
-                             text: "결제 정보 저장 중 오류가 발생했습니다.",
-                             icon: 'error',
-                             confirmButtonText: '확인',
-                             confirmButtonColor: '#9832a8'
-                         	});
                     	}
                     });
                    	
