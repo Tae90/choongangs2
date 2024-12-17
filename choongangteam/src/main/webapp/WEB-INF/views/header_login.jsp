@@ -97,8 +97,8 @@
                         <a href="category_page?Maincategory_number=1&Subcategory_number=101">뜨개질</a>
                         <a href="category_page?Maincategory_number=1&Subcategory_number=102">레진아트</a>
                         <a href="category_page?Maincategory_number=1&Subcategory_number=103">비즈 공예</a>
-                        <a href="category_page?Maincategory_number=1&Subcategory_number=104">스탬프</a>
-                        <a href="category_page?Maincategory_number=1&Subcategory_number=105">한지 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=104">나무 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=105">종이 공예</a>
                     </div>
 
                 </div>
