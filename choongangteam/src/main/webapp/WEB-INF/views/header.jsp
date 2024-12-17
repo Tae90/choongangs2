@@ -35,7 +35,7 @@
         <div class="categories">
             <div style="display: flex; align-items: center;">
                 <span class="material-symbols-outlined" style="color: black;">reorder</span><span
-                    style="margin-left: 5px; margin-bottom: 4px;">카테고리</span>
+                   style="margin-left: 5px;">카테고리</span>
             </div>
             <div class="dropdown-content">
                 <div class="dropright">
