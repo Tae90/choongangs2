@@ -32,9 +32,9 @@
     <div class="section discounts">
       <div class="payment-methods">
         <h2>결제 수단</h2>
-        <label><input type="radio" name="agency" value="html5_inicis" checked> 카드/간편결제</label>
+        <label><input type="radio" name="agency" value="html5_inicis" checked> 신용카드</label>
         <label><input type="radio" name="agency" value="kakaopay"> 카카오페이
-        <img src="<%= request.getContextPath()%>/uimg/kakaopay_logo.png" class="payment-logo"></label>
+        <img src="<%= request.getContextPath()%>/img/contents/kakaopay_logo.png" class="payment-logo"></label>
        </div>
     </div>
 

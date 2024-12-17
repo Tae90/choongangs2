@@ -134,9 +134,9 @@
       			<div class="details" id ="payment_title">
         			<!-- 찜 및 리뷰 카운트 -->
         			<div class="favorite-count">
-        				<img src="<%= request.getContextPath() %>/uimg/heart_pink.png" class="icon-small">
+        				<img src="<%= request.getContextPath() %>/img/contents/heart_pink.png" class="icon-small">
         				<span id="favoriteCount_${lesson.lesson_number}">${lesson.favorite_count}</span>
-        				<img src="<%= request.getContextPath() %>/uimg/star.png" class="icon-small">
+        				<img src="<%= request.getContextPath() %>/img/contents/star.png" class="icon-small">
         				<span>(${avgReplyScore})${lesson.reply_count}</span>
         			</div>
         			
@@ -145,10 +145,10 @@
         			</div>
         			<div class="summary-info">
          				<div class="summary-item" id="apply">
-            				<img src="<%= request.getContextPath()%>/uimg/people.png">
+            				<img src="<%= request.getContextPath()%>/img/contents/people.png">
           				</div>
           				<div class="summary-item" id="classTime">
-            				<img src="<%= request.getContextPath()%>/uimg/clock.png">
+            				<img src="<%= request.getContextPath()%>/img/contents/clock.png">
           				</div>
         			</div>
         			<!-- 강의 일정 -->
@@ -163,9 +163,9 @@
         			<!-- 아이콘 섹션 -->
       				<div class="icon-container">
       					<div class="icons">
-        					<img src="<%= request.getContextPath()%>/uimg/heart.png" class="icon heart_icon"
+        					<img src="<%= request.getContextPath()%>/img/contents/heart.png" class="icon heart_icon"
         						data-favorite="false" data-lesson_number="${lesson.lesson_number}">
-        					<a href="asd"><img src="<%= request.getContextPath()%>/uimg/contact.png" class="icon" id="messageIcon"></a>
+        					<a href="asd"><img src="<%= request.getContextPath()%>/img/contents/chat.png" class="icon" id="messageIcon"></a>
         				</div>
         				<!-- 결제하기 버튼 -->
         				<c:choose>
@@ -175,11 +175,11 @@
         					</c:when>
         					<c:when test="${classCheck}">
         						<!-- 본인이 등록한 클래스인 경우 -->
-        		 				<button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다">결제하기</button>
+        		 				<button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다.">결제하기</button>
         					</c:when>
         					<c:when test="${paidCheck}">
         						<!-- 중복 결제인 경우 -->
-        						<button type="button" class="pay-button" data-message="중복 결제 불가합니다">결제하기</button>
+        						<button type="button" class="pay-button" data-message="중복 결제 불가합니다.">결제하기</button>
         					</c:when>
         					<c:otherwise>
         						<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
@@ -201,9 +201,9 @@
 	<div class="payment_bottom">
 		<!-- 아이콘 섹션 -->
       	<div class="icon-container">
-       		<img src="<%= request.getContextPath()%>/uimg/heart.png" class="icon heart_icon"
+       		<img src="<%= request.getContextPath()%>/img/contents/heart.png" class="icon heart_icon"
        			data-favorite="false" data-lesson_number="${lesson.lesson_number}">
-       		<a href="asd"><img src="<%= request.getContextPath()%>/uimg/contact.png" class="icon" id="messageIcon"></a>
+       		<a href="asd"><img src="<%= request.getContextPath()%>/img/contents/chat.png" class="icon" id="messageIcon"></a>
         	
         	<!-- 결제하기 버튼 -->
         	<c:choose>
@@ -213,13 +213,13 @@
         	</c:when>
         	<c:when test="${classCheck}">
         		<!-- 본인이 등록한 클래스인 경우 -->
-        		 <button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다">결제하기</button>
+        		 <button type="button" class="pay-button" data-message="본인이 등록한 클래스는 결제 불가합니다.">결제하기</button>
         	</c:when>
         	<c:when test="${paidCheck}">
         		<!-- 중복 결제인 경우 -->
-        		<button type="button" class="pay-button" data-message="중복 결제 불가합니다">결제하기</button>
+        		 <button type="button" class="pay-button" data-message="중복 결제 불가합니다.">결제하기</button>
         	</c:when>
-        		<c:otherwise>
+        	 <c:otherwise>
         	<a href="<%= request.getContextPath()%>/paymentform?lesson_number=${lesson.lesson_number}" class="pay-button">결제하기</a>
         		</c:otherwise>
         	</c:choose>
@@ -228,6 +228,10 @@
 
 <script>
   $(document).ready(function() {
+	 
+	// 일정 버튼 체크 초기화
+	 $('#scheduleButton').prop('checked', false);
+	 $('#agreementSection').css('border', '');
 	  
     // 일정 버튼 클릭 시 테두리 색상 변경
     $('#agreementSection input').on('change', function() {
@@ -248,8 +252,8 @@
             $this
              .attr('data-favorite', isFavorite)
              .attr('src', isFavorite
-            	? '<%= request.getContextPath() %>/uimg/heart_pink.png'
-                : '<%= request.getContextPath() %>/uimg/heart.png');
+            	? '<%= request.getContextPath() %>/img/contents/heart_pink.png'
+                : '<%= request.getContextPath() %>/img/contents/heart.png');
         },
         error: function () {
             console.error('찜 상태 확인 중 오류 발생');
@@ -281,8 +285,8 @@
                 $this
                    .attr('data-favorite', newFavorite)
                    .attr('src', newFavorite
-                     ? '<%= request.getContextPath() %>/uimg/heart_pink.png'
-                   : '<%= request.getContextPath() %>/uimg/heart.png');
+                     ? '<%= request.getContextPath() %>/img/contents/heart_pink.png'
+                   	 : '<%= request.getContextPath() %>/img/contents/heart.png');
                 
                 // 찜 횟수 갱신
                 $.ajax({
