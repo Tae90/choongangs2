@@ -62,7 +62,12 @@
    </script>
 </c:if>
 	
-		      <!-- Slideshow container -->
+	
+	
+	 <!-- 여기에 내용넣기 -->
+    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
+    	
+				      <!-- Slideshow container -->
         <div class="slideshow-container">
 
             <!-- Full-width images with number and caption text -->
@@ -70,7 +75,7 @@
                 <div class="numbertext">1 / 3</div>
 
                 <a href="asd">
-                    <img src="/img/contents/Default.png" style="width:100%; height: 400px;">
+                    <img src="/img/thumbnail/mainimg1.png" style="width:100%; height: 400px;">
                 </a>
 
             </div>
@@ -99,11 +104,6 @@
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
-	
-	 <!-- 여기에 내용넣기 -->
-    <div style="margin: auto; max-width: 1280px; font-family: 'Pretendard', sans-serif;">
-    	
-
   
 
 
