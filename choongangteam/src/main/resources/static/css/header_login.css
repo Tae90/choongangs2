@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
     z-index: 30;
-    height: 129px;
+    height: 140px;
     border-bottom-color: rgb(255, 255, 255);
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
   	margin: 0 auto;
-    height: 80px;
+    height: 90px;
     position: relative;
     max-width: 1280px;
     width: min(100%, 1280px);
@@ -121,6 +121,8 @@
     display: inline-block;
     align-items: center;
     position: relative;
+    font-family: 'Pretendard', sans-serif;
+	font-size: 14px;
 }
 
 .dropdown-content {
@@ -139,7 +141,8 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    font-size: 14px;
+    font-size: 13px;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .dropdown-content a:hover {
@@ -228,7 +231,7 @@
 /* 로그인 후 내 닉네임을 누르면 메뉴가 드롭다운 */
 
 .dropbtn {
-    background-color: white;
+    background-color: rgba(0,0,0,0);
     color: black;
     padding: 16px;
     font-size: 16px;
