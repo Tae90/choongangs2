@@ -17,10 +17,10 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
 
-    <link href="/css/icons.css" rel="stylesheet">
-    <link href="/css/font.css" rel="stylesheet">
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/header_login.css" rel="stylesheet">
+    <link href="/css/icons.css" rel="stylesheet">
+    <link href="/css/font.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/slidshow.css" rel="stylesheet">
     <link href="/css/mainpage.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                <img src="/img/contents/Default.png" style="width:100%;  height: 400px;">
+                <img src="/img/thumbnail/mainimg2.png" style="width:100%;  height: 400px;">
 
             </div>
 

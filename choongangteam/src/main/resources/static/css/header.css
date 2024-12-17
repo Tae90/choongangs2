@@ -34,10 +34,11 @@
 
 /* 메인 타이틀 */
 .title {
-	font-size: 32px;
+	/* font-size: 32px; */
 	text-decoration: none;
-	margin-right: 40px;
+	/* margin-right: 40px; */
 	position: relative;
+	height: 40px;
 	/* 타이틀과 검색창 사이 간격 */
 }
 
