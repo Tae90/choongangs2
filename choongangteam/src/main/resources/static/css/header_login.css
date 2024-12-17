@@ -231,7 +231,7 @@
 /* 로그인 후 내 닉네임을 누르면 메뉴가 드롭다운 */
 
 .dropbtn {
-    background-color: white;
+    background-color: rgba(0,0,0,0);
     color: black;
     padding: 16px;
     font-size: 16px;
