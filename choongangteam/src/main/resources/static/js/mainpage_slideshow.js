@@ -1,12 +1,12 @@
 let slideIndex = 1;
+let slideInterval;
+
 showSlides(slideIndex);
 
-// Next/previous controls
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-// Thumbnail image controls
 function currentSlide(n) {
     showSlides(slideIndex = n);
 }
@@ -25,9 +25,37 @@ function showSlides(n) {
     }
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
+    
+    // 타이머 재설정
+    resetTimer();
 }
 
-// 페이지 로드 시 슬라이드 표시
+function autoSlide() {
+    plusSlides(1);
+}
+
+function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(autoSlide, 5000);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     showSlides(slideIndex);
+    resetTimer(); // 초기 타이머 설정
 });
+
+// 화살표 클릭 이벤트에 대한 리스너 추가
+document.querySelector('.prev').addEventListener('click', function() {
+    plusSlides(-1);
+});
+document.querySelector('.next').addEventListener('click', function() {
+    plusSlides(1);
+});
+
+// 점(dot) 클릭 이벤트에 대한 리스너 추가
+let dots = document.getElementsByClassName("dot");
+for (let i = 0; i < dots.length; i++) {
+    dots[i].addEventListener('click', function() {
+        currentSlide(i + 1);
+    });
+}
