@@ -29,7 +29,10 @@ public interface PaymentDAO {
 
 	Double getAvgReplyScore(@Param("lesson_number") int lesson_number);
 
-	void lessonCurrentApplyUpdate(int lesson_number);
+	void lessonCurrentApplyUpdate(@Param("lesson_number") int lesson_number);
+
+	void lessonCurrentApplyDrop(@Param("lesson_number") int lesson_number);
+
 
 
 	

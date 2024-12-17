@@ -135,7 +135,7 @@
         			<!-- 찜 및 리뷰 카운트 -->
         			<div class="favorite-count">
         				<img src="<%= request.getContextPath() %>/uimg/heart_pink.png" class="icon-small">
-        				<span>${lesson.favorite_count}</span>
+        				<span id="favoriteCount_${lesson.lesson_number}">${lesson.favorite_count}</span>
         				<img src="<%= request.getContextPath() %>/uimg/star.png" class="icon-small">
         				<span>(${avgReplyScore})${lesson.reply_count}</span>
         			</div>
@@ -247,6 +247,7 @@
     $(document).on('click', '.heart_icon', function() {
        console.log('찜 버튼 클릭됨');
        const $this = $(this);
+       
        const favorite = $this.attr('data-favorite') === "true";
        const lesson_number = $this.data('lesson_number');
        console.log('lesson_number:', lesson_number);
@@ -260,10 +261,21 @@
              if(response) {
                 const newFavorite = !favorite;
                 $this
-                 .attr('data-favorite', newFavorite)
+                   .attr('data-favorite', newFavorite)
                    .attr('src', newFavorite
                      ? '<%= request.getContextPath() %>/uimg/heart_pink.png'
                    : '<%= request.getContextPath() %>/uimg/heart.png');
+                
+                // 찜 횟수 갱신
+                $.ajax({
+                    url: '/favorite/count',
+                    method: 'POST',
+                    data: {lesson_number: lesson_number},
+                    success: function(count) {
+                        $('#favoriteCount_' + lesson_number).text(count);
+                    },
+                });
+                
              } else{
                 alert("회원가입 및 로그인 후 이용 가능합니다.");
                 location.href="/loginpage";

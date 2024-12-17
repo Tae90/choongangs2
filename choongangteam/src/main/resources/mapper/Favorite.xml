@@ -20,5 +20,20 @@
     <select id="isFavorite" resultType="int">
     select count(*) from favorite where member_email = #{member_email} and lesson_number = #{lesson_number}
 	</select>
+	
+	<!-- 찜 클릭 시 찜 횟수 증가 -->
+	<update id="plusFavoriteCount" parameterType="int">
+    	update lesson set favorite_count = favorite_count + 1 where lesson_number = #{lesson_number}
+	</update>
+	
+	<!-- 찜 해제 시 찜 횟수 감소 -->
+	<update id="minusFavoriteCount">
+    	update lesson set favorite_count = favorite_count - 1 where lesson_number = #{lesson_number} and favorite_count > 0
+	</update>
+	
+	<!-- 찜 횟수 실시간 반영 -->
+	<select id="getFavoriteCount" resultType="int">
+        select favorite_count from lesson where lesson_number = #{lesson_number}
+	</select>
     
 </mapper>

@@ -73,7 +73,7 @@ public class PaymentController {
    @PostMapping("/save_payment")
    @ResponseBody
    public Integer savePayment(@RequestBody Payment payment, HttpSession session) {
-      
+      	   
 	   System.out.println("payment in");
 	   System.out.println("payment:"+ payment);	  	   
 	   
@@ -144,7 +144,6 @@ public class PaymentController {
 	  String imp_uid = paymentInfo.getPayment_imp_uid();
 	  String reason = "사용자 요청";
 	  String token = iamportservice.getAccessToken();
-	  
 	  int amount = paymentInfo.getPayment_price();
 	  
 	  System.out.println("token : " + token);
@@ -153,6 +152,7 @@ public class PaymentController {
 	  	  
       // 결제 취소 상태 설정
 	  paymentInfo.setPayment_state(0); // 0: 결제 취소
+	  paymentservice.lessonCurrentApplyDrop(paymentInfo.getLesson_number());
 	  int result = paymentservice.updatePayment(paymentInfo);
 	  	  
       return result;
