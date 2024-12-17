@@ -294,10 +294,6 @@
 
 @media(max-width : 768px) {
 
-    .title {
-        font-size: 22px;
-    }
-
 
     .title_search_login {
         width: calc(100% - 80px);
@@ -356,9 +352,7 @@
     	gap: 2px;
     }
     
-    .title {
-        font-size: 18px;
-    }
+
     
     .search_login {
         flex: 0 1 100%;
