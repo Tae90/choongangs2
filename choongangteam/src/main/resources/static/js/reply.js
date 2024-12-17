@@ -81,11 +81,10 @@ function loadMoreReply(){
 				console.log("댓글 불러왓을 때 if문 실행됨");
 				setTimeout(function(){
 					response.forEach(function(reply){
-						var userPhoto = reply.member_photo || '/static/img/profile/Default.png';
-							var imgSrc = '/uimg/' + reply.member_photo;
+						var imgSrc = '/uimg/' + reply.member_photo;
 							
 							if (!reply.member_photo){
-								imgSrc = '/resource/static/img/profile/Default.png';
+								imgSrc = '/img/profile/Default.png';
 							}else{
 								imgSrc = '/uimg/'+reply.member_photo;
 							}
