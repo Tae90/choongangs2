@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.PaymentDAO;
 import com.example.demo.model.Lesson;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class PaymentService {
 	
 	 private final PaymentDAO dao;
-
+	 
 	public int savePayment(Payment payment) {
 		return dao.savePayment(payment);
 	}
@@ -52,6 +53,10 @@ public class PaymentService {
 
 	public void lessonCurrentApplyUpdate(int lesson_number) {
 		dao.lessonCurrentApplyUpdate(lesson_number);
+	}
+
+	public void lessonCurrentApplyDrop(int lesson_number) {
+		dao.lessonCurrentApplyDrop(lesson_number);
 	}
 
 

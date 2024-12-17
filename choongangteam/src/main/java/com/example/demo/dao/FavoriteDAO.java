@@ -12,4 +12,10 @@ public interface FavoriteDAO {
 
 	int isFavorite(@Param("member_email")String member_email, @Param("lesson_number")int lesson_number);
 
+	void plusFavoriteCount(@Param("lesson_number") int lesson_number);
+
+	void minusFavoriteCount(@Param("lesson_number") int lesson_number);
+
+	int getFavoriteCount(@Param("lesson_number") int lesson_number);
+
 }

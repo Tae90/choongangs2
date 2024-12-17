@@ -41,8 +41,14 @@
     	select * from payment where member_email = #{member_email} order by payment_date desc
 	</select>
 	
+	<!-- 결제 시 모집인원 증가 -->
 	<update id="lessonCurrentApplyUpdate" parameterType="int">
     	update lesson set lesson_currentapply = lesson_currentapply + 1 where lesson_number = #{lesson_number}
+	</update>
+	
+	<!-- 결제 취소 시 모집인원 감소 -->
+	<update id="lessonCurrentApplyDrop" parameterType="int">
+    	update lesson set lesson_currentapply = lesson_currentapply - 1 where lesson_number = #{lesson_number} and lesson_currentapply > 0
 	</update>
 	
 	<!-- 결제 정보 업데이트 -->
@@ -54,4 +60,5 @@
 	<select id="getAvgReplyScore" parameterType="int" resultType="double">
 		select coalesce(avg(reply_score), 0) from reply where lesson_number = #{lesson_number}
 	</select>
+	
 </mapper>
