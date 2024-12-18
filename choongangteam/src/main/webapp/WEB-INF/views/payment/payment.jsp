@@ -24,7 +24,7 @@
         <h2>클래스 정보</h2>
         <span class="lesson-title">&lt;${lesson.lesson_title}&gt;</span>
         <div class="class-thumbnail">
-            <img src="<%= request.getContextPath() %>${lesson.lesson_thumbnail}"><br>
+            <img src="${path}/uimg/${lesson.lesson_thumbnail}"><br>
         </div>
     </div>
 

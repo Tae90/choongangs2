@@ -38,7 +38,23 @@
 	
 	<!-- 판매자 결제 내역 가져오기 -->
     <select id="getPaymentBySeller" parameterType="String" resultType="payment">
-    	select * from payment where member_email = #{member_email} order by payment_date desc
+    	select
+        p.payment_number,
+        p.payment_date,
+        p.payment_title,
+        p.payment_price,
+        p.payment_nickname,
+        p.payment_state,
+        l.lesson_number,
+        l.member_email
+    from 
+        payment p
+    join
+        lesson l on p.lesson_number = l.lesson_number
+    where 
+        l.member_email = #{member_email}
+    order by
+        p.payment_date desc
 	</select>
 	
 	<!-- 결제 시 모집인원 증가 -->
