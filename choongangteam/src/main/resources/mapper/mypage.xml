@@ -53,18 +53,14 @@
 
 	<select id="myreview" resultType="reply">
 
-		SELECT *
-		FROM choongang.payment
-		p
-		LEFT JOIN choongang.lesson l ON p.lesson_number = l.lesson_number
-		LEFT JOIN choongang.reply r ON l.lesson_number = r.lesson_number
-		WHERE
-		p.member_email = #{member_email}
-		AND p.payment_state = '1'
-		AND
-		l.lesson_delete != 1
-		ORDER BY
-		p.lesson_number, r.write_date DESC;
+		        SELECT p.*, l.*, r.*
+FROM choongang.payment p
+LEFT JOIN choongang.lesson l ON p.lesson_number = l.lesson_number
+LEFT JOIN choongang.reply r ON l.lesson_number = r.lesson_number AND r.member_email = #{member_email}
+WHERE p.member_email = #{member_email}
+  AND p.payment_state = '1'
+  AND l.lesson_delete != 1
+ORDER BY p.lesson_number, r.write_date DESC;
 
 	</select>
 
