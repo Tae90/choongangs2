@@ -23,6 +23,15 @@
 
 }
 
+.logo{
+	
+	width: 100px; 
+	height: 50px; 
+	margin-top:12px; 
+	background-color: rgba(0,0,0,0); 
+	
+}
+
 /* 메인타이틀, 검색박스 들어가는 div */
 .title_search_login {
     display: flex;
@@ -363,4 +372,7 @@
         max-width: 100%;
     }
 
+	.logo{
+	width: 70px;
+	}
 }
