@@ -8,7 +8,7 @@
             <a href="mainpage" class="title">
               <!--   <span class="do-hyeon-regular">메이</span>
                 <span class="racing-sans-one-regular">Kit</span> -->
-                  <img src="/img/contents/makeit.png" style="width: 100px; height: 50px; margin-top:12px; background-color: rgba(0,0,0,0); ">
+                  <img src="/img/contents/makeit.png"  class="logo">
             </a>
             </div>
             <div class="search_login">

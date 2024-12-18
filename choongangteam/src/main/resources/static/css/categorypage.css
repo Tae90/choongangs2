@@ -105,3 +105,12 @@
 		position: fix;
 	}
 }
+
+
+@media(max-width : 425px) {
+
+		.second_cate{
+			font-size:14px;
+		}
+	
+	}

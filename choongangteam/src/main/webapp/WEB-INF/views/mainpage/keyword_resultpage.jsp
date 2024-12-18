@@ -240,9 +240,9 @@ $(window).scroll(function() {
 
 				<c:forEach var="recommend" items="${bestclass }" begin="0" end="3">
 					<div class="flex-item">
-						<a href="asd" class="class_link">
+						<a href="paymentdetail?lesson_number=${recommend.lesson_number}" class="class_link">
 							<div class="image-container">
-								<img src="art.jpg"
+								<img src="${path }/uimg/${recommend.lesson_thumbnail }"
 									style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
 							</div>
 							<div class="text-container" style="font-size: 14px;">
