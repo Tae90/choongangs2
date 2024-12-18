@@ -22,10 +22,10 @@
     <!-- 클래스 정보 섹션 -->
     <div class="section class-info">
         <h2>클래스 정보</h2>
-        <span class="lesson-title">&lt;${lesson.lesson_title}&gt;</span>
         <div class="class-thumbnail">
             <img src="${path}/uimg/${lesson.lesson_thumbnail}"><br>
         </div>
+         <span class="lesson-title">&lt;${lesson.lesson_title}&gt;</span>
     </div>
 
     <!-- 결제 수단 섹션 -->
@@ -48,7 +48,7 @@
     
     <div class="summary-row">
         <p>강의 일정</p>
-        <span>${lesson.start_date}&nbsp;${lesson.start_hour}:${lesson.start_min}~${lesson.class_hour}:${lesson.class_min}</span>
+        <span>${lesson.start_date}&nbsp;${lesson.start_hour}:0${lesson.start_min}~${lesson.class_hour}:0${lesson.class_min}</span>
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>
