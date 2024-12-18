@@ -88,7 +88,7 @@
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
-                <img src="/img/contents/Default.png" style="width:100%;  height: 400px;">
+                <img src="/img/thumbnail/mainimg3.png" style="width:100%;  height: 400px;">
 
             </div>
 
