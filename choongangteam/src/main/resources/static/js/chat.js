@@ -1,6 +1,5 @@
 'use strict';
 
-var chatPage = document.querySelector('#chat-page');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
@@ -8,50 +7,52 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 
-// `username` 변수는 서버에서 전달된 값
-console.log("Logged in as:", username);
-
 document.addEventListener("DOMContentLoaded", function () {
-    if (username) {
-        startChat(username); // username 값을 사용해 WebSocket 연결 시작
+    if (username && roomId) {
+        startChat();
     } else {
-        console.error("Username is not defined.");
+        console.error("Username or Room ID is not defined.");
     }
 });
 
-function startChat(username) {
+function startChat() {
     var socket = new SockJS('/chat/ws');
     stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function () {
-        onConnected(username);
+        onConnected();
     }, onError);
 }
 
-function onConnected(username) {
+function onConnected() {
     stompClient.subscribe('/topic/public', onMessageReceived);
 
-    stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({ sender: username, type: 'JOIN' })
-    );
+    // Send JOIN message to the server
+    stompClient.send("/app/chat.addUser", {}, JSON.stringify({
+        senderEmail: username,
+        roomId: roomId,
+        messageType: 'JOIN'
+    }));
 
     connectingElement.classList.add('hidden');
 }
 
 function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+    connectingElement.textContent = 'Could not connect to WebSocket server.';
     connectingElement.style.color = 'red';
 }
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
+
     if (messageContent && stompClient) {
         var chatMessage = {
-            sender: username,
-            content: messageInput.value,
-            type: 'CHAT'
+            senderEmail: username, // 내 메시지 전송 시 내 이메일 포함
+            content: messageContent,
+            roomId: roomId,
+            messageType: 'CHAT'
         };
+
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
@@ -61,40 +62,57 @@ function sendMessage(event) {
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
+    console.log("Received Message Sender:", message.senderEmail);
+    console.log("Current User (Session):", username);
+
+    // 메시지 요소 생성
     var messageElement = document.createElement('li');
 
-    if (message.type === 'JOIN') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' joined!';
-    } else if (message.type === 'LEAVE') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' left!';
-    } else {
-        messageElement.classList.add('chat-message');
+    // 내 메시지와 상대방 메시지 구분
+	if (message.senderEmail === username) { // 내 메시지 (세션 값으로 비교)
+	    messageElement.classList.add('chat-message', 'self'); // 내 메시지 (왼쪽)
+	    messageElement.innerHTML = `
+	        <div class="chat-message">
+	            <div class="message-wrapper">
+	                <span class="message-sender">${message.senderNickname}</span>:
+	                <span class="message-content">${message.content}</span>
+	            </div>
+	            <div class="message-timestamp">
+	                <span class="timestamp-date">${formatDate(new Date())}</span><br>
+	                <span class="timestamp-time">${formatTime(new Date())}</span>
+	            </div>
+	        </div>
+	    `;
+	} else { // 상대방 메시지
+	    messageElement.classList.add('chat-message', 'other'); // 상대방 메시지 (오른쪽)
+	    messageElement.innerHTML = `
+	        <div class="chat-message">
+	            <div class="message-timestamp">
+	                <span class="timestamp-date">${formatDate(new Date())}</span><br>
+	                <span class="timestamp-time">${formatTime(new Date())}</span>
+	            </div>
+	            <div class="message-wrapper">
+	                <span class="message-sender">${message.senderNickname}</span>:
+	                <span class="message-content">${message.content}</span>
+	            </div>
+	        </div>
+	    `;
+	}
 
-        var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(message.sender[0].toUpperCase());
-        avatarElement.appendChild(avatarText);
-        avatarElement.classList.add(message.sender === username ? 'self' : 'other');
-        messageElement.appendChild(avatarElement);
 
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.sender);
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
-
-        var textElement = document.createElement('p');
-        var messageText = document.createTextNode(message.content);
-        textElement.appendChild(messageText);
-        textElement.classList.add(message.sender === username ? 'self' : 'other');
-        messageElement.appendChild(textElement);
-
-        // 추가: self 또는 other 클래스 부여
-        messageElement.classList.add(message.sender === username ? 'self' : 'other');
-    }
-
+    // 채팅창에 메시지 추가
     messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+    messageArea.scrollTop = messageArea.scrollHeight; // 스크롤을 아래로 이동
+}
+
+
+// 날짜와 시간 포맷 함수
+function formatDate(date) {
+    return date.toLocaleDateString('en-GB').split('/').reverse().join('.'); // yy.MM.dd
+}
+
+function formatTime(date) {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
 messageForm.addEventListener('submit', sendMessage, true);
