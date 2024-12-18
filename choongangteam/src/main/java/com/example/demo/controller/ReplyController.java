@@ -125,12 +125,14 @@ public class ReplyController {
 		System.out.println("comment : " + reply);
 		
 		System.out.println("score : " + reply.getReply_score());
-		System.out.println("content : " + reply.getReply_content());
-		
+		System.out.println("content : " + reply.getReply_content());	
 		
 		
 		int result = service.insert(reply);
 		
+		int result1 = service.addCount(reply.getLesson_number());
+		if(result1 == 1) System.out.println("reply count + 1");
+				
 		if(result == 1) System.out.println("리뷰등록 성공");
 	
 		return "redirect:paymentdetail?lesson_number="+reply.getLesson_number();
@@ -169,7 +171,8 @@ public class ReplyController {
 		System.out.println("reply_number : " + reply_number);
 		
 		service.replyDelete(reply_number);
-		
+		int result = service.deleteCount(lesson_number);
+		if (result == 1)System.out.println("reply count -1");
 		
 		return "redirect:paymentdetail?lesson_number="+lesson_number;
 	}

@@ -78,4 +78,14 @@
 		delete from reply where reply_number = #{reply_number}
 	</delete>
 	
+	<update id="addCount" parameterType="int">
+		update lesson set reply_count = reply_count + 1 where lesson_number = #{lesson_number}
+	</update>
+	
+	<update id="deleteCount" parameterType="int">
+		update lesson set reply_count = reply_count - 1 where lesson_number = #{lesson_number}
+	</update>
+	
+	
+	
 </mapper>
