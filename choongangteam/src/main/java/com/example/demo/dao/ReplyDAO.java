@@ -23,8 +23,9 @@ public interface ReplyDAO {
 
 	int pcheck(Reply reply);
 
-
+	int addCount(int lesson_number);
 	
+	int deleteCount(int lesson_number);
 	
 
 

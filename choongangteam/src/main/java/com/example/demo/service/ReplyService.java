@@ -46,6 +46,15 @@ public class ReplyService {
 		return dao.pcheck(reply);
 	}
 
+	public int addCount(int lesson_number) {
+		return dao.addCount(lesson_number);
+	}
+	public int deleteCount(int lesson_number) {
+		return dao.deleteCount(lesson_number);
+	}
+
+
+
 	
 	
 	
