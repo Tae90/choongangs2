@@ -74,7 +74,7 @@
             <div class="mySlides fade" style="display: block;">
                 <div class="numbertext">1 / 3</div>
 
-                <a href="asd">
+                <a href="paymentdetail?lesson_number=231">
                     <img src="/img/thumbnail/mainimg1.png" style="width:100%; height: 400px;">
                 </a>
 
@@ -82,14 +82,16 @@
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
+                <a href="paymentdetail?lesson_number=209">
                 <img src="/img/thumbnail/mainimg2.png" style="width:100%;  height: 400px;">
-
+				</a>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
+                <a href="paymentdetail?lesson_number=230">
                 <img src="/img/thumbnail/mainimg3.png" style="width:100%;  height: 400px;">
-
+				</a>
             </div>
 
             <!-- Next and previous buttons -->
