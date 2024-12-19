@@ -24,7 +24,7 @@
 	<div style="margin-top: 16px;">
 		<div style="width: 100%;">
 		
-		<form method="post" action="/reply_insert" id="form" name="form">
+		<form method="post" action="/reply_insert" id="form" name="form" onsubmit="replychk(event)">
 			<input type="hidden" name="member_email" value="${userSession.email }">
 			<!-- 게시판 번호도 히든으로 추가해야함 -->
 			<input type="hidden" name="lesson_number" value="${lesson_number}">		
