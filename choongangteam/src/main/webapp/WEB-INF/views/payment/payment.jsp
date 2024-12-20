@@ -68,7 +68,7 @@ $(document).ready(function(){
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>
-        <span>총 ${lesson.lesson_apply}인</span>
+        <span>${lesson.lesson_currentapply}/${lesson.lesson_apply}인</span>
     </div>
     <div class="total-row">
         <p>최종 결제금액</p>
