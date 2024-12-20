@@ -123,7 +123,7 @@ public class LoginController {
 		userSession.setEmail(dbmember.getMember_email());
 		userSession.setNickname(dbmember.getMember_nickname());
 		userSession.setUser_photo(dbmember.getMember_photo());
-		userSession.setMember_number(dbmember.getMember_number());
+		userSession.setMember_number(0);
 
 		session.setAttribute("userSession", userSession);
 		

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -11,15 +11,13 @@
 	<link href="/css/reply.css" rel="stylesheet">
 	
 	<script src="/js/reply.js"></script>
-
 	
 
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
 <body>
-
-<c:if test="${userSession.email != null}">
+<c:if test="${!empty userSession && userSession.member_number != 1 }">
 <div id="reply_insertSection" class="container"> 
 	<div style="margin-top: 16px;">
 		<div style="width: 100%;">
