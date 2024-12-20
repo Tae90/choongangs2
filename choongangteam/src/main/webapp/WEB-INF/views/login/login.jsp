@@ -15,7 +15,7 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		// 카카오 sdk 초기화
-	 	Kakao.init('6f3ddfb13ef8ecdc68981d7cbb221743');
+	 	Kakao.init('${kkey}');
 
 	    // SDK 초기화 여부를 판단합니다.
 	    console.log(Kakao.isInitialized());
@@ -77,7 +77,7 @@
 
 	<div class="min-h-screen flex flex-1 flex-col justify-center items-center px-6 py-20 lg:px-8 max-w-7xl mx-auto w-full">
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-		<h2 class="mt-10 text-3xl font-semibold leading-snug tracking-tighter text-center text-taling-gray-800">로그인 화면<br>초본</h2>		
+		<h2 class="mt-10 text-3xl font-semibold leading-snug tracking-tighter text-center text-taling-gray-800"><img src="/img/contents/makeit.png" style="margin-left:65px;"></h2>		
 	</div>
 	
 	<div class="w-full max-w-sm mt-16 sm:mx-auto">
@@ -134,7 +134,7 @@
 <script type="text/javascript">
 	    
 	// 네이버 로그인 객체 생성							clientID				콜백uri
-	var naver_id_login = new naver_id_login("MjilLtWpbUBN_5nya8ed", "http://localhost/naverCallback");
+	var naver_id_login = new naver_id_login("${nkey}", "http://localhost/naverCallback");
 	
 	var state = naver_id_login.getUniqState();
 	naver_id_login.setDomain("http://localhost/naverLogin");

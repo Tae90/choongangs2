@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,6 +14,11 @@ import java.util.Map;
 
 @Service
 public class OAuthService {
+	
+	@Value("${kakao.key}")
+	private String kkey;
+	
+	
 
 	// 카카오 액세스 토큰 얻기
     public String getKakaoAccessToken(String code) {
@@ -32,7 +38,7 @@ public class OAuthService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=6f3ddfb13ef8ecdc68981d7cbb221743"); // TODO REST_API_KEY 입력
+            sb.append("&client_id="+kkey); // TODO REST_API_KEY 입력
             sb.append("&redirect_uri=http://localhost/kakaoCallback"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code); // 로그인하면 주는 인증코드, 토큰을 발급받을 때 사용한다.
             bw.write(sb.toString());
