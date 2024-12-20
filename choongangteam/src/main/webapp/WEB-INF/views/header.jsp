@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <header class="top_block">
     <div class="top_menu">
 
@@ -13,7 +14,7 @@
             </a>
             </div>
             <div class="search" >
-                <form action="keyword_search"  method="get" style="margin-top: 5px;">
+                <form action="keyword_search"  method="get" style="margin-top: 5px !important;">
                     <input type="text" placeholder="키워드를 검색하세요" id="lesson_keyword" name="lesson_keyword" class="search_word">
                     <button type="submit" style="background-color: #F6F6F6; border-style: none; cursor: pointer;">
                         <span class="material-symbols-outlined" style="color: #8c8c8c;">search</span>
@@ -30,7 +31,7 @@
             <a href="loginpage" class="login">로그인</a>
         </div>
 
- 	<hr style="border-style: ridge; border-width: 1px; width: 100%; max-width: 1280px; position: absolute; bottom: 0;">
+ 	<hr style="border-style: ridge; border-width: 1px; width: 100%; max-width: 1280px; position: absolute; bottom: 0; margin:8px !important;">
 
     </div>
 

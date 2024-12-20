@@ -37,7 +37,7 @@
 	position: sticky; /* 스크롤에 따라 움직이게 설정 */
 	top: 15%; /* 스크롤 시 상단에서 12% 떨어지도록 설정 */
 	height: auto;
-	max-height: 420px; 
+	max-height: 440px; 
 	width : 25%;
 	background-color: #fff;
 	padding: 20px;
@@ -360,7 +360,7 @@
 
 @media ( max-width : 935px) {
 	.payment-right-section {
-		max-height: 489px;
+		max-height: 550px;
 	}
 	
 	.icon-container {
