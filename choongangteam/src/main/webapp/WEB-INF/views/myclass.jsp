@@ -134,9 +134,17 @@ body {
 							</div>
 							<!-- 채팅 버튼 -->
 							<div style="float: right; width: 10%; text-align: right;">
+								<!-- 채팅 버튼 -->
 								<button class="btn-chat"
 									onclick="location.href='/chat?payment_number=${item.payment_number}'">채팅문의</button>
+								<!-- 간격 추가 -->
+								<div style="margin-top: 10px;"></div>
+								<!-- 클래스 이동 버튼 -->
+								<button class="btn-chat"
+									onclick="location.href='https://webrtcpj.o-r.kr/webrtc/main.html?mode=0'">클래스룸
+								</button>
 							</div>
+
 							<div style="clear: both;"></div>
 						</div>
 					</c:forEach>

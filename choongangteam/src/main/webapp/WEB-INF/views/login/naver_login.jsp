@@ -13,7 +13,7 @@
 
 //.gitignore 해야된다..
 
-var naver_id_login = new naver_id_login("MjilLtWpbUBN_5nya8ed", "http://localhost/naverCallback");
+var naver_id_login = new naver_id_login("${nkey}", "http://localhost/naverCallback");
 //   alert(naver_id_login.oauthParams.access_token);
 naver_id_login.get_naver_userprofile("naverSignInCallback()");
 //   alert('콜백실행');
