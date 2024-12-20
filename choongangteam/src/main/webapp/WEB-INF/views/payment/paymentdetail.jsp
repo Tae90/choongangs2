@@ -17,6 +17,7 @@
 <link href="/css/icons.css" rel="stylesheet">
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/paymentdetail.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>상세 페이지</title>
 <script>

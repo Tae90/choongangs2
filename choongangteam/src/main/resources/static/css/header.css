@@ -12,7 +12,7 @@
 .top_menu {
 	display: flex;
 	align-items: center;
-	margin: 0 auto;
+	margin: 0 auto !important;
 	height: 90px;
 	position: relative;
 	max-width: 1280px;
@@ -27,7 +27,7 @@
 	justify-content: flex-start;
 	/* 왼쪽 정렬 */
 	width: calc(100% - 100px);
-  	gap: 20px;
+  	gap: 20px !important;
     height: 40px;
 	/* 전체 너비 사용 */
 }
@@ -36,7 +36,7 @@
 .title {
 	font-size: 32px;
 	text-decoration: none;
-	margin-right: 40px;
+	margin-right: 40px ;
 	position: relative;
 	/* 타이틀과 검색창 사이 간격 */
 }
@@ -61,11 +61,11 @@
 	width: 100%;
 	border-radius: 4px;
 	border: 1px solid rgb(229, 231, 235);
-	display: flex;
-	align-items: center;
+	display: flex !important;
+	align-items: center !important;
 	background-color: #F6F6F6;
 	border: 1px solid transparent;
-	transition: border-color 0.3s ease;
+	transition: border-color 0.3s ease !important;
 }
 
 .search form:focus-within {

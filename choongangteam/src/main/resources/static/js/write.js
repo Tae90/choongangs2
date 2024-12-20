@@ -140,8 +140,8 @@ function selectCategory(value) {
 		$('#subcategory_number').append('<option value="101">뜨개질</option>');
 		$('#subcategory_number').append('<option value="102">레진아트</option>');
 		$('#subcategory_number').append('<option value="103">비즈공예</option>');
-		$('#subcategory_number').append('<option value="104">스탬프</option>');
-		$('#subcategory_number').append('<option value="105">한지공예</option>');
+		$('#subcategory_number').append('<option value="104">나무공예</option>');
+		$('#subcategory_number').append('<option value="105">종이공예</option>');
 	} else if (selectedValue === '3') { //미술 카테고리 하위 목록
 		$('#subcategory_number').append('<option value="">카테고리를 선택해주세요</option>');
 		$('#subcategory_number').append('<option value="301">디지털아트</option>');

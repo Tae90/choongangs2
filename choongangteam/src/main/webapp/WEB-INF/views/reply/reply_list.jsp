@@ -7,7 +7,6 @@
 <head>
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <!-- 	sweetalert 사용 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 	<script src="/js/reply.js"></script>
