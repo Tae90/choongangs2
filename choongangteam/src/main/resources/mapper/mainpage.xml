@@ -9,7 +9,7 @@
 
 		SELECT
 		l.*,
-		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		COALESCE(ROUND(AVG(r.reply_score), 1), 0) AS avg_reply_score
 		FROM
 		choongang.lesson l
 		LEFT JOIN
@@ -20,6 +20,7 @@
 		l.lesson_number
 		ORDER BY
 		l.favorite_count DESC;
+
 
 
 	</select>
@@ -39,7 +40,7 @@
 
 		SELECT
 		l.*,
-		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		  COALESCE(ROUND(AVG(r.reply_score), 1), 0) AS avg_reply_score
 		FROM
 		choongang.lesson l
 		LEFT JOIN
@@ -65,7 +66,7 @@
 		resultType="lesson">
 		SELECT DISTINCT
 		l.*,
-		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		  COALESCE(ROUND(AVG(r.reply_score), 1), 0) AS avg_reply_score
 		FROM
 		choongang.lesson l
 		LEFT JOIN
@@ -98,14 +99,15 @@
 
 		SELECT
 		l.*,
-		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		  COALESCE(ROUND(AVG(r.reply_score), 1), 0) AS avg_reply_score
 		FROM
 		choongang.lesson l
 		LEFT JOIN
 		choongang.reply r ON l.lesson_number =
 		r.lesson_number
 		WHERE
-		l.lesson_keyword LIKE CONCAT('%', REPLACE(#{lesson_keyword}, ' ', ''), '%')
+		l.lesson_keyword LIKE CONCAT('%',
+		REPLACE(#{lesson_keyword}, ' ', ''), '%')
 		AND l.lesson_delete != 1
 		GROUP BY
 		l.lesson_number
@@ -123,7 +125,7 @@
 		resultType="lesson">
 		SELECT DISTINCT
 		l.*,
-		ROUND(AVG(r.reply_score), 1) AS avg_reply_score
+		  COALESCE(ROUND(AVG(r.reply_score), 1), 0) AS avg_reply_score
 		FROM
 		choongang.lesson l
 		LEFT JOIN
@@ -148,7 +150,7 @@
 			<otherwise>l.lesson_number DESC</otherwise>
 		</choose>
 		LIMIT #{limit}
-	</select>	
+	</select>
 
 
 
