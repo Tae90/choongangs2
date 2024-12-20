@@ -15,4 +15,6 @@ public class SellerLesson {
     private String payment_nickname;  // 구매자 닉네임
     private String buyer_email;       // 구매자 이메일
     private int payment_number;
+    
+    private String start_time; // 합쳐진 수업 시작 시간
 }
