@@ -50,6 +50,7 @@
 		$("#class_title").html("<h2>"+title+"</h2>");
 		$("#payment_title").prepend("<h2>"+title+"</h2>");
 		$('#agreementSection').append(date+" "+start_hour+":"+start_min+"~"+class_hour+":"+class_min)
+		$('#as').append(date+" "+start_hour+":"+start_min+"~"+class_hour+":"+class_min)
 		if(Number(start_min) === Number(class_min)){
 			$('#classTime').append('원데이 '+(Number(class_hour)-Number(start_hour))+"시간");
 		}else{
@@ -204,6 +205,10 @@
 		</div>
 	</div>
 	<div class="payment_bottom">
+		<!-- 일정 선택 버튼 -->
+      	<div class="agreement-section" id="as">
+        	<input type="radio" value="agree" id="scheduleButton"> 
+      	</div>
 		<!-- 아이콘 섹션 -->
       	<div class="icon-container">
        		<img src="<%= request.getContextPath()%>/img/contents/heart.png" class="icon heart_icon"
