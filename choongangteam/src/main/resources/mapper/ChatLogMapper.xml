@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ChatLogMapper">
+
+    <!-- 채팅 메시지 저장 -->
+    <insert id="insertChatLog" parameterType="com.example.demo.model.ChatLog">
+        INSERT INTO chat_log (room_id, sender_email, receiver_email, content, message_type, created_at)
+        VALUES (#{roomId}, #{senderEmail}, #{receiverEmail}, #{content}, #{messageType}, NOW());
+    </insert>
+
+    <!-- lesson 테이블에서 판매자 email 조회 -->
+    <select id="findLessonMemberEmail" parameterType="String" resultType="String">
+        SELECT member_email
+        FROM lesson
+        WHERE lesson_number = #{lessonNumber};
+    </select>
+
+    <!-- payment 테이블에서 구매자 email 조회 -->
+    <select id="findPaymentMemberEmail" parameterType="String" resultType="String">
+        SELECT member_email
+        FROM payment
+        WHERE payment_number = #{paymentNumber};
+    </select>
+
+    <!-- payment 테이블에서 lesson_number 조회 -->
+    <select id="findLessonNumberByPaymentNumber" parameterType="String" resultType="String">
+        SELECT lesson_number
+        FROM payment
+        WHERE payment_number = #{paymentNumber};
+    </select>
+
+    <!-- 특정 채팅방의 메시지 조회 -->
+    <!-- 특정 room_id와 senderEmail로 상대방 이메일 조회 -->
+<!-- 특정 채팅방의 최신 20개 메시지 조회 (시간순 정렬) -->
+<select id="findChatLogsByRoomId" parameterType="Map" resultType="com.example.demo.model.ChatLog">
+SELECT 
+    cl.room_id AS roomId,
+    cl.sender_email AS senderEmail,
+    m_sender.member_nickname AS senderNickname,
+    m_receiver.member_nickname AS receiverNickname,
+    cl.content,
+    cl.message_type AS messageType,
+<!--     cl.created_at as created_at -->
+    DATE_ADD(cl.created_at, INTERVAL 9 HOUR) AS createdAt
+    
+FROM chat_log cl
+LEFT JOIN member m_sender ON cl.sender_email = m_sender.member_email
+LEFT JOIN member m_receiver ON cl.receiver_email = m_receiver.member_email
+WHERE cl.room_id = #{roomId}
+ORDER BY cl.created_at ASC
+LIMIT 20
+</select>
+
+
+
+
+
+
+
+<delete id="deleteOldestChatLog">
+    DELETE FROM chat_log
+    WHERE id = (
+        SELECT temp.id
+        FROM (SELECT id FROM chat_log WHERE room_id = #{roomId} ORDER BY created_at ASC LIMIT 1) AS temp
+    )
+</delete>
+
+
+
+
+
+<!-- member 테이블에서 닉네임 조회 -->
+<select id="findMemberNicknameByEmail" parameterType="String" resultType="String">
+    SELECT member_nickname
+    FROM member
+    WHERE member_email = #{email};
+</select>
+
+<!-- payment 테이블에서 닉네임 조회 -->
+<select id="findPaymentNicknameByPaymentNumber" parameterType="String" resultType="String">
+    SELECT payment_nickname
+    FROM payment
+    WHERE payment_number = #{paymentNumber};
+</select>
+
+<!-- 채팅방 메시지 개수 확인 -->
+<select id="countChatLogsByRoomId" parameterType="String" resultType="int">
+    SELECT COUNT(*) 
+    FROM chat_log 
+    WHERE room_id = #{roomId};
+</select>
+
+
+
+    
+
+</mapper>
