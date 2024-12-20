@@ -13,6 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/payment.css">
     <title>결제 페이지</title>
+<script>
+
+var date ="${lesson.start_date}";
+var start_hour ="${lesson.start_hour}";
+var start_min ="${lesson.start_min}";
+var class_hour ="${lesson.class_hour}";
+var class_min ="${lesson.class_min}";
+
+if(start_min==='0') start_min='00';
+if(class_min==='0') class_min='00';
+
+$(document).ready(function(){
+	$('#agreementSection').append(date+" "+start_hour+":"+start_min+"~"+class_hour+":"+class_min)
+});
+
+</script>
 </head>
 <body>
     <div class="payment-container">
@@ -48,7 +64,7 @@
     
     <div class="summary-row">
         <p>강의 일정</p>
-        <span>${lesson.start_date}&nbsp;${lesson.start_hour}:0${lesson.start_min}~${lesson.class_hour}:0${lesson.class_min}</span>
+        <div id=agreementSection></div>
     </div>
     <div class="summary-row people">
         <p>수강 인원</p>
