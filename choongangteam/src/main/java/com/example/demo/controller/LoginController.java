@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -44,12 +45,30 @@ public class LoginController {
 	private final JoinService join_service;
 	private final OAuthService auth_service;
 	
+	@Value("${naver.key}")
+    private String nkey;
+	
+	@Value("${kakao.key}")
+	private String kkey;
+	
+	@Value("${find.pass.email}")
+	private String femail;
+	
+	@Value("${find.pass.pass}")
+	private String fpass;
+
+	
 	
 	
 	// 로그인 선택창
 	@RequestMapping("/loginpage")
-	public String loginpage() {
+	public String loginpage(Model model) {
 		System.out.println("login page in");
+		
+		
+		model.addAttribute("nkey", nkey);
+		model.addAttribute("kkey", kkey);
+		
 		return "/login/login";
 	}
 	
@@ -175,8 +194,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/naverlogin")
-	public String naverlogin() {
+	public String naverlogin(Model model) {
 		System.out.println("naverlogin in");
+		
+		model.addAttribute("nkey", nkey);
 		
 		return "/login/naver_login";
 	}
@@ -241,11 +262,11 @@ public class LoginController {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "chokiw1371@naver.com";
-		String hostSMTPpwd = "Chlrldnjs!2"; // 비밀번호 입력해야함
+		String hostSMTPid = "femail";
+		String hostSMTPpwd = "fpass"; // 비밀번호 입력해야함
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "chokiw1371@naver.com";
+		String fromEmail = "femail";
 		String fromName = "관리자";
 		String subject = "비밀번호 찾기";
 
