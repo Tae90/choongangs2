@@ -77,7 +77,7 @@
 
 	<div class="min-h-screen flex flex-1 flex-col justify-center items-center px-6 py-20 lg:px-8 max-w-7xl mx-auto w-full">
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-		<h2 class="mt-10 text-3xl font-semibold leading-snug tracking-tighter text-center text-taling-gray-800">로그인 화면<br>초본</h2>		
+		<h2 class="mt-10 text-3xl font-semibold leading-snug tracking-tighter text-center text-taling-gray-800"><img src="/img/contents/makeit.png" style="margin-left:65px;"></h2>		
 	</div>
 	
 	<div class="w-full max-w-sm mt-16 sm:mx-auto">
