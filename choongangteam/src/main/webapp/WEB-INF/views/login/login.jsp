@@ -15,7 +15,7 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		// 카카오 sdk 초기화
-	 	Kakao.init('6f3ddfb13ef8ecdc68981d7cbb221743');
+	 	Kakao.init('${kkey}');
 
 	    // SDK 초기화 여부를 판단합니다.
 	    console.log(Kakao.isInitialized());
@@ -134,7 +134,7 @@
 <script type="text/javascript">
 	    
 	// 네이버 로그인 객체 생성							clientID				콜백uri
-	var naver_id_login = new naver_id_login("MjilLtWpbUBN_5nya8ed", "http://localhost/naverCallback");
+	var naver_id_login = new naver_id_login("${nkey}", "http://localhost/naverCallback");
 	
 	var state = naver_id_login.getUniqState();
 	naver_id_login.setDomain("http://localhost/naverLogin");
