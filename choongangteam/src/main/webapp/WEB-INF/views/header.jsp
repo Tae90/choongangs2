@@ -6,10 +6,13 @@
     <div class="top_menu">
 
         <div class="title_search">
+        <div style="width: 80px;">
             <a href="mainpage" class="title">
-                <span class="do-hyeon-regular">메이</span>
-                <span class="racing-sans-one-regular">Kit</span>
+                <!-- <span class="do-hyeon-regular">메이</span>
+                <span class="racing-sans-one-regular">Kit</span> -->
+                <img src="/img/contents/makeit.png" style="width: 100px; height: 50px; margin-top:12px; ">
             </a>
+            </div>
             <div class="search" >
                 <form action="keyword_search"  method="get" style="margin-top: 5px !important;">
                     <input type="text" placeholder="키워드를 검색하세요" id="lesson_keyword" name="lesson_keyword" class="search_word">
@@ -47,8 +50,8 @@
                         <a href="category_page?Maincategory_number=1&Subcategory_number=101">뜨개질</a>
                         <a href="category_page?Maincategory_number=1&Subcategory_number=102">레진아트</a>
                         <a href="category_page?Maincategory_number=1&Subcategory_number=103">비즈 공예</a>
-                        <a href="category_page?Maincategory_number=1&Subcategory_number=104">스탬프</a>
-                        <a href="category_page?Maincategory_number=1&Subcategory_number=105">한지 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=104">나무 공예</a>
+                        <a href="category_page?Maincategory_number=1&Subcategory_number=105">종이 공예</a>
                     </div>
 
                 </div>

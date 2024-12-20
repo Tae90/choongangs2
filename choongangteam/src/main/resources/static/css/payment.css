@@ -23,6 +23,15 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);	/* 그림자 추가 */
 }
 
+.class-thumbnail img {
+    max-width: 100%; /* 부모 컨테이너에 맞게 크기 조정 */
+    height: auto; /* 비율 유지 */
+    border-radius: 5px; /* 원하는 경우 모서리를 둥글게 */
+    display: block; /* 이미지가 블록 요소로 렌더링되도록 설정 */
+    max-width: 800px; /* 이미지 최대 크기를 300px로 제한 */
+    height: auto; /* 비율 유지 */
+}
+
 /* 결제 수단 섹션 스타일 */
 .payment-methods {
     margin-top: 20px;
@@ -57,8 +66,8 @@ body {
     font-size: 18px; /* 글씨 크기 키우기 */
     font-weight: bold; /* 굵은 글씨 */
     padding: 3px 5px; /* 안쪽 여백 추가 */
-    margin-top: 5px; /* 위쪽 여백 */
-    margin-bottom: 5px;
+    margin-top: -5px;
+    margin-bottom: -5px; 
 }
 
 /* 각 섹션 스타일 */

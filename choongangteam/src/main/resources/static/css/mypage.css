@@ -181,6 +181,7 @@
     width: 200px;
     height: 100px;
     margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .text-container {
@@ -235,10 +236,14 @@
     width: 200px;
     height: 100px;
     margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .reviewtext-container {
     margin-right: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .write_review{
@@ -405,12 +410,32 @@ input[type="checkbox"] {
 
 @media(max-width : 425px) {
             
-    /*  form{
-         max-width: 240px;
-     } */
+    .image-container {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.reviewimage-container {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
  
      .delete_me {
         padding-left: 0px;
      }
+     
+      .my_menu {
+        width: 100%;
+        flex-direction: row;
+        justify-content: left;
+        flex-wrap: nowrap;
+        padding-right: 20px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
 
  }

@@ -33,13 +33,14 @@ public class MainpageController {
 
 		// 메인페이지에 나오는 best 20 클래스중 8개만 보여줌
 		List<Lesson> bestclass = service.bestclass(lesson);
-
+		
+		
 		System.out.println(bestclass);
-
+	
 		UserSession user = (UserSession) session.getAttribute("userSession");
 
 		model.addAttribute("user", user);
-		model.addAttribute("bestclass", bestclass);
+		model.addAttribute("bestclass", bestclass);		
 
 		return "mainpage/mainpage";
 	}

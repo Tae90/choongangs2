@@ -1,8 +1,6 @@
 let slideIndex = 1;
 let slideInterval;
 
-showSlides(slideIndex);
-
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
@@ -26,7 +24,6 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
     
-    // 타이머 재설정
     resetTimer();
 }
 
@@ -41,7 +38,7 @@ function resetTimer() {
 
 document.addEventListener("DOMContentLoaded", function() {
     showSlides(slideIndex);
-    resetTimer(); // 초기 타이머 설정
+    // resetTimer() 호출 제거
 });
 
 // 화살표 클릭 이벤트에 대한 리스너 추가

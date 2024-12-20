@@ -13,7 +13,7 @@ $(document).ready(function() {
 	
 	// 클래스에 공백이 있으면 인식을 못하므로 여러개의 클래스값을 쓰려면 공백대신
 	// .을 삽입
-	$('.flex.flex-col.gap-4.text-sm').each(function(){
+	$('.comment-item').each(function(){
 		var replyNum = $(this).attr('id');
 		if (replyNum) {
 			// 초기에 출력된 댓글들 넘버를 삽입
@@ -88,24 +88,22 @@ function loadMoreReply(){
 							}else{
 								imgSrc = '/uimg/'+reply.member_photo;
 							}
-							var replyHtml = `
-							                    <div id="${reply.reply_number}" class="flex flex-col gap-4 text-sm">
-							                        <div id="rlist" class="border border-taling-gray-200 p-4 md:px-6 rounded-lg">
-							                            <div class="flex gap-3">
-							                                <div class="shrink-0">
+							var replyHtml = `<div id="${reply.reply_number}" class="comment-item">
+													<div class="comment-header">
+														<div class="comment-avatar">
 							                                    <img src="${imgSrc}" alt="Profile Image" style="border-radius: 50%; width: 56px; height: 56px;">
-							                                </div>
-							                                <div class="w-full">
+														</div>
+							                                <div class="comment-body">
 							                                    <div>
-							                                        <div class="flex justify-between">
-							                                            <div class="flex space-x-1 gap-1 ml-1.5">${reply.member_nickname}</div>
-							                                            <div class="flex items-center gap-2">${reply.write_date}</div>
+							                                        <div class="comment-info">
+							                                            <div class="comment-nickname">${reply.member_nickname}</div>
+							                                            <div class="comment-date">${reply.write_date}</div>
 							                                        </div>
-							                                        <div class="flex items-center mt-1">
+							                                        <div class="comment-stars">
 							                                            ${(() => {
 							                                                let starsHtml = '';
 							                                                for (let i = 1; i <= 5; i++) {
-							                                                    starsHtml += (i <= reply.reply_score) ? '<span class="star_on">★</span>' : '<span class="star_off">★</span>';
+							                                                    starsHtml += (i <= reply.reply_score) ? '<span class="star-on">★</span>' : '<span class="star-off">★</span>';
 							                                                }
 							                                                return starsHtml;
 							                                            })()}
@@ -113,11 +111,9 @@ function loadMoreReply(){
 							                                    </div>
 							                                </div>
 							                            </div>
-							                            <div class="flex">
-							                                <div class="mt-4 leading-relaxed whitespace-pre-wrap break-all text-sm sm:text-base">${reply.reply_content}</div>
-							                            </div>
+							                            <div class="comment-content">${reply.reply_content}</div>
 							                            ${reply.member_email === userEmail ? 
-							                                `<div onclick="redelete(${reply.reply_number},${lesson_number})" class="flex justify-end mt-4 text-xs text-gray hover:text-taling-gray-800 gap-3">
+							                                `<div onclick="redelete(${reply.reply_number},${lesson_number})" class="delete-button">
 							                                    <button>삭제</button>
 							                                </div>` 
 							                                : ''}

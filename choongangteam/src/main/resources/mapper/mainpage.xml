@@ -148,7 +148,7 @@
 			<otherwise>l.lesson_number DESC</otherwise>
 		</choose>
 		LIMIT #{limit}
-	</select>
+	</select>	
 
 
 
