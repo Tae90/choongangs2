@@ -6,6 +6,7 @@ import com.example.demo.service.ChatLogService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import com.example.demo.model.UserSession;
@@ -26,22 +28,74 @@ public class ChatController {
     private final ChatLogService chatLogService;
 
     @GetMapping("/chat")
-    public String chatPage(HttpSession session, Model model, @RequestParam("payment_number") String paymentNumber) {
+    public String chatPage(
+            HttpSession session,
+            Model model,
+            @RequestParam(name = "payment_number", required = false) String roomId
+    ) {
         UserSession userSession = (UserSession) session.getAttribute("userSession");
         if (userSession == null) {
-            return "redirect:/login"; // 로그인되지 않았다면 로그인 페이지로 리다이렉트
+            return "redirect:/login";
         }
 
-        // 채팅 기록 가져오기 (memberNumber 값 추가)
-        List<ChatLog> chatLogs = chatLogService.findChatLogsByRoomId(paymentNumber, userSession.getMember_number());
+        String email = userSession.getEmail();
 
-        model.addAttribute("nickname", userSession.getNickname());
-        model.addAttribute("roomId", paymentNumber);
-        model.addAttribute("chatLogs", chatLogs);
+        // 채팅방 목록과 읽지 않은 메시지 개수
+        List<Map<String, Object>> chatRooms = chatLogService.getChatRooms(email);
+        Map<String, Integer> unreadCounts = chatLogService.getUnreadMessageCounts(email);
+
+        model.addAttribute("chatRooms", chatRooms);
+        model.addAttribute("unreadCounts", unreadCounts);
+
+        // 특정 채팅방 읽음 상태 업데이트 및 메시지 로드
+        if (roomId != null) {
+            chatLogService.markMessagesAsRead(roomId, email); // 읽음 상태 업데이트
+            List<ChatLog> chatLogs = chatLogService.findChatLogsByRoomId(roomId, userSession.getMember_number());
+            model.addAttribute("chatLogs", chatLogs);
+            model.addAttribute("roomId", roomId);
+        } else {
+            model.addAttribute("chatLogs", null);
+        }
 
         return "chat";
     }
 
+
+
+
+    @GetMapping("/chat/recentRoomId")
+    @ResponseBody
+    public String getMostRecentRoomId(HttpSession session) {
+        UserSession userSession = (UserSession) session.getAttribute("userSession");
+        if (userSession == null) {
+            return null; // 로그인되지 않은 경우
+        }
+        return chatLogService.getMostRecentRoomId(userSession.getEmail());
+    }
+
+    @GetMapping("/chat/unreadCount")
+    @ResponseBody
+    public Map<String, Integer> getUnreadMessageCount(HttpSession session) {
+        UserSession userSession = (UserSession) session.getAttribute("userSession");
+        if (userSession == null) {
+            return Map.of("unreadCount", 0); // 로그인되지 않은 경우 0 반환
+        }
+        String email = userSession.getEmail();
+        int unreadCount = chatLogService.getTotalUnreadCount(email);
+        return Map.of("unreadCount", unreadCount);
+    }
+    
+    @GetMapping("/chat/unreadDot")
+    @ResponseBody
+    public boolean getUnreadDotStatus(HttpSession session) {
+        UserSession userSession = (UserSession) session.getAttribute("userSession");
+        if (userSession == null) {
+            return false; // 로그인되지 않은 경우 빨간 점 표시하지 않음
+        }
+        String email = userSession.getEmail();
+        int unreadCount = chatLogService.getTotalUnreadCount(email);
+        return unreadCount > 0; // 읽지 않은 메시지가 있으면 true 반환
+    }
 
 
 
@@ -85,8 +139,7 @@ public class ChatController {
         return chatLog;
     }
 
-
-
+    
     @MessageMapping("/chat.addUser")
     public void addUser(@Payload ChatLog chatLog, SimpMessageHeaderAccessor headerAccessor) {
         // WebSocket 세션에 UserSession 설정

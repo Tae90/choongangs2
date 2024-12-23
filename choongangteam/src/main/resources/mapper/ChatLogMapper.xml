@@ -54,8 +54,52 @@ LIMIT 20
 </select>
 
 
+<!-- 읽지 않은 메시지 개수 조회 -->
+<select id="findUnreadMessageCountsByEmail" parameterType="String" resultType="map">
+    SELECT 
+        cl.room_id AS roomId,
+        COUNT(*) AS unreadCount
+    FROM chat_log cl
+    WHERE cl.receiver_email = #{email} AND cl.is_read = FALSE
+    GROUP BY cl.room_id
+</select>
+
+<!-- 특정 채팅방 메시지 읽음 상태 업데이트 -->
+<update id="markMessagesAsRead" parameterType="Map">
+    UPDATE chat_log
+    SET is_read = TRUE
+    WHERE room_id = #{roomId} AND receiver_email = #{email} AND is_read = FALSE;
+</update>
 
 
+
+  <!-- 채팅방 목록 조회 -->
+    <select id="findChatRoomsByEmail" parameterType="String" resultType="Map">
+        SELECT 
+            cl.room_id AS roomId,
+            CASE 
+                WHEN cl.sender_email = #{email} THEN cl.receiver_email
+                ELSE cl.sender_email
+            END AS otherEmail,
+            cl.content AS lastMessage,
+            cl.created_at AS lastMessageTime,
+            m.member_nickname AS otherNickname,
+            m.member_photo AS otherPhoto
+        FROM chat_log cl
+        JOIN member m ON m.member_email = (
+            CASE 
+                WHEN cl.sender_email = #{email} THEN cl.receiver_email
+                ELSE cl.sender_email
+            END
+        )
+        WHERE cl.id IN (
+            SELECT MAX(id)
+            FROM chat_log
+            WHERE sender_email = #{email} OR receiver_email = #{email}
+            GROUP BY room_id
+        )
+        ORDER BY cl.created_at DESC
+    </select>
 
 
 
@@ -93,7 +137,19 @@ LIMIT 20
 </select>
 
 
+<select id="findMostRecentRoomId" parameterType="String" resultType="String">
+    SELECT room_id
+    FROM chat_log
+    WHERE sender_email = #{email} OR receiver_email = #{email}
+    ORDER BY created_at DESC
+    LIMIT 1;
+</select>
 
+    <select id="countTotalUnreadMessages" parameterType="String" resultType="int">
+    SELECT COUNT(*)
+    FROM chat_log
+    WHERE receiver_email = #{email} AND is_read = FALSE;
+</select>
     
 
 </mapper>
