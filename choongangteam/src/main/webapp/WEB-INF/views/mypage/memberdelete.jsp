@@ -55,7 +55,7 @@
 
 </style>
 
-<title>Insert title here</title>
+<title>내 집 안의 작은 공방, 메킷</title>
 </head>
 <body>
 
@@ -88,7 +88,9 @@
                     </div>
                 </div>
 
-                <!--  <button class="write_lesson" onclick="location.href='asd'">클래스 등록</button> -->
+                        <c:if test="${userSession.member_number == 1}">
+    					<button class="write_lesson" onclick="location.href='classRegister'">클래스 등록</button>
+			  </c:if>
 
                 <div class="my_menu">
                     <a href="mypage" class="side_link">
@@ -96,20 +98,38 @@
                         <span class="material-symbols-outlined small-icon">chevron_right</span>
                     </a>
 
-                    <a href="payment" class="side_link"  >
-                        <span>결제 내역</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
+                    <c:if test="${userSession.member_number == 1}">
+    						<a href="paymentcancel" class="side_link">
+        						<span>판매 내역</span>
+        						<span class="material-symbols-outlined small-icon">chevron_right</span>
+    					</a>
+					</c:if>
+					<c:if test="${userSession.member_number != 1}">
+    						<a href="paymentcancel" class="side_link">
+        						<span>결제 내역</span>
+        							<span class="material-symbols-outlined small-icon">chevron_right</span>
+   						 </a>
+					</c:if>
 
-                    <a href="favoritelist" class="side_link"  >
-                        <span>찜</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
+                 
+    <c:if test="${userSession.member_number == 1}">
+        <a href="myregisteredclasses" class="side_link">
+            <span>내가 등록한 클래스</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+    </c:if>
 
-                    <a href="reviews" class="side_link" >
-                        <span>리뷰</span>
-                        <span class="material-symbols-outlined small-icon">chevron_right</span>
-                    </a>
+    <c:if test="${userSession.member_number != 1}">
+        <a href="favoritelist" class="side_link">
+            <span>찜</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+
+        <a href="reviews" class="side_link">
+            <span>리뷰</span>
+            <span class="material-symbols-outlined small-icon">chevron_right</span>
+        </a>
+    </c:if>
                 </div>
 
             </div>

@@ -196,7 +196,7 @@ public class MypageController {
 		 System.out.println("회원 비밀번호 : "+ pass);
 	
 		
-		/* model.addAttribute("user", user); */
+		model.addAttribute("user", user); 
 		return "mypage/memberdelete";
 	}
 	
@@ -232,6 +232,7 @@ public class MypageController {
 	    }
 	    System.out.println("결과 값: " + result);
 	    model.addAttribute("result", result);
+	   
 	    
 	    return "mypage/delete_result";
 	}

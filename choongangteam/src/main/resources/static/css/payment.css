@@ -172,3 +172,42 @@ button:hover {
     font-size: 18px;
     font-weight: bold;
 }
+
+@media (max-width: 700px) {
+    .payment-container {
+        width: 100%;
+        padding: 10px;
+    }
+	
+	.class-thumbnail img {
+    max-width: 100%; /* 부모 컨테이너에 맞게 크기 조정 */
+    height: auto; /* 비율 유지 */
+    border-radius: 5px; /* 원하는 경우 모서리를 둥글게 */
+    display: block; /* 이미지가 블록 요소로 렌더링되도록 설정 */
+    max-width: 400px; /* 이미지 최대 크기를 300px로 제한 */
+    height: auto; /* 비율 유지 */
+}
+
+    body {
+        font-size: 0.8rem;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .summary-row, .total-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .payment-summary {
+        padding: 15px;
+        font-size: 14px;
+    }
+}

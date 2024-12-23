@@ -55,7 +55,7 @@
 
 </style>
 
-<title>Insert title here</title>
+<title>내 집 안의 작은 공방, 메킷</title>
 </head>
 <body>
 
@@ -99,7 +99,7 @@
                     </a>
 
                     <c:if test="${userSession.member_number == 1}">
-    						<a href="selllist" class="side_link">
+    						<a href="paymentcancel" class="side_link">
         						<span>판매 내역</span>
         						<span class="material-symbols-outlined small-icon">chevron_right</span>
     					</a>

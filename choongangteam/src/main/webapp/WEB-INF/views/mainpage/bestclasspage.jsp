@@ -31,7 +31,7 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/mainpage.css" rel="stylesheet">
 
-<title>Insert title here</title>
+<title>내 집 안의 작은 공방, 메킷</title>
 </head>
 <body>
 
