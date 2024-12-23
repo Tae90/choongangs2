@@ -318,7 +318,7 @@
 
 .payment_bottom {
 	display: none; /*처음에는 안보이게 설정*/
-	height: 55px; 
+	height: auto; 
 	width: 100%;
 	align-items: center;
 	position: fixed;
@@ -391,6 +391,7 @@
 	
 	.payment_bottom {
 		display: flex;
+		flex-direction: column; /* 아이콘들을 세로로 쌓기 */
 	}
 	
 	.class_title {
