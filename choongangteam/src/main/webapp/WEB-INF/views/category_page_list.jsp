@@ -57,7 +57,7 @@
 }
 </style>
 
-<title>Insert title here</title>
+<title>내 집 안의 작은 공방, 메킷</title>
 
 <script>
 /* 무한 스크롤 스크립트 */
