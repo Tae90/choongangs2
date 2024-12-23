@@ -170,7 +170,6 @@
       					<div class="icons">
         					<img src="<%= request.getContextPath()%>/img/contents/heart.png" class="icon heart_icon"
         						data-favorite="false" data-lesson_number="${lesson.lesson_number}">
-        					<a href="asd"><img src="<%= request.getContextPath()%>/img/contents/chat.png" class="icon" id="messageIcon"></a>
         				</div>
         				<!-- 결제하기 버튼 -->
         				<c:choose>
@@ -208,7 +207,6 @@
       	<div class="icon-container">
        		<img src="<%= request.getContextPath()%>/img/contents/heart.png" class="icon heart_icon"
        			data-favorite="false" data-lesson_number="${lesson.lesson_number}">
-       		<a href="asd"><img src="<%= request.getContextPath()%>/img/contents/chat.png" class="icon" id="messageIcon"></a>
         	
         	<!-- 결제하기 버튼 -->
         	<c:choose>
