@@ -99,7 +99,7 @@
                     </a>
 
                     <c:if test="${userSession.member_number == 1}">
-    						<a href="selllist" class="side_link">
+    						<a href="paymentcancel" class="side_link">
         						<span>판매 내역</span>
         						<span class="material-symbols-outlined small-icon">chevron_right</span>
     					</a>
