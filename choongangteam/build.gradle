@@ -43,7 +43,7 @@ dependencies {
     // websocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'  	
     // payment
-    implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
+    //implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
     // devtools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
