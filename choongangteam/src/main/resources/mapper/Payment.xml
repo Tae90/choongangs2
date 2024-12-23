@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.PaymentDAO">
+   
+   <!-- 결제 정보 저장 -->
+   <insert id="savePayment" parameterType="payment">
+    insert into payment (
+        payment_number, payment_title, payment_price, payment_method, payment_agency, 
+        member_email, lesson_number, payment_date, payment_state, payment_nickname, payment_imp_uid
+    ) values (
+        #{payment_number}, #{payment_title}, #{payment_price}, #{payment_method}, 
+        #{payment_agency}, #{member_email}, #{lesson_number}, now(), #{payment_state},
+        #{payment_nickname}, #{payment_imp_uid}
+    )
+</insert>
+   
+   <!-- lesson 데이터 가져오기 -->
+   <select id="getLessonNumber" parameterType="int"  resultType="lesson">
+      select * from lesson where lesson_number = #{lesson_number}
+   </select>
+   
+   <!-- member 데이터 가져오기 -->
+   <select id="getMemberEmail" parameterType="String" resultType="member">
+      select * from member where member_email = #{member_email}
+   </select>
+   
+   <!-- 특정 결제 정보 조회 -->
+    <select id="getPaymentNumber" parameterType="int" resultType="payment">
+        select * from payment where payment_number = #{payment_number}
+    </select>
+    
+    <!-- 구매자 결제 내역 가져오기 -->
+    <select id="getPaymentByBuyer" parameterType="String" resultType="payment">
+    	select * from payment where member_email = #{member_email} order by payment_date desc
+	</select>
+	
+	<!-- 판매자 결제 내역 가져오기 -->
+    <select id="getPaymentBySeller" parameterType="String" resultType="payment">
+    	select
+        p.payment_number,
+        p.payment_date,
+        p.payment_title,
+        p.payment_price,
+        p.payment_nickname,
+        p.payment_state,
+        l.lesson_number,
+        l.member_email
+    from 
+        payment p
+    join
+        lesson l on p.lesson_number = l.lesson_number
+    where 
+        l.member_email = #{member_email}
+    order by
+        p.payment_date desc
+	</select>
+	
+	<!-- 결제 시 모집인원 증가 -->
+	<update id="lessonCurrentApplyUpdate" parameterType="int">
+    	update lesson set lesson_currentapply = lesson_currentapply + 1 where lesson_number = #{lesson_number}
+	</update>
+	
+	<!-- 결제 취소 시 모집인원 감소 -->
+	<update id="lessonCurrentApplyDrop" parameterType="int">
+    	update lesson set lesson_currentapply = lesson_currentapply - 1 where lesson_number = #{lesson_number} and lesson_currentapply > 0
+	</update>
+	
+	<!-- 결제 정보 업데이트 -->
+    <update id="updatePayment" parameterType="payment">
+        update payment set payment_state = #{payment_state} where payment_number = #{payment_number}
+    </update>
+        
+    <!-- 평균 reply_score 가져오기 -->
+	<select id="getAvgReplyScore" parameterType="int" resultType="double">
+		select coalesce(avg(reply_score), 0) from reply where lesson_number = #{lesson_number}
+	</select>
+	
+	<!-- 중복 결제 확인 -->
+    <select id="paidCheck" parameterType="map" resultType="int">
+        select count(*) from payment where member_email = #{email} and lesson_number = #{lesson_number}
+    </select>
+    
+    <!-- 클래스 등록자 이메일 가져오기 -->
+    <select id="classCheck" parameterType="int" resultType="string">
+        select member_email from lesson where lesson_number = #{lesson_number}
+    </select>
+	
+</mapper>

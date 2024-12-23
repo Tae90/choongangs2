@@ -1,0 +1,213 @@
+/* 전체 페이지 기본 스타일 설정 */
+body {
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+    font-size : .875rem;
+	font-weight : 500;
+}
+
+/* 결제 컨테이너 스타일*/
+.payment-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);	/* 그림자 추가 */
+}
+
+.class-thumbnail img {
+    max-width: 100%; /* 부모 컨테이너에 맞게 크기 조정 */
+    height: auto; /* 비율 유지 */
+    border-radius: 5px; /* 원하는 경우 모서리를 둥글게 */
+    display: block; /* 이미지가 블록 요소로 렌더링되도록 설정 */
+    max-width: 800px; /* 이미지 최대 크기를 300px로 제한 */
+    height: auto; /* 비율 유지 */
+}
+
+/* 결제 수단 섹션 스타일 */
+.payment-methods {
+    margin-top: 20px;
+}
+
+.payment-methods label {
+    display: flex; /* 아이콘과 텍스트를 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* 결제 로고 이미지 스타일 */
+.payment-logo {
+    margin-left: 5px; /* 텍스트와 이미지 간 간격 */
+    width: 25px; /* 이미지 크기 설정 */
+    height: auto; /* 비율 유지 */
+    vertical-align: middle; /* 텍스트 높이에 맞춤 */
+}
+
+/* 페이지 제목 스타일 */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.lesson-title {
+    display: inline-block; /* 블록 요소처럼 작동하지만 가로 정렬 유지 */
+    font-size: 18px; /* 글씨 크기 키우기 */
+    font-weight: bold; /* 굵은 글씨 */
+    padding: 3px 5px; /* 안쪽 여백 추가 */
+    margin-top: -5px;
+    margin-bottom: -5px; 
+}
+
+/* 각 섹션 스타일 */
+.section {
+    border: 1px solid #e0e0e0; /* 선 추가 */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+/* 섹션 제목 스타일 */
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* 텍스트 입력 필드와 숫자 입력 필드 스타일 */
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 버튼 스타일 */
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #9832a8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* 버튼에 마우스를 올렸을 때 스타일 */
+button:hover {
+    background: #c6b7ca;
+}
+
+/* 결제하기 버튼 위치 조정 */
+.pay-button-container {
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+/* 결제 요약 섹션 스타일 */
+.payment-summary {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+}
+
+/* 결제 요약 항목 스타일 */
+.summary-row, .total-row {
+    display: flex;
+    justify-content: space-between; /* 좌우로 정렬 */
+    align-items: center; /* 텍스트와 숫자를 동일한 높이로 정렬 */
+}
+
+/* 수강 인원 아래 구분선 */
+.summary-row.people {
+    border-bottom: 1px solid #e0e0e0; /* 구분선 추가 */
+    padding-bottom: 5px; /* 텍스트와 구분선 사이 간격 */
+}
+
+/* 최종 결제금액 강조 */
+.total-row {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* 할인 강조 스타일 */
+.summary-row.discount span {
+	margin-top: 10px;
+    font-size: 16px;
+    color: #f50057;
+    font-weight: bold;
+}
+
+.summary-row.discount strong {
+    display: inline-block;
+    background: #ffeef0;
+    color: #f50057;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/* 결제 버튼 스타일 */
+.pay-button {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+    .payment-container {
+        width: 100%;
+        padding: 10px;
+    }
+	
+	.class-thumbnail img {
+    max-width: 100%; /* 부모 컨테이너에 맞게 크기 조정 */
+    height: auto; /* 비율 유지 */
+    border-radius: 5px; /* 원하는 경우 모서리를 둥글게 */
+    display: block; /* 이미지가 블록 요소로 렌더링되도록 설정 */
+    max-width: 400px; /* 이미지 최대 크기를 300px로 제한 */
+    height: auto; /* 비율 유지 */
+}
+
+    body {
+        font-size: 0.8rem;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .summary-row, .total-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .payment-summary {
+        padding: 15px;
+        font-size: 14px;
+    }
+}

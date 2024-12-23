@@ -1,0 +1,441 @@
+.mypage_container {
+    display: flex;
+    align-items: flex-start; /* 수직 정렬을 위해 사용 */
+    padding: 0px, 20px; /* 전체적인 패딩 */
+    box-sizing: border-box; /* 패딩 포함한 박스 크기 계산 */
+}
+
+
+/* 마이페이지 왼쪽 사이드 메뉴 */
+.side_menu{
+    display: flex;
+    padding: 48px, 28px;
+    flex-direction: column;
+    width: 320px;
+    margin-top: 50px;
+}
+
+/* 프로필 사진, 이메일 */
+.myimg_name{
+    padding: 16px;
+    background-color: rgb(250, 250, 250);
+    display: flex;
+    border-radius: 6px;
+    width: 280px;
+    height: 60px;
+    align-items: center;
+}
+
+.nick_email{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+/* 클래스 등록 버튼(판매자일 경우에만 보이게함) */
+.write_lesson{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px, 16px;
+    height: 48px;
+    background: #9832a8;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    width: 280px;
+}
+
+/* 버튼 아래에 마이페이지 내 메뉴 이동 */
+.my_menu{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.side_link{
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-color: rgb(238, 238, 238);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.side_link:link{
+    text-decoration: none;
+    color: black;
+}
+
+.side_link:visited{
+	color: black;
+}
+
+.mypage_content{
+    display: flex;
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 100%;
+    display: block;
+}
+
+/* 여기서 부터 사이드 메뉴에 따라 나타나는게 달라서 구분지음 */
+
+/* 내 프로필 부분 */
+.my_profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top-color: rgb(238, 238, 238);
+    border-top-width: 1px;
+    border-top-style: solid;
+    
+}
+
+/* 닉네임 변경 버튼 */
+.nickname_edit{    
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.19);
+    border: none;
+    cursor: pointer;
+    padding-top: 2px;
+   
+}
+
+/* 프로필 변경 버튼 */
+.profileimg_edit{
+    position: absolute;
+    border-radius: 50%;
+    background-color: #9832a8;
+    cursor: pointer;
+    border: none;
+    left: 40px;
+    bottom: 2px;
+    width: 30px;
+    height: 28px;
+}
+
+/*  로그아웃, 회원탈퇴 */
+.logout:link{
+    color: #212121;
+}
+
+.logout:visited{
+	color: #212121;
+}
+
+/* 내 프로필 부분 끝 */
+
+
+
+
+/* 내가 찜한 클래스 불러오기 */
+.mylike_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.mylike_class{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: transform 0.3s ease;
+    width: 100%;
+    border-bottom-color: #ddd;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    height: 120px;
+    margin-top: 10px;
+}
+
+.mylike_class:hover {
+    transform: scale(1.02);
+}
+
+.class_link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.class_link:link {
+    text-decoration: none;
+    color: black;
+}
+
+.class_link:visited {
+    color: black
+}
+
+.image-container {
+    width: 200px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.text-container {
+    margin-right: 10px;
+}
+
+
+
+/* 내가 작성한 리뷰 */
+
+.myreview_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.myreview_class{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: transform 0.3s ease;
+    width: 100%;
+    border-bottom-color: #ddd;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    height: 120px;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.myreview_class:hover {
+    transform: scale(1.02);
+}
+
+.review_link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.review_link:link {
+    text-decoration: none;
+    color: black;
+}
+
+.review_link:visited {
+    color: black
+}
+
+.reviewimage-container {
+    width: 200px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.reviewtext-container {
+    margin-right: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.write_review{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px, 16px;
+    height: 36px;
+    background: white;
+    border-color: #9832a8;
+    border-style: solid;
+    border-width: 2px;
+	color: black;
+	cursor: pointer;
+    font-weight: 500;
+    font-size: 12px;
+    max-width: 150px;
+    width: 100%;
+}
+
+/* 회원 탈퇴 폼 */
+
+.warning {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(229, 231, 235);
+    min-height: 160px;
+    max-width: 782px;
+    gap: 4;
+}
+
+.delete_me {
+    display: flex;
+    flex-direction: column;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 48px;
+    gap: 80px;
+    min-height: 160px;
+    max-width: 782px;
+    width: 100%;
+}
+
+.delete_text {
+    display: grid;
+    grid-template-columns: 250px auto;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222222;
+    align-items: center;
+}
+
+.delete_passwd {
+    width: 100%;
+    max-width: 400px;
+    height: 32px;
+}
+
+.delete_passwd {
+    border-radius: 4px;
+    border: 1px solid rgb(229, 231, 235);
+}
+
+.delete_passwd:focus-within {
+    border-color: #9832a8;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.delete_passwd:focus {
+    outline: none;
+}
+
+input[type="checkbox"] {
+    accent-color: #9832a8;
+}
+
+.delete_ok {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px, 16px;
+    height: 48px;
+    background: #9832a8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    width: 350px;
+    transition: opacity 0.3s ease;
+}
+
+.delete_ok:disabled {
+    background-color: #cccccc;
+}
+
+@media screen and (max-width: 767px) {
+
+    .mypage_container{
+        flex-direction: column;
+    }
+
+    .side_menu {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+
+    .myimg_name {
+        width: 100%;
+        margin-bottom: 20px;
+        padding-right: 20px;
+        
+    }
+
+    .write_lesson {
+        width: 100%;
+        margin-bottom: 5px;
+        padding-right: 20px;
+    }
+
+    .my_menu {
+        width: 100%;
+        flex-direction: row;
+        justify-content: left;
+        flex-wrap: wrap;
+        padding-right: 20px;
+        margin-top: 10px;
+    }
+
+    .small-icon{
+        display: none;
+    }
+
+    .side_link {
+        width: auto;
+        margin-right: 10px;
+        border-bottom: none;
+        padding: 5px 10px;
+    }
+
+    .mypage_content{
+        margin-left: auto;
+    }
+    
+    .delete_text {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+    .delete_text span:nth-child(2) {
+        margin-top: 5px;
+    }
+}
+
+
+@media(max-width : 425px) {
+            
+    .image-container {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.reviewimage-container {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+ 
+     .delete_me {
+        padding-left: 0px;
+     }
+     
+      .my_menu {
+        width: 100%;
+        flex-direction: row;
+        justify-content: left;
+        flex-wrap: nowrap;
+        padding-right: 20px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+ }

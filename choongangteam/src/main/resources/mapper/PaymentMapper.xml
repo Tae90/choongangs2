@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.PaymentMapper">
+<select id="findPaymentsForBuyer" resultType="com.example.demo.model.Payment">
+    SELECT 
+        p.payment_number,
+        p.payment_date,
+        p.payment_title,
+        p.payment_method,
+        p.payment_agency,
+        p.payment_price,
+        p.payment_state,
+        p.payment_nickname,
+        p.member_email,
+        p.lesson_number,
+        l.lesson_thumbnail,
+        CONCAT(l.start_date, ' ', LPAD(l.start_hour, 2, '0'), ':', LPAD(l.start_min, 2, '0')) AS start_time
+    FROM 
+        payment p
+    JOIN 
+        lesson l ON p.lesson_number = l.lesson_number
+    WHERE 
+        p.payment_state = 1 AND p.member_email = #{email}
+</select>
+
+</mapper>

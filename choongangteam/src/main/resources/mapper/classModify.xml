@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.ClassModifyDAO">
+
+	<update id="updateClass" parameterType="lesson">
+		update lesson 
+		set lesson_title = #{lesson_title},
+			lesson_content = #{lesson_content},
+			start_date=#{start_date},
+			start_hour=#{start_hour},
+			start_min=#{start_min},
+			class_hour=#{class_hour},
+			class_min=#{class_min},
+			lesson_keyword=#{lesson_keyword},
+			lesson_price=#{lesson_price},
+			lesson_apply=#{lesson_apply},
+			lesson_thumbnail=#{lesson_thumbnail},
+			content_image=#{content_image},
+			subcategory_number=#{subcategory_number},
+			maincategory_number=#{maincategory_number}
+        where lesson_number = #{lesson_number}
+	</update>
+	<select id="getLesson" parameterType="int" resultType="lesson">
+		select * from lesson where lesson_number= #{lesson_number};
+	</select>
+	
+	<update id="deleteLesson" parameterType="int">
+		update lesson set lesson_delete = 1 where lesson_number= #{lesson_number};
+	</update>
+</mapper>
