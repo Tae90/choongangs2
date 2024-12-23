@@ -1,6 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <header class="top_block">
+
+  <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/chat/recentRoomId')
+                .then(response => response.text())
+                .then(roomId => {
+                    if (roomId) {
+                        document.getElementById('chatButton').setAttribute('onclick', `location.href='/chat?payment_number=${roomId}'`);
+                    }
+                })
+                .catch(error => console.error('Error fetching recent roomId:', error));
+
+            // 읽지 않은 메시지가 있으면 빨간 점 추가
+            fetch('/chat/unreadCount')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.unreadCount > 0) {
+                        const unreadDot = document.querySelector('.unread-dot');
+                        if (unreadDot) {
+                            unreadDot.style.display = 'block';
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching unread count:', error));
+        });
+
+        function myFunction(event) {
+            event.stopPropagation(); // 이벤트 버블링 방지
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn') && !event.target.matches('.small-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content-mypage");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
     <div class="top_menu">
 
         <div class="title_search_login">
@@ -34,10 +77,18 @@
             </button>
 
 	<!-- 채팅 버튼 -->
-            <button class="messagebox" onclick="location.href='asd'">
-                <span class="material-symbols-outlined small-icon"
-                    style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">sms</span>
-            </button> 
+
+
+
+<!-- 채팅 버튼 -->
+<!-- 채팅 버튼 -->
+<button id="chatButton" class="messagebox" style="position: relative;">
+    <span class="material-symbols-outlined small-icon"
+          style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+        sms
+    </span>
+    <span class="unread-dot"></span> <!-- 빨간 점 -->
+</button>
 
             <div class="dropdown_mypage">
                 <button onclick="myFunction(event)" class="dropbtn">${user.nickname } <span  onclick="myFunction(event)"
@@ -57,26 +108,7 @@
         </div>
 
         <!-- 닉네임 누르면 메뉴 나오는 함수 -->
-        <script>
-        function myFunction(event) {
-            event.stopPropagation(); // 이벤트 버블링 방지
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn') && !event.target.matches('.small-icon')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content-mypage");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-        </script>
+    
 
 	<hr style="border-style: ridge; border-width: 1px; width: 100%; max-width: 1280px; position: absolute; bottom: 0;">
 

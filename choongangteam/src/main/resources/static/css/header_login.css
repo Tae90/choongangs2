@@ -376,3 +376,22 @@
 	width: 70px;
 	}
 }
+
+    /* 기본 메시지 아이콘 스타일 */
+    .messagebox {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .unread-dot {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none; /* 기본적으로 숨김 */
+}
+    

@@ -59,6 +59,31 @@ public class ChatLogService {
     public String getPaymentNicknameByPaymentNumber(String paymentNumber) {
         return chatLogMapper.findPaymentNicknameByPaymentNumber(paymentNumber);
     }
+    
+    // 채팅방 목록 조회
+    public List<Map<String, Object>> getChatRooms(String email) {
+        return chatLogMapper.findChatRoomsByEmail(email);
+    }
+    
+    public Map<String, Integer> getUnreadMessageCounts(String email) {
+        List<Map<String, Object>> unreadCounts = chatLogMapper.findUnreadMessageCountsByEmail(email);
+        Map<String, Integer> unreadMap = new HashMap<>();
+        for (Map<String, Object> entry : unreadCounts) {
+            unreadMap.put((String) entry.get("roomId"), ((Long) entry.get("unreadCount")).intValue());
+        }
+        return unreadMap;
+    }
 
+    public void markMessagesAsRead(String roomId, String email) {
+        chatLogMapper.markMessagesAsRead(Map.of("roomId", roomId, "email", email));
+    }
+    
+    public String getMostRecentRoomId(String email) {
+        return chatLogMapper.findMostRecentRoomId(email);
+    }
+
+    public int getTotalUnreadCount(String email) {
+        return chatLogMapper.countTotalUnreadMessages(email);
+    }
 
 }

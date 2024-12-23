@@ -4,15 +4,29 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
+var chatRooms = document.querySelectorAll('.chat-room'); // 채팅방 목록 요소 선택
 
 var stompClient = null;
+var currentRoomId = null;
 
 document.addEventListener("DOMContentLoaded", function () {
     if (username && roomId) {
+        currentRoomId = roomId; // 초기 roomId 설정
         startChat();
     } else {
         console.error("Username or Room ID is not defined.");
     }
+
+    // 각 채팅방 클릭 이벤트 리스너 등록
+    chatRooms.forEach(room => {
+        room.addEventListener('click', function () {
+            const newRoomId = this.getAttribute('data-room-id');
+
+            if (newRoomId !== currentRoomId) {
+                window.location.href = `/chat?payment_number=${newRoomId}`; // URL 변경
+            }
+        });
+    });
 });
 
 function startChat() {
@@ -47,7 +61,7 @@ function sendMessage(event) {
 
     if (messageContent && stompClient) {
         var chatMessage = {
-            senderEmail: username, // 내 메시지 전송 시 내 이메일 포함
+            senderEmail: username,
             content: messageContent,
             roomId: roomId,
             messageType: 'CHAT'
@@ -65,50 +79,40 @@ function onMessageReceived(payload) {
     console.log("Received Message Sender:", message.senderEmail);
     console.log("Current User (Session):", username);
 
-    // 메시지 요소 생성
     var messageElement = document.createElement('li');
 
-    // 내 메시지와 상대방 메시지 구분
-	if (message.senderEmail === username) { // 내 메시지 (세션 값으로 비교)
-	    messageElement.classList.add('chat-message', 'self'); // 내 메시지 (왼쪽)
-	    messageElement.innerHTML = `
-	        <div class="chat-message">
-	            <div class="message-wrapper">
-	                <span class="message-sender">${message.senderNickname}</span>:
-	                <span class="message-content">${message.content}</span>
-	            </div>
-	            <div class="message-timestamp">
-	                <span class="timestamp-date">${formatDate(new Date())}</span><br>
-	                <span class="timestamp-time">${formatTime(new Date())}</span>
-	            </div>
-	        </div>
-	    `;
-	} else { // 상대방 메시지
-	    messageElement.classList.add('chat-message', 'other'); // 상대방 메시지 (오른쪽)
-	    messageElement.innerHTML = `
-	        <div class="chat-message">
-	            <div class="message-timestamp">
-	                <span class="timestamp-date">${formatDate(new Date())}</span><br>
-	                <span class="timestamp-time">${formatTime(new Date())}</span>
-	            </div>
-	            <div class="message-wrapper">
-	                <span class="message-sender">${message.senderNickname}</span>:
-	                <span class="message-content">${message.content}</span>
-	            </div>
-	        </div>
-	    `;
-	}
+    if (message.senderEmail === username) {
+        messageElement.classList.add('chat-message', 'self');
+        messageElement.innerHTML = `
+            <div class="message-wrapper">
+                <span class="message-sender">${message.senderNickname}</span>:
+                <span class="message-content">${message.content}</span>
+            </div>
+            <div class="message-timestamp">
+                <span class="timestamp-date">${formatDate(new Date(message.createdAt))}</span><br>
+                <span class="timestamp-time">${formatTime(new Date(message.createdAt))}</span>
+            </div>
+        `;
+    } else {
+        messageElement.classList.add('chat-message', 'other');
+        messageElement.innerHTML = `
+            <div class="message-timestamp">
+                <span class="timestamp-date">${formatDate(new Date(message.createdAt))}</span><br>
+                <span class="timestamp-time">${formatTime(new Date(message.createdAt))}</span>
+            </div>
+            <div class="message-wrapper">
+                <span class="message-sender">${message.senderNickname}</span>:
+                <span class="message-content">${message.content}</span>
+            </div>
+        `;
+    }
 
-
-    // 채팅창에 메시지 추가
     messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight; // 스크롤을 아래로 이동
+    messageArea.scrollTop = messageArea.scrollHeight;
 }
 
-
-// 날짜와 시간 포맷 함수
 function formatDate(date) {
-    return date.toLocaleDateString('en-GB').split('/').reverse().join('.'); // yy.MM.dd
+    return date.toLocaleDateString('en-GB').split('/').reverse().join('.');
 }
 
 function formatTime(date) {

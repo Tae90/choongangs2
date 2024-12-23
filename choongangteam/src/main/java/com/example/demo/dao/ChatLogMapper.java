@@ -30,4 +30,16 @@ public interface ChatLogMapper {
     
     int countChatLogsByRoomId(@Param("roomId") String roomId);
 
+    List<Map<String, Object>> findChatRoomsByEmail(@Param("email") String email);
+    
+    List<Map<String, Object>> findUnreadMessageCountsByEmail(@Param("email") String email);
+
+    // 특정 채팅방 메시지 읽음 상태 업데이트
+    void markMessagesAsRead(Map<String, Object> params);
+    
+    
+    String findMostRecentRoomId(@Param("email") String email);
+    
+    int countTotalUnreadMessages(@Param("email") String email);
+
 }
