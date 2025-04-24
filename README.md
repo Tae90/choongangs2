@@ -13,4 +13,10 @@
 
 ![image](https://github.com/user-attachments/assets/becb0e79-d64d-41e0-8075-0c8606f96809)
 
-<img width="376" alt="image" src="https://github.com/user-attachments/assets/351a8e4d-556a-48cf-b8be-f80b10fce38a" />
+
+![image](https://github.com/user-attachments/assets/818d7489-e8aa-427d-ae72-76f4241db914)
+
+
+<img width="100%" alt="그림02" src="https://github.com/user-attachments/assets/9ecbd801-90ce-4631-b2d9-22eb943de39f" />
+
+<img width="100%" alt="그림03" src="https://github.com/user-attachments/assets/09e966f8-86fc-4b67-9f18-862a6c6bbf27" />
