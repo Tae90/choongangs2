@@ -14,8 +14,7 @@
 ![image](https://github.com/user-attachments/assets/becb0e79-d64d-41e0-8075-0c8606f96809)
 
 
-![image](https://github.com/user-attachments/assets/818d7489-e8aa-427d-ae72-76f4241db914)
-
+<img width="4100%" alt="그림01" src="https://github.com/user-attachments/assets/f4e9d418-b6c2-4db7-80b0-5dedf01424bc" />
 
 <img width="100%" alt="그림02" src="https://github.com/user-attachments/assets/9ecbd801-90ce-4631-b2d9-22eb943de39f" />
 
